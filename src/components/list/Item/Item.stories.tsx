@@ -17,3 +17,7 @@ export const TopItem: Story = {
 export const NormalItem: Story = {
   render: () => <Item text="3日後" color="light-gray" />,
 };
+
+export const BottmItem: Story = {
+  render: () => <Item text="5日後" color="gray" rounded="bottom" />,
+};
