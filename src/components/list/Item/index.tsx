@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import { Colors } from "@/lib/colors";
+import { motion, useAnimationControls, type DragHandlers } from "framer-motion";
 
 const colorVariant = {
   gray: "bg-gray text-dark-gray",
@@ -27,12 +28,42 @@ type Props = {
 };
 
 const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
+  const controls = useAnimationControls();
+
+  const handleDragEnd: DragHandlers["onDragEnd"] = async (e, info) => {
+    const offset = info.offset.x;
+    const velocity = info.velocity.x;
+    const target = e.target;
+
+    let width: number = 0;
+    if (target instanceof HTMLDivElement) {
+      width = target.clientWidth;
+    }
+
+    if (offset < -(width / 2) || velocity < -500) {
+      await controls.start({ x: "-100%", transition: { duration: 0.2 } });
+    } else {
+      controls.start({ x: 0, opacity: 1, transition: { duration: 0.5 } });
+    }
+  };
+
   return (
-    <li
-      className={`py-2 px-5 ${colorVariant[color]} list-none ${roundedVariant[rounded]}`}
+    <motion.li
+      className="list-none"
+      whileTap={{ cursor: "grabbing" }}
+      layout
+      transition={{ type: "spring", stiffness: 600, damping: 30 }}
     >
-      {text}
-    </li>
+      <motion.div
+        className={`py-2 px-5 ${colorVariant[color]} ${roundedVariant[rounded]}`}
+        animate={controls}
+        onDragEnd={handleDragEnd}
+        drag="x"
+        dragDirectionLock
+      >
+        {text}
+      </motion.div>
+    </motion.li>
   );
 };
 
