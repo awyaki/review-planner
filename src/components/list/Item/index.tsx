@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { Colors } from "@/lib/colors";
-import { motion, useAnimationControls, type DragHandlers } from "framer-motion";
+import { motion, useAnimate, type DragHandlers } from "framer-motion";
 
 const colorVariant = {
   gray: "bg-gray text-dark-gray",
@@ -28,7 +28,7 @@ type Props = {
 };
 
 const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
-  const controls = useAnimationControls();
+  const [scope, animate] = useAnimate();
 
   const handleDragEnd: DragHandlers["onDragEnd"] = async (e, info) => {
     const offset = info.offset.x;
@@ -41,9 +41,11 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
     }
 
     if (offset < -(width / 2) || velocity < -500) {
-      await controls.start({ x: "-100%", transition: { duration: 0.2 } });
+      await animate(scope.current, { x: "-100%" }, { duration: 0.2 });
+      // TODO: implement onDelete
+      // onDelete
     } else {
-      controls.start({ x: 0, opacity: 1, transition: { duration: 0.5 } });
+      animate(scope.current, { x: 0, opacity: 1 }, { duration: 0.5 });
     }
   };
 
@@ -51,12 +53,11 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
     <motion.li
       className="list-none"
       whileTap={{ cursor: "grabbing" }}
-      layout
       transition={{ type: "spring", stiffness: 600, damping: 30 }}
     >
       <motion.div
+        ref={scope}
         className={`py-2 px-5 ${colorVariant[color]} ${roundedVariant[rounded]}`}
-        animate={controls}
         onDragEnd={handleDragEnd}
         drag="x"
         dragDirectionLock
