@@ -13,3 +13,7 @@ type Story = StoryObj<typeof Item>;
 export const TopItem: Story = {
   render: () => <Item text="1日後" color="gray" rounded="top" />,
 };
+
+export const NormalItem: Story = {
+  render: () => <Item text="3日後" color="light-gray" />,
+};
