@@ -1,6 +1,7 @@
 import { type FC } from "react";
 import { Colors } from "@/lib/colors";
 import { motion, useAnimate, type DragHandlers } from "framer-motion";
+import { MdDelete } from "react-icons/md";
 
 const colorVariant = {
   gray: "bg-gray text-dark-gray",
@@ -31,6 +32,7 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
   const [scope, animate] = useAnimate();
 
   const itemBodySelector = "item-body";
+  const deleteIconSelector = "delete-icon";
 
   const handleDragEnd: DragHandlers["onDragEnd"] = async (e, info) => {
     const offset = info.offset.x;
@@ -41,31 +43,51 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
     if (target instanceof HTMLDivElement) {
       width = target.clientWidth;
     }
-
     if (offset < -(width / 2) || velocity < -500) {
-      await animate(`.${itemBodySelector}`, { x: "-100%" }, { duration: 0.2 });
+      await (async () => {
+        animate(`.${itemBodySelector}`, { x: "-100%" });
+        animate(`.${deleteIconSelector}`, { width: "100%", x: "-100%" });
+      })();
       // TODO: implement onDelete
       // onDelete
     } else {
-      animate(`.${itemBodySelector}`, { x: 0, opacity: 1 }, { duration: 0.5 });
+      animate(`.${itemBodySelector}`, { x: 0 });
+      animate(`.${deleteIconSelector}`, { width: 0, x: 0 });
     }
+  };
+
+  const handleOnDrag: DragHandlers["onDrag"] = (e, info) => {
+    animate(
+      `.${deleteIconSelector}`,
+      {
+        width: -info.offset.x,
+        x: info.offset.x,
+      },
+      {
+        stiffness: 100,
+        duration: 0,
+      }
+    );
   };
 
   return (
     <motion.li
       ref={scope}
-      className="flex list-none"
+      className={`flex w-full overflow-x-hidden list-none bg-dark-gray  ${roundedVariant[rounded]}`}
       whileTap={{ cursor: "grabbing" }}
-      transition={{ type: "spring", stiffness: 600, damping: 30 }}
     >
       <motion.div
-        className={`${itemBodySelector} flex-grow py-2 px-5 ${colorVariant[color]} ${roundedVariant[rounded]}`}
+        className={`${itemBodySelector} shrink-0 py-2 px-5 w-full ${colorVariant[color]} ${roundedVariant[rounded]}`}
         onDragEnd={handleDragEnd}
+        onDrag={handleOnDrag}
         drag="x"
         dragDirectionLock
       >
         {text}
       </motion.div>
+      <div className="flex items-center justify-center w-0 text-white shrink-0 delete-icon bg-dark-gray">
+        <MdDelete />
+      </div>
     </motion.li>
   );
 };
