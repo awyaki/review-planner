@@ -1,7 +1,7 @@
 import { type FC } from "react";
 import { Colors } from "@/lib/colors";
 import { motion, useAnimate, type DragHandlers } from "framer-motion";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 
 const colorVariant = {
   gray: "bg-gray text-dark-gray",
@@ -76,6 +76,9 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
       className={`flex w-full overflow-x-hidden list-none bg-dark-gray  ${roundedVariant[rounded]}`}
       whileTap={{ cursor: "grabbing" }}
     >
+      <div className="flex items-center justify-center w-0 text-white shrink-0 update-icon bg-dark-gray">
+        <MdModeEdit />
+      </div>
       <motion.div
         className={`${itemBodySelector} shrink-0 py-2 px-5 w-full ${colorVariant[color]} ${roundedVariant[rounded]}`}
         onDragEnd={handleDragEnd}
