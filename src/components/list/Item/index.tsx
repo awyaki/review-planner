@@ -1,6 +1,6 @@
 import { type FC } from "react";
 import { Colors } from "@/lib/colors";
-import { motion, useAnimate, type DragHandlers } from "framer-motion";
+import { motion, type PanHandlers, useAnimate } from "framer-motion";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 
 const colorVariant = {
@@ -33,64 +33,73 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
 
   const itemBodySelector = "item-body";
   const deleteIconSelector = "delete-icon";
+  const updateIconSelector = "update-icon";
 
-  const handleDragEnd: DragHandlers["onDragEnd"] = async (e, info) => {
-    const offset = info.offset.x;
-    const velocity = info.velocity.x;
+  const handlePanEnd: PanHandlers["onPanEnd"] = (e, info) => {
     const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
 
-    let width: number = 0;
-    if (target instanceof HTMLDivElement) {
-      width = target.clientWidth;
-    }
-    if (offset < -(width / 2) || velocity < -500) {
-      await (async () => {
-        animate(`.${itemBodySelector}`, { x: "-100%" });
-        animate(`.${deleteIconSelector}`, { width: "100%", x: "-100%" });
-      })();
-      // TODO: implement onDelete
-      // onDelete
+    const x = info.offset.x;
+    const v = info.velocity.x;
+    const width = target.clientWidth;
+    const animationStartBoundary = width / 2;
+    const animationStartSpeed = 500;
+
+    if (x > animationStartBoundary || v > animationStartSpeed) {
+      animate(`.${updateIconSelector}`, { width: "100%" }, { duration: 0.2 });
+    } else if (x < -animationStartBoundary || v < -animationStartSpeed) {
+      animate(
+        `.${deleteIconSelector}`,
+        { width: "100%", x: "-100%" },
+        { duration: 0.2 }
+      );
+      animate(`.${updateIconSelector}`, { width: 0 }, { duration: 0.2 });
     } else {
-      animate(`.${itemBodySelector}`, { x: 0 });
-      animate(`.${deleteIconSelector}`, { width: 0, x: 0 });
+      if (x >= 0) {
+        animate(`.${updateIconSelector}`, { width: 0 }, { duration: 0.2 });
+        return;
+      } else {
+        animate(
+          `.${deleteIconSelector}`,
+          { width: 0, x: "100%" },
+          { duration: 0.4 }
+        );
+      }
     }
   };
 
-  const handleOnDrag: DragHandlers["onDrag"] = (e, info) => {
-    animate(
-      `.${deleteIconSelector}`,
-      {
-        width: -info.offset.x,
-        x: info.offset.x,
-      },
-      {
-        stiffness: 100,
-        duration: 0,
-      }
-    );
+  const handlePan: PanHandlers["onPan"] = (e, info) => {
+    const x = info.offset.x;
+    if (x >= 0) {
+      animate(`.${updateIconSelector}`, { width: x }, { duration: 0 });
+    } else {
+      animate(`.${deleteIconSelector}`, { width: -x, x: x }, { duration: 0 });
+    }
   };
 
   return (
     <motion.li
       ref={scope}
-      className={`flex w-full overflow-x-hidden list-none bg-dark-gray  ${roundedVariant[rounded]}`}
-      whileTap={{ cursor: "grabbing" }}
+      className={`flex w-full list-none ${roundedVariant[rounded]} overflow-x-hidden`}
     >
-      <div className="flex items-center justify-center w-0 text-white shrink-0 update-icon bg-dark-gray">
-        <MdModeEdit />
-      </div>
       <motion.div
-        className={`${itemBodySelector} shrink-0 py-2 px-5 w-full ${colorVariant[color]} ${roundedVariant[rounded]}`}
-        onDragEnd={handleDragEnd}
-        onDrag={handleOnDrag}
-        drag="x"
-        dragDirectionLock
+        className={`flex items-center justify-center w-0 text-white shrink-0 ${updateIconSelector} bg-dark-gray`}
+      >
+        <MdModeEdit />
+      </motion.div>
+      <motion.div
+        className={`${itemBodySelector} shrink-0 py-2 px-5 w-full ${colorVariant[color]}`}
+        whileTap={{ cursor: "grabbing" }}
+        onPanEnd={handlePanEnd}
+        onPan={handlePan}
       >
         {text}
       </motion.div>
-      <div className="flex items-center justify-center w-0 text-white shrink-0 delete-icon bg-dark-gray">
+      <motion.div
+        className={`flex items-center justify-center w-0 text-white shrink-0 ${deleteIconSelector} bg-dark-gray`}
+      >
         <MdDelete />
-      </div>
+      </motion.div>
     </motion.li>
   );
 };
