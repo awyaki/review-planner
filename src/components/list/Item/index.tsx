@@ -20,7 +20,7 @@ const roundedVariant = {
   [k in "top" | "bottom" | "none"]: `rounded-${"t" | "b"}-lg` | "";
 };
 
-type RoundedVariantKeys = keyof typeof roundedVariant;
+export type RoundedVariantKeys = keyof typeof roundedVariant;
 
 type Props = {
   text: string;
