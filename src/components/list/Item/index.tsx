@@ -25,10 +25,16 @@ export type RoundedVariantKeys = keyof typeof roundedVariant;
 type Props = {
   text: string;
   color: ColorVariantKeys;
+  onDelete?: () => void;
   rounded?: RoundedVariantKeys;
 };
 
-const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
+const Item: FC<Props> = ({
+  text,
+  color,
+  rounded = "none",
+  onDelete,
+}) => {
   const [scope, animate] = useAnimate();
 
   const itemBodySelector = "item-body";
@@ -54,6 +60,7 @@ const Item: FC<Props> = ({ text, color, rounded = "none" }) => {
         { duration: 0.2 }
       );
       animate(`.${updateIconSelector}`, { width: 0 }, { duration: 0.2 });
+      if (onDelete) onDelete();
     } else {
       if (x >= 0) {
         animate(`.${updateIconSelector}`, { width: 0 }, { duration: 0.2 });
