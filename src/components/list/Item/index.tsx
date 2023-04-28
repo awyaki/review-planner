@@ -10,7 +10,7 @@ const colorVariant = {
   [k in Colors]?: `bg-${Colors} text-${Colors}`;
 };
 
-type ColorVariantKeys = keyof typeof colorVariant;
+export type ColorVariantKeys = keyof typeof colorVariant;
 
 const roundedVariant = {
   top: "rounded-t-lg",
