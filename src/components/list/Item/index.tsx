@@ -26,6 +26,7 @@ type Props = {
   text: string;
   color: ColorVariantKeys;
   onDelete?: () => void;
+  onUpdate?: () => void;
   rounded?: RoundedVariantKeys;
 };
 
@@ -33,6 +34,7 @@ const Item: FC<Props> = ({
   text,
   color,
   rounded = "none",
+  onUpdate,
   onDelete,
 }) => {
   const [scope, animate] = useAnimate();
@@ -53,6 +55,7 @@ const Item: FC<Props> = ({
 
     if (x > animationStartBoundary || v > animationStartSpeed) {
       animate(`.${updateIconSelector}`, { width: "100%" }, { duration: 0.2 });
+      if (onUpdate) onUpdate();
     } else if (x < -animationStartBoundary || v < -animationStartSpeed) {
       animate(
         `.${deleteIconSelector}`,
