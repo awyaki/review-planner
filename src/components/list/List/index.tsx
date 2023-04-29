@@ -1,5 +1,6 @@
 import { type FC } from "react";
 import { Item, type ColorVariantKeys, RoundedVariantKeys } from "../Item";
+import { AnimatePresence } from "framer-motion";
 
 type Props = {
   data: { id: string; text: string }[];
@@ -27,16 +28,18 @@ const List: FC<Props> = ({ data, onDelete, onUpdate }) => {
 
   return (
     <ul>
-      {data.map(({ id, text }, i) => (
-        <Item
-          key={id}
-          text={text}
-          rounded={getRounded(i)}
-          color={getColor(i)}
-          onDelete={onDelete ? () => onDelete(id) : undefined}
-          onUpdate={onUpdate ? () => onUpdate(id) : undefined}
-        />
-      ))}
+      <AnimatePresence>
+        {data.map(({ id, text }, i) => (
+          <Item
+            key={id}
+            text={text}
+            rounded={getRounded(i)}
+            color={getColor(i)}
+            onDelete={onDelete ? () => onDelete(id) : undefined}
+            onUpdate={onUpdate ? () => onUpdate(id) : undefined}
+          />
+        ))}
+      </AnimatePresence>
     </ul>
   );
 };

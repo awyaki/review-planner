@@ -90,7 +90,9 @@ const Item: FC<Props> = ({
   return (
     <motion.li
       ref={scope}
+      exit={{ opacity: 0 }}
       className={`flex w-full list-none ${roundedVariant[rounded]} overflow-x-hidden`}
+      layout
     >
       <motion.div
         className={`flex items-center justify-center w-0 text-white shrink-0 ${updateIconSelector} bg-dark-gray`}
