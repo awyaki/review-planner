@@ -9,7 +9,7 @@ const Page: NextPage = () => {
   ];
 
   return (
-    <article className="h-screen bg-sky">
+    <article className="h-screen p-5 bg-sky">
       <h1 className="mb-4 text-xl text-white">Menu</h1>
       <ul className="mb-10">
         {menuItems.map((text, i, items) => {
