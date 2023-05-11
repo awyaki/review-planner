@@ -13,9 +13,8 @@ type Story = StoryObj<typeof MenuPage>;
 export const Primary: Story = {
   render: () => <MenuPage />,
   parameters: {
-    nextRouter: {
-      path: "/menu",
-      asPath: "/menu",
+    nextjs: {
+      appDirectory: true,
     },
   },
 };
