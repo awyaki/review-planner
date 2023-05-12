@@ -29,7 +29,10 @@ const Page: NextPage = () => {
             <ThemeColorCircle background="white" theme="sky" />
           </span>
         </li>
-        <li className="p-4 list-none rounded-b-lg bg-light-gray"></li>
+        <li className="flex justify-between p-4 list-none rounded-b-lg bg-light-gray">
+          <span>IDの表示方法</span>
+          <span>十進法</span>
+        </li>
       </ul>
     </article>
   );
