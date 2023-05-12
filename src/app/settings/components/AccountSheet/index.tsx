@@ -12,7 +12,7 @@ const AccountSheet: React.FC<Props> = ({ onClose }) => {
         className="absolute top-0 left-0 w-screen h-screen cursor-pointer bg-gray bg-opacity-20"
       ></div>
       <section className="absolute bottom-0 left-0 w-screen bg-white text-dark-gray rounded-t-2xl">
-        <div className="px-3 pt-5 mb-10">
+        <div className="px-5 pt-5 mb-10">
           <h2 className="mb-5 text-lg">Account</h2>
           <div className="flex mb-5 gap-5">
             <svg width={36} height={36}>
