@@ -20,7 +20,7 @@ const Page: NextPage = () => {
             <span>戻る</span>
           </button>
         </header>
-        <h1 className="mb-4 text-xl text-white">Menu</h1>
+        <h1 className="mb-4 text-xl text-white">設定</h1>
         <ul className="mb-10 text-dark-gray">
           <li className="flex justify-between p-4 list-none rounded-t-lg bg-light-gray">
             <span>アカウント</span>
