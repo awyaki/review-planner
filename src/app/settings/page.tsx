@@ -4,13 +4,18 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { AccountSheet, ThemeColorCircle } from "./components";
+import { AnimatePresence } from "framer-motion";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      {isOpen && <AccountSheet onClose={() => setIsOpen(false)} />}
+      <AnimatePresence>
+        {isOpen && (
+          <AccountSheet key="account-sheet" onClose={() => setIsOpen(false)} />
+        )}
+      </AnimatePresence>
       <article className="h-screen p-5 bg-sky">
         <header className="pt-2 pb-6">
           <button
