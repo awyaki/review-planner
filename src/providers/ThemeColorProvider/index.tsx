@@ -4,9 +4,7 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
-import { type Colors } from "@/lib/colors";
-
-type Theme = { primary: Colors; background: Colors };
+import { type Theme } from "@/lib/colors";
 
 const initialTheme: Theme = {
   primary: "sky",

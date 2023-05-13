@@ -13,3 +13,5 @@ export const colors = {
 };
 
 export type Colors = keyof typeof colors;
+
+export type Theme = { primary: Colors; background: Colors };
