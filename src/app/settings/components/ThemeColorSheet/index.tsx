@@ -32,14 +32,17 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
         <div className="flex flex-col justify-between">
           <div className="px-5 pt-5">
             <h2 className="mb-5 text-lg">テーマカラー</h2>
-            <ul className="p-3 mb-5 bg-gray rounded-md">
-              {themes.map((theme) => {
+            <ul className="flex p-3 mb-5 bg-gray rounded-md">
+              {themes.map((theme, i) => {
                 const isChecked =
                   theme.background === selectedTheme.background &&
                   theme.primary === selectedTheme.primary;
 
                 return (
-                  <li key={`${theme.primary}${theme.background}`}>
+                  <li
+                    key={`${theme.primary}${theme.background}`}
+                    className={i !== themes.length - 1 ? `mr-3` : ""}
+                  >
                     <CheckableThemeColorCircle
                       isChecked={isChecked}
                       background={theme.background}
