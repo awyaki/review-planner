@@ -43,11 +43,13 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
                     key={`${theme.primary}${theme.background}`}
                     className={i !== themes.length - 1 ? `mr-3` : ""}
                   >
-                    <CheckableThemeColorCircle
-                      isChecked={isChecked}
-                      background={theme.background}
-                      theme={theme.primary}
-                    />
+                    <button onClick={() => setSelectedTheme(theme)}>
+                      <CheckableThemeColorCircle
+                        isChecked={isChecked}
+                        background={theme.background}
+                        theme={theme.primary}
+                      />
+                    </button>
                   </li>
                 );
               })}
