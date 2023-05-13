@@ -3,14 +3,17 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
-import { useAccountSheet } from "./hooks";
+import { useAccountSheet, useThemeColorSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet();
+  const [renderThemeColorSheet, handleOpenThemeColorSheet] =
+    useThemeColorSheet();
   return (
     <>
       {renderAccountSheet()}
+      {renderThemeColorSheet()}
       <article className="h-screen p-5 bg-sky">
         <header className="pt-2 pb-6">
           <button
@@ -32,11 +35,16 @@ const Page: NextPage = () => {
               <span>Example name</span>
             </button>
           </li>
-          <li className="flex items-center justify-between p-4 list-none bg-gray">
-            <span>テーマカラー</span>
-            <span>
-              <ThemeColorCircle background="white" theme="sky" />
-            </span>
+          <li className="p-4 list-none bg-gray">
+            <button
+              className="flex items-center justify-between w-full"
+              onClick={handleOpenThemeColorSheet}
+            >
+              <span>テーマカラー</span>
+              <span>
+                <ThemeColorCircle background="white" theme="sky" />
+              </span>
+            </button>
           </li>
           <li className="flex justify-between p-4 list-none rounded-b-lg bg-light-gray">
             <span>IDの表示方法</span>
