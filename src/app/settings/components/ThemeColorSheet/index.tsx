@@ -1,22 +1,17 @@
+import { useContext } from "react";
 import { CheckableThemeColorCircle } from "../CheckableThemeColorCircle";
 import { motion } from "framer-motion";
 import { LargeButton } from "@/components";
 import { type Colors, themes } from "@/lib/colors";
+import { ThemeColorContext } from "@/providers";
 
 type Props = {
   onClose: () => void;
 };
 
-type ThemeColorPair = {
-  theme: Colors;
-  background: Colors;
-};
-
 const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
-  const SELECTED_THEME_COLOR: ThemeColorPair = {
-    theme: "sky",
-    background: "white",
-  };
+  const { theme: selectedTheme, setTheme: setSelectedTheme } =
+    useContext(ThemeColorContext);
   return (
     <>
       <motion.div
@@ -38,17 +33,17 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
           <div className="px-5 pt-5">
             <h2 className="mb-5 text-lg">テーマカラー</h2>
             <ul className="p-3 mb-5 bg-gray rounded-md">
-              {themes.map((pair) => {
+              {themes.map((theme) => {
                 const isChecked =
-                  pair.background === SELECTED_THEME_COLOR.background &&
-                  pair.primary === SELECTED_THEME_COLOR.theme;
+                  theme.background === selectedTheme.background &&
+                  theme.primary === selectedTheme.primary;
 
                 return (
-                  <li key={`${pair.primary}${pair.background}`}>
+                  <li key={`${theme.primary}${theme.background}`}>
                     <CheckableThemeColorCircle
                       isChecked={isChecked}
-                      background="white"
-                      theme="sky"
+                      background={theme.background}
+                      theme={theme.primary}
                     />
                   </li>
                 );
