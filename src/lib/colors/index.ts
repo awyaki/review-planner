@@ -1,5 +1,3 @@
-export type Colors = "sky" | "white" | "gray" | "light-gray" | "dark-gray";
-
 /*
  * This colors object must be
  * sync to confing.theme.colors in tailwind.config.js
@@ -13,3 +11,5 @@ export const colors = {
   "light-gray": "#F1F1F1",
   "dark-gray": "#616161",
 };
+
+export type Colors = keyof typeof colors;
