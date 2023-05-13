@@ -41,7 +41,11 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
                 return (
                   <li
                     key={`${theme.primary}${theme.background}`}
-                    className={i !== themes.length - 1 ? `mr-3` : ""}
+                    className={
+                      i !== themes.length - 1
+                        ? `mr-3 flex items-center`
+                        : "flex items-center"
+                    }
                   >
                     <button onClick={() => setSelectedTheme(theme)}>
                       <CheckableThemeColorCircle
