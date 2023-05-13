@@ -1,12 +1,26 @@
-import { ThemeColorCircle } from "../ThemeColorCircle";
+import { CheckableThemeColorCircle } from "../CheckableThemeColorCircle";
 import { motion } from "framer-motion";
 import { LargeButton } from "@/components";
+import { type Colors } from "@/lib/colors";
 
 type Props = {
   onClose: () => void;
 };
 
+type ThemeColorPair = {
+  theme: Colors;
+  background: Colors;
+};
+
 const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
+  const THEME_COLOR_PAIRS: ThemeColorPair[] = [
+    { theme: "sky", background: "white" },
+  ];
+
+  const SELECTED_THEME_COLOR: ThemeColorPair = {
+    theme: "sky",
+    background: "white",
+  };
   return (
     <>
       <motion.div
@@ -28,9 +42,21 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
           <div className="px-5 pt-5">
             <h2 className="mb-5 text-lg">テーマカラー</h2>
             <ul className="p-3 mb-5 bg-gray rounded-md">
-              <li>
-                <ThemeColorCircle background="white" theme="sky" />
-              </li>
+              {THEME_COLOR_PAIRS.map((pair) => {
+                const isChecked =
+                  pair.background === SELECTED_THEME_COLOR.background &&
+                  pair.theme === SELECTED_THEME_COLOR.theme;
+
+                return (
+                  <li key={`${pair.theme}${pair.background}`}>
+                    <CheckableThemeColorCircle
+                      isChecked={isChecked}
+                      background="white"
+                      theme="sky"
+                    />
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <LargeButton text="閉じる" onClick={onClose} />
