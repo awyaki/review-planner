@@ -1,21 +1,16 @@
 "use client";
-import { useState } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
-import { AccountSheet, ThemeColorCircle } from "./components";
-import { AnimatePresence } from "framer-motion";
+import { ThemeColorCircle } from "./components";
+import { useAccountSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet();
   return (
     <>
-      <AnimatePresence>
-        {isOpen && (
-          <AccountSheet key="account-sheet" onClose={() => setIsOpen(false)} />
-        )}
-      </AnimatePresence>
+      {renderAccountSheet()}
       <article className="h-screen p-5 bg-sky">
         <header className="pt-2 pb-6">
           <button
@@ -31,7 +26,7 @@ const Page: NextPage = () => {
           <li className="p-4 list-none rounded-t-lg bg-light-gray">
             <button
               className="flex justify-between w-full"
-              onClick={() => setIsOpen(true)}
+              onClick={handleOpenAccountSheet}
             >
               <span>アカウント</span>
               <span>Example name</span>
