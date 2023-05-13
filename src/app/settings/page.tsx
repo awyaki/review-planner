@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
