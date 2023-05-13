@@ -1,4 +1,6 @@
+"use client";
 import "./globals.css";
+import { ThemeColorContextProvider } from "../providers";
 
 type Props = {
   children: React.ReactNode;
@@ -7,7 +9,9 @@ type Props = {
 const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeColorContextProvider>{children}</ThemeColorContextProvider>
+      </body>
     </html>
   );
 };
