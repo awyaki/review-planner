@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { createPortal } from "react-dom";
 import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
@@ -7,9 +8,14 @@ import { AccountSheet, ThemeColorCircle } from "./components";
 
 const Page: NextPage = () => {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      {createPortal(<AccountSheet onClose={() => {}} />, document.body)}
+      {isOpen &&
+        createPortal(
+          <AccountSheet onClose={() => setIsOpen(false)} />,
+          document.body
+        )}
       <article className="h-screen p-5 bg-sky">
         <header className="pt-2 pb-6">
           <button
@@ -22,9 +28,14 @@ const Page: NextPage = () => {
         </header>
         <h1 className="mb-4 text-xl text-white">設定</h1>
         <ul className="mb-10 text-dark-gray">
-          <li className="flex justify-between p-4 list-none rounded-t-lg bg-light-gray">
-            <span>アカウント</span>
-            <span>Example name</span>
+          <li className="p-4 list-none rounded-t-lg bg-light-gray">
+            <button
+              className="flex justify-between w-full"
+              onClick={() => setIsOpen(true)}
+            >
+              <span>アカウント</span>
+              <span>Example name</span>
+            </button>
           </li>
           <li className="flex items-center justify-between p-4 list-none bg-gray">
             <span>テーマカラー</span>
