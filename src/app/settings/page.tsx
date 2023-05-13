@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { createPortal } from "react-dom";
 import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -11,11 +10,7 @@ const Page: NextPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      {isOpen &&
-        createPortal(
-          <AccountSheet onClose={() => setIsOpen(false)} />,
-          document.body
-        )}
+      {isOpen && <AccountSheet onClose={() => setIsOpen(false)} />}
       <article className="h-screen p-5 bg-sky">
         <header className="pt-2 pb-6">
           <button
