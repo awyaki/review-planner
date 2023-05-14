@@ -26,18 +26,18 @@ const Page: NextPage = () => {
         </header>
         <h1 className="mb-4 text-xl text-white">設定</h1>
         <ul className="mb-10 text-dark-gray">
-          <li className="p-4 list-none rounded-t-lg bg-light-gray">
+          <li className="list-none rounded-t-lg bg-light-gray">
             <button
-              className="flex justify-between w-full"
+              className="flex justify-between w-full p-4"
               onClick={handleOpenAccountSheet}
             >
               <span>アカウント</span>
               <span>Example name</span>
             </button>
           </li>
-          <li className="p-4 list-none bg-gray">
+          <li className="list-none bg-gray">
             <button
-              className="flex items-center justify-between w-full"
+              className="flex items-center justify-between w-full p-4"
               onClick={handleOpenThemeColorSheet}
             >
               <span>テーマカラー</span>
