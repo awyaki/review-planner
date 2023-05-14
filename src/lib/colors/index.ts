@@ -20,3 +20,16 @@ export const themes = [
 ] as const;
 
 export type Theme = FlatArray<typeof themes, 1>;
+
+export const baseColorVariant = {
+  sky: {
+    white: "bg-sky text-white",
+  },
+  orange: {
+    white: "bg-orange text-white",
+  },
+} satisfies {
+  [primary in Theme["primary"]]: {
+    [background in Theme["background"]]: `bg-${primary} text-${background}`;
+  };
+};

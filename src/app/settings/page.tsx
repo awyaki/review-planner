@@ -5,21 +5,8 @@ import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
 import { ThemeColorContext } from "@/providers";
-import { type Theme } from "@/lib/colors";
+import { baseColorVariant } from "@/lib/colors";
 import { useAccountSheet, useThemeColorSheet } from "./hooks";
-
-const pageColorVariant = {
-  sky: {
-    white: "bg-sky text-white",
-  },
-  orange: {
-    white: "bg-orange text-white",
-  },
-} satisfies {
-  [primary in Theme["primary"]]: {
-    [background in Theme["background"]]: `bg-${primary} text-${background}`;
-  };
-};
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -33,7 +20,7 @@ const Page: NextPage = () => {
       {renderThemeColorSheet()}
       <article
         className={`h-screen p-5 ${
-          pageColorVariant[theme.primary][theme.background]
+          baseColorVariant[theme.primary][theme.background]
         }`}
       >
         <header className="pt-2 pb-6">
