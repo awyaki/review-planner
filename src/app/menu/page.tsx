@@ -6,6 +6,7 @@ import { MenuItem } from "./components";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorContext } from "@/providers";
 import { type Theme } from "@/lib/colors";
+import Link from "next/link";
 
 const pageColorVariant = {
   sky: {
@@ -65,8 +66,10 @@ const Page: NextPage = () => {
         })}
       </ul>
       <ul>
-        <li className="p-4 rounded-t-lg rounded-b-lg bg-light-gray text-dark-gray">
-          設定
+        <li className="rounded-t-lg rounded-b-lg bg-light-gray text-dark-gray">
+          <Link className="block p-4" href="/settings">
+            設定
+          </Link>
         </li>
       </ul>
     </article>
