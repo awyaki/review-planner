@@ -63,7 +63,10 @@ const Page: NextPage = () => {
             >
               <span>テーマカラー</span>
               <span>
-                <ThemeColorCircle background="white" theme="sky" />
+                <ThemeColorCircle
+                  theme={theme.primary}
+                  background={theme.background}
+                />
               </span>
             </button>
           </li>
