@@ -1,30 +1,51 @@
 "use client";
+import { useContext } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
+import { ThemeColorContext } from "@/providers";
+import { type Theme } from "@/lib/colors";
 import { useAccountSheet, useThemeColorSheet } from "./hooks";
+
+const pageColorVariant = {
+  sky: {
+    white: "bg-sky text-white",
+  },
+  orange: {
+    white: "bg-orange text-white",
+  },
+} satisfies {
+  [primary in Theme["primary"]]: {
+    [background in Theme["background"]]: `bg-${primary} text-${background}`;
+  };
+};
 
 const Page: NextPage = () => {
   const router = useRouter();
   const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet();
   const [renderThemeColorSheet, handleOpenThemeColorSheet] =
     useThemeColorSheet();
+  const { theme } = useContext(ThemeColorContext);
   return (
     <>
       {renderAccountSheet()}
       {renderThemeColorSheet()}
-      <article className="h-screen p-5 bg-sky">
+      <article
+        className={`h-screen p-5 ${
+          pageColorVariant[theme.primary][theme.background]
+        }`}
+      >
         <header className="pt-2 pb-6">
           <button
-            className="flex items-center mb-2 text-white"
+            className="flex items-center mb-2"
             onClick={() => router.back()}
           >
             <AiOutlineLeft className="mr-1" />
             <span>戻る</span>
           </button>
         </header>
-        <h1 className="mb-4 text-xl text-white">設定</h1>
+        <h1 className="mb-4 text-xl">設定</h1>
         <ul className="mb-10 text-dark-gray">
           <li className="list-none rounded-t-lg bg-light-gray">
             <button
