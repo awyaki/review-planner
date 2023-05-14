@@ -1,12 +1,14 @@
 import { SmallButton, LargeButton } from "@/components";
 import { motion } from "framer-motion";
 import { Sheet } from "@/components";
+import { Theme } from "@/lib/colors";
 
 type Props = {
   onClose: () => void;
+  theme: Theme;
 };
 
-const AccountSheet: React.FC<Props> = ({ onClose }) => {
+const AccountSheet: React.FC<Props> = ({ onClose, theme }) => {
   return (
     <Sheet onClose={onClose}>
       <h2 className="mb-5 text-lg">アカウント</h2>
@@ -17,10 +19,10 @@ const AccountSheet: React.FC<Props> = ({ onClose }) => {
         <div>Example name</div>
       </div>
       <div className="mb-8">
-        <SmallButton text="サインアウト" onClick={() => {}} />
+        <SmallButton theme={theme} text="サインアウト" onClick={() => {}} />
       </div>
       <div>
-        <SmallButton text="アカウント削除" onClick={() => {}} />
+        <SmallButton theme={theme} text="アカウント削除" onClick={() => {}} />
       </div>
     </Sheet>
   );
