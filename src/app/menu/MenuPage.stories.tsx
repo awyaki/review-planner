@@ -1,9 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import MenuPage from "./page";
+import { ThemeColorContextProvider } from "@/providers";
 
 const meta: Meta<typeof MenuPage> = {
   title: "MenuPage",
   component: MenuPage,
+  decorators: [
+    (Story) => (
+      <ThemeColorContextProvider>
+        <Story />
+      </ThemeColorContextProvider>
+    ),
+  ],
 };
 
 export default meta;
