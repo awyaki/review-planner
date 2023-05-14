@@ -22,7 +22,7 @@ export const ThemeColorContext = createContext<{
 export const ThemeColorContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [theme, setTheme] = useState({ ...initialTheme });
+  const [theme, setTheme] = useState<Theme>({ ...initialTheme });
 
   return (
     <ThemeColorContext.Provider

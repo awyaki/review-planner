@@ -14,9 +14,9 @@ export const colors = {
 
 export type Colors = keyof typeof colors;
 
-export type Theme = { primary: Colors; background: Colors };
-
-export const themes: Theme[] = [
+export const themes = [
   { primary: "sky", background: "white" },
   { primary: "orange", background: "white" },
-];
+] as const;
+
+export type Theme = FlatArray<typeof themes, 1>;
