@@ -1,16 +1,12 @@
 "use client";
-import { useContext } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { MenuItem } from "./components";
 import { AiOutlineLeft } from "react-icons/ai";
-import { ThemeColorContext } from "@/providers";
-import { baseColorVariant } from "@/lib/colors";
 import Link from "next/link";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const { theme } = useContext(ThemeColorContext);
 
   const menuItems = [
     "IDを発行する",
@@ -19,11 +15,7 @@ const Page: NextPage = () => {
   ];
 
   return (
-    <article
-      className={`h-screen p-5 ${
-        baseColorVariant[theme.primary][theme.background]
-      }`}
-    >
+    <article className="h-screen p-5 bg-bg-secondary text-text-on-gb-secondary">
       <header className="pt-2 pb-6">
         <button
           className="flex items-center mb-2"

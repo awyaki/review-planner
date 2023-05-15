@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
 import { ThemeColorContext } from "@/providers";
-import { baseColorVariant } from "@/lib/colors";
 import { useAccountSheet, useThemeColorSheet } from "./hooks";
 
 const Page: NextPage = () => {
@@ -20,11 +19,7 @@ const Page: NextPage = () => {
     <>
       {renderAccountSheet()}
       {renderThemeColorSheet()}
-      <article
-        className={`h-screen p-5 ${
-          baseColorVariant[theme.primary][theme.background]
-        }`}
-      >
+      <article className="h-screen p-5 bg-bg-secondary text-text-on-gb-secondary">
         <header className="pt-2 pb-6">
           <button
             className="flex items-center mb-2"
