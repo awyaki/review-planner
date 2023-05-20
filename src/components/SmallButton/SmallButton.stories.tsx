@@ -11,31 +11,13 @@ export default meta;
 type Story = StoryObj<typeof SmallButton>;
 
 export const MenuButton: Story = {
-  render: () => (
-    <SmallButton
-      text="メニュー"
-      onClick={() => {}}
-      theme={{ primary: "sky", background: "white" }}
-    />
-  ),
+  render: () => <SmallButton text="メニュー" onClick={() => {}} />,
 };
 
 export const AddNewNotificationButton: Story = {
-  render: () => (
-    <SmallButton
-      text="通知を追加"
-      onClick={() => {}}
-      theme={{ primary: "orange", background: "white" }}
-    />
-  ),
+  render: () => <SmallButton text="通知を追加" onClick={() => {}} />,
 };
 
 export const SelectFromPresetsButton: Story = {
-  render: () => (
-    <SmallButton
-      text="プリセットから選ぶ"
-      onClick={() => {}}
-      theme={{ primary: "sky", background: "white" }}
-    />
-  ),
+  render: () => <SmallButton text="プリセットから選ぶ" onClick={() => {}} />,
 };
