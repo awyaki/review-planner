@@ -1,15 +1,11 @@
-/*
- * This colors object must be
- * sync to confing.theme.colors in tailwind.config.js
- **/
 export const colors = {
-  sky: "#72B2E6",
-  white: "#FFFFFF",
-  black: "#2E2E2E",
-  gray: "#D8D8D8",
-  orange: "#FF8C45",
-  "light-gray": "#F1F1F1",
-  "dark-gray": "#616161",
+  sky: { code: "#72B2E6", rgb: "114 178 230" },
+  white: { code: "#FFFFFF", rgb: "255 255 255" },
+  black: { code: "#2E2E2E", rgb: "46 46 46" },
+  gray: { code: "#D8D8D8", rgb: "216 216 216" },
+  orange: { code: "#FF8C45", rgb: "255 140 69" },
+  "light-gray": { code: "#F1F1F1", rgb: "241 241 241" },
+  "dark-gray": { code: "#616161", rgb: "97 97 97" },
 };
 
 export type Colors = keyof typeof colors;

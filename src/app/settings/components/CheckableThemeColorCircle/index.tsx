@@ -22,12 +22,17 @@ const CheckableThemeColorCircle: React.FC<Props> = ({
 
   return (
     <svg width={size} height={size}>
-      <circle fill={colors[background]} cx={center.x} cy={center.y} r={r} />
-      <circle fill={colors[theme]} cx={center.x} cy={center.y} r={r - 3} />
+      <circle
+        fill={colors[background].code}
+        cx={center.x}
+        cy={center.y}
+        r={r}
+      />
+      <circle fill={colors[theme].code} cx={center.x} cy={center.y} r={r - 3} />
       <motion.path
         fill="none"
         strokeWidth={2}
-        stroke={colors[background]}
+        stroke={colors[background].code}
         initial={{ pathLength: 0 }}
         animate={{ pathLength: isChecked ? 1 : 0 }}
         transition={{ duration: 0.5 }}

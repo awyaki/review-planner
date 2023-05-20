@@ -30,7 +30,7 @@ const Sheet: React.FC<Props> = ({ onClose, children }) => {
               <span className="text-xs text-dark-gray">閉じる</span>
               <svg width={36} height={20}>
                 <motion.path
-                  stroke={colors["dark-gray"]}
+                  stroke={colors["dark-gray"].code}
                   strokeLinecap="round"
                   strokeWidth={3}
                   initial={{ d: "M 0 3 L 18 3" }}
@@ -39,7 +39,7 @@ const Sheet: React.FC<Props> = ({ onClose, children }) => {
                   transition={{ duration: 0.2 }}
                 />
                 <motion.path
-                  stroke={colors["dark-gray"]}
+                  stroke={colors["dark-gray"].code}
                   strokeLinecap="round"
                   strokeWidth={3}
                   initial={{ d: "M 36 3 L 18 3" }}

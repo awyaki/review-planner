@@ -16,8 +16,13 @@ const ThemeColorCircle: React.FC<Props> = ({ background, theme }) => {
 
   return (
     <svg width={size} height={size}>
-      <circle fill={colors[background]} cx={center.x} cy={center.y} r={r} />
-      <circle fill={colors[theme]} cx={center.x} cy={center.y} r={r - 3} />
+      <circle
+        fill={colors[background].code}
+        cx={center.x}
+        cy={center.y}
+        r={r}
+      />
+      <circle fill={colors[theme].code} cx={center.x} cy={center.y} r={r - 3} />
     </svg>
   );
 };
