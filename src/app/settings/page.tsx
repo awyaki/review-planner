@@ -10,9 +10,7 @@ import { useAccountSheet, useThemeColorSheet } from "./hooks";
 const Page: NextPage = () => {
   const router = useRouter();
   const { theme } = useContext(ThemeColorContext);
-  const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet({
-    theme,
-  });
+  const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet();
   const [renderThemeColorSheet, handleOpenThemeColorSheet] =
     useThemeColorSheet();
   return (
