@@ -1,11 +1,9 @@
-import { type Colors, colors } from "@/lib/colors";
-
 type Props = {
-  background: Colors;
-  theme: Colors;
+  background: string;
+  color: string;
 };
 
-const ThemeColorCircle: React.FC<Props> = ({ background, theme }) => {
+const ThemeColorCircle: React.FC<Props> = ({ color, background }) => {
   const size = 36;
   const center = {
     x: size / 2,
@@ -16,13 +14,8 @@ const ThemeColorCircle: React.FC<Props> = ({ background, theme }) => {
 
   return (
     <svg width={size} height={size}>
-      <circle
-        fill={colors[background].code}
-        cx={center.x}
-        cy={center.y}
-        r={r}
-      />
-      <circle fill={colors[theme].code} cx={center.x} cy={center.y} r={r - 3} />
+      <circle fill={background} cx={center.x} cy={center.y} r={r} />
+      <circle fill={color} cx={center.x} cy={center.y} r={r - 3} />
     </svg>
   );
 };
