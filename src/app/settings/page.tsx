@@ -46,8 +46,8 @@ const Page: NextPage = () => {
               <span>テーマカラー</span>
               <span>
                 <ThemeColorCircle
-                  theme={theme.primary}
-                  background={theme.background}
+                  color={theme.primary.code}
+                  background={theme["bg-primary"].code}
                 />
               </span>
             </button>
