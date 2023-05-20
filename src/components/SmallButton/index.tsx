@@ -1,18 +1,14 @@
 import { type FC } from "react";
-import { type Theme, baseColorVariant } from "@/lib/colors";
 
 type Props = {
   text: string;
   onClick: () => void;
-  theme: Theme;
 };
 
-export const SmallButton: FC<Props> = ({ text, onClick, theme }) => {
+export const SmallButton: FC<Props> = ({ text, onClick }) => {
   return (
     <button
-      className={`px-4 py-1 rounded-lg ${
-        baseColorVariant[theme.primary][theme.background]
-      }`}
+      className="px-4 py-1 rounded-lg bg-bg-secondary text-text-on-gb-secondary"
       onClick={onClick}
     >
       {text}
