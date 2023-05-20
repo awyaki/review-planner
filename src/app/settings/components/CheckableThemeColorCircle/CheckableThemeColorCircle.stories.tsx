@@ -14,7 +14,7 @@ const meta: Meta<typeof CheckableThemeColorCircle> = {
       options: [...Object.keys(colors)],
       control: { type: "select" },
     },
-    theme: {
+    color: {
       options: [...Object.keys(colors)],
       control: { type: "select" },
     },
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof CheckableThemeColorCircle>;
 export const Primary: Story = {
   args: {
     isChecked: true,
-    background: "white",
-    theme: "sky",
+    background: colors["white"].code,
+    color: colors["sky"].code,
   },
 };

@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 
 type Props = {
   isChecked: boolean;
-  background: Colors;
-  theme: Colors;
+  background: string;
+  color: string;
 };
 
 const CheckableThemeColorCircle: React.FC<Props> = ({
   isChecked,
   background,
-  theme,
+  color,
 }) => {
   const size = 36;
   const center = {
@@ -22,17 +22,12 @@ const CheckableThemeColorCircle: React.FC<Props> = ({
 
   return (
     <svg width={size} height={size}>
-      <circle
-        fill={colors[background].code}
-        cx={center.x}
-        cy={center.y}
-        r={r}
-      />
-      <circle fill={colors[theme].code} cx={center.x} cy={center.y} r={r - 3} />
+      <circle fill={background} cx={center.x} cy={center.y} r={r} />
+      <circle fill={color} cx={center.x} cy={center.y} r={r - 3} />
       <motion.path
         fill="none"
         strokeWidth={2}
-        stroke={colors[background].code}
+        stroke={background}
         initial={{ pathLength: 0 }}
         animate={{ pathLength: isChecked ? 1 : 0 }}
         transition={{ duration: 0.5 }}
