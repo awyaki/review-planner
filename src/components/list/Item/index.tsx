@@ -4,24 +4,26 @@ import { motion, type PanHandlers, useAnimate } from "framer-motion";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 
 const colorVariant = {
-  gray: "bg-gray text-dark-gray",
-  "light-gray": "bg-light-gray text-dark-gray",
+  gray: "bg-gray text-dark-gray shrink-0 py-2 px-5 w-full",
+  "light-gray": "bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full",
 } satisfies {
-  [k in Colors]?: `bg-${Colors} text-${Colors}`;
+  [k in Colors]?:
+    | `bg-gray text-dark-gray shrink-0 py-2 px-5 w-full`
+    | `bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full`;
 };
 
 export type ColorVariants = "gray" | "light-gray";
 
 const roundedVariant = {
-  top: "rounded-t-lg",
-  bottom: "rounded-b-lg",
-  both: "rounded-t-lg rounded-b-lg",
-  none: "",
+  top: "rounded-t-lg flex w-full list-none overflow-x-hidden",
+  bottom: "rounded-b-lg flex w-full list-none overflow-x-hidden",
+  both: "rounded-t-lg rounded-b-lg flex w-full list-none overflow-x-hidden",
+  none: "flex w-full list-none overflow-x-hidden",
 } satisfies {
   [k in "top" | "bottom" | "none" | "both"]:
-    | `rounded-${"t" | "b"}-lg`
-    | `rounded-${"t" | "b"}-lg rounded-${"t" | "b"}-lg`
-    | "";
+    | `rounded-${"t" | "b"}-lg flex w-full list-none overflow-x-hidden`
+    | `rounded-t-lg rounded-b-lg flex w-full list-none overflow-x-hidden`
+    | "flex w-full list-none overflow-x-hidden";
 };
 
 export type RoundedVariants = "top" | "bottom" | "both" | "none";
@@ -95,7 +97,7 @@ const Item: FC<Props> = ({
     <motion.li
       ref={scope}
       exit={{ opacity: 0 }}
-      className={`flex w-full list-none ${roundedVariant[rounded]} overflow-x-hidden`}
+      className={`${roundedVariant[rounded]}`}
       layout
     >
       <motion.div
@@ -104,7 +106,7 @@ const Item: FC<Props> = ({
         <MdModeEdit />
       </motion.div>
       <motion.div
-        className={`${itemBodySelector} shrink-0 py-2 px-5 w-full ${colorVariant[color]}`}
+        className={`${itemBodySelector} ${colorVariant[color]}`}
         whileTap={{ cursor: "grabbing" }}
         onPanEnd={handlePanEnd}
         onPan={handlePan}
