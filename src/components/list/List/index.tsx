@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Item, type ColorVariants, RoundedVariantKeys } from "../Item";
+import { Item, type ColorVariants, RoundedVariants } from "../Item";
 import { AnimatePresence } from "framer-motion";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const List: FC<Props> = ({ data, onDelete, onUpdate }) => {
-  const getRounded = (i: number): RoundedVariantKeys => {
+  const getRounded = (i: number): RoundedVariants => {
     const length = data.length;
     switch (i) {
       case 0:

@@ -24,14 +24,14 @@ const roundedVariant = {
     | "";
 };
 
-export type RoundedVariantKeys = "top" | "bottom" | "both" | "none";
+export type RoundedVariants = "top" | "bottom" | "both" | "none";
 
 type Props = {
   text: string;
   color: ColorVariants;
   onDelete?: () => void;
   onUpdate?: () => void;
-  rounded?: RoundedVariantKeys;
+  rounded?: RoundedVariants;
 };
 
 const Item: FC<Props> = ({
