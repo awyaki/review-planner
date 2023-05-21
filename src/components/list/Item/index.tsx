@@ -15,9 +15,13 @@ export type ColorVariants = "gray" | "light-gray";
 const roundedVariant = {
   top: "rounded-t-lg",
   bottom: "rounded-b-lg",
+  both: "rounded-t-lg rounded-b-lg",
   none: "",
 } satisfies {
-  [k in "top" | "bottom" | "none"]: `rounded-${"t" | "b"}-lg` | "";
+  [k in "top" | "bottom" | "none" | "both"]:
+    | `rounded-${"t" | "b"}-lg`
+    | `rounded-${"t" | "b"}-lg rounded-${"t" | "b"}-lg`
+    | "";
 };
 
 export type RoundedVariantKeys = keyof typeof roundedVariant;
