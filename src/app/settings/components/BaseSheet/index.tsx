@@ -1,26 +1,29 @@
+import { useContext } from "react";
 import { Sheet } from "@/components";
+import { BaseContext } from "@/providers";
 
 type Props = {
   onClose: () => void;
 };
 
 const BaseSheet: React.FC<Props> = ({ onClose }) => {
+  const { base, changeBase } = useContext(BaseContext);
   return (
     <Sheet onClose={onClose}>
       <h2 className="mb-5 text-lg">IDの表示形式</h2>
       <ul>
         <li className="mb-3">
           <BaseSelectButton
-            isSelected={true}
+            isSelected={base === "decimal"}
             text="十進法"
-            onClick={() => {}}
+            onClick={() => changeBase("decimal")}
           />
         </li>
         <li>
           <BaseSelectButton
-            isSelected={false}
+            isSelected={base === "hexadecimal"}
             text="十六進法"
-            onClick={() => {}}
+            onClick={() => changeBase("hexadecimal")}
           />
         </li>
       </ul>
