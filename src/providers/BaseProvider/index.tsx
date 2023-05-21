@@ -1,9 +1,9 @@
 "use client";
 import { createContext, useState } from "react";
 
-type Base = "decimal" | "hexadecimal";
+export type Base = "decimal" | "hexadecimal";
 
-const BaseContext = createContext<{
+export const BaseContext = createContext<{
   base: Base;
   changeBase: (base: Base) => void;
 }>({
