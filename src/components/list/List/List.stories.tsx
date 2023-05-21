@@ -35,3 +35,9 @@ export const NormalList: Story = {
     ],
   },
 };
+
+export const OneItemList: Story = {
+  args: {
+    data: [{ id: "1", text: "1日後" }],
+  },
+};
