@@ -11,6 +11,7 @@ type Props = {
 const List: FC<Props> = ({ data, onDelete, onUpdate }) => {
   const getRounded = (i: number): RoundedVariants => {
     const length = data.length;
+    if (length === 1) return "both";
     switch (i) {
       case 0:
         return "top";
