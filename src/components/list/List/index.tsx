@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Item, type ColorVariantKeys, RoundedVariantKeys } from "../Item";
+import { Item, type ColorVariants, RoundedVariantKeys } from "../Item";
 import { AnimatePresence } from "framer-motion";
 
 type Props = {
@@ -21,7 +21,7 @@ const List: FC<Props> = ({ data, onDelete, onUpdate }) => {
     }
   };
 
-  const getColor = (i: number): ColorVariantKeys => {
+  const getColor = (i: number): ColorVariants => {
     if (i % 2 === 0) return "light-gray";
     return "gray";
   };

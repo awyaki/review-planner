@@ -10,7 +10,7 @@ const colorVariant = {
   [k in Colors]?: `bg-${Colors} text-${Colors}`;
 };
 
-export type ColorVariantKeys = keyof typeof colorVariant;
+export type ColorVariants = "gray" | "light-gray";
 
 const roundedVariant = {
   top: "rounded-t-lg",
@@ -24,7 +24,7 @@ export type RoundedVariantKeys = keyof typeof roundedVariant;
 
 type Props = {
   text: string;
-  color: ColorVariantKeys;
+  color: ColorVariants;
   onDelete?: () => void;
   onUpdate?: () => void;
   rounded?: RoundedVariantKeys;
