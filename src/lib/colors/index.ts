@@ -17,6 +17,7 @@ export type Colors = keyof typeof colors;
 
 export type Theme = {
   primary: Color;
+  "text-on-primary": Color;
   "bg-primary": Color;
   "bg-secondary": Color;
   "text-on-bg-primary": Color;
@@ -29,6 +30,7 @@ export type ThemeName = FlatArray<typeof themeNames, 0>;
 export const themes = {
   "sky-light": {
     primary: { ...colors.sky },
+    "text-on-primary": { ...colors.white },
     "bg-primary": { ...colors.white },
     "bg-secondary": { ...colors.sky },
     "text-on-bg-primary": { ...colors["dark-gray"] },
@@ -36,6 +38,7 @@ export const themes = {
   },
   "orange-light": {
     primary: { ...colors.orange },
+    "text-on-primary": { ...colors.white },
     "bg-primary": { ...colors.white },
     "bg-secondary": { ...colors.orange },
     "text-on-bg-primary": { ...colors["dark-gray"] },
