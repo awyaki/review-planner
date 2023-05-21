@@ -15,7 +15,7 @@ const Page: NextPage = () => {
   ];
 
   return (
-    <article className="h-screen p-5 bg-bg-secondary text-text-on-gb-secondary">
+    <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
       <header className="pt-2 pb-6">
         <button
           className="flex items-center mb-2"

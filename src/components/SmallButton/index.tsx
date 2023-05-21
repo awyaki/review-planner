@@ -8,7 +8,7 @@ type Props = {
 export const SmallButton: FC<Props> = ({ text, onClick }) => {
   return (
     <button
-      className="px-4 py-1 rounded-lg bg-bg-secondary text-text-on-gb-secondary"
+      className="px-4 py-1 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
       onClick={onClick}
     >
       {text}
