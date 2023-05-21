@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     colors: {
       primary: "rgb(var(--color-primary) / <alpha-value>)",
+      "text-on-primary": "rgb(var(--color-text-on-primary) / <alpha-value>)",
       "bg-primary": "rgb(var(--color-bg-primary) / <alpha-value>)",
       "bg-secondary": "rgb(var(--color-bg-secondary) / <alpha-value>)",
       "text-on-bg-primary":
