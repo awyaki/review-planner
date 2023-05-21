@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import SettingsPage from "./page";
-import { ThemeColorContextProvider } from "@/providers";
+import { ThemeColorContextProvider, BaseContextProvider } from "@/providers";
 
 const meta: Meta<typeof SettingsPage> = {
   title: "SettingsPage",
@@ -9,7 +9,9 @@ const meta: Meta<typeof SettingsPage> = {
     (Story) => {
       return (
         <ThemeColorContextProvider>
-          <Story />
+          <BaseContextProvider>
+            <Story />
+          </BaseContextProvider>
         </ThemeColorContextProvider>
       );
     },
