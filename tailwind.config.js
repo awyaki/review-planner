@@ -10,9 +10,9 @@ module.exports = {
       primary: "rgb(var(--color-primary) / <alpha-value>)",
       "bg-primary": "rgb(var(--color-bg-primary) / <alpha-value>)",
       "bg-secondary": "rgb(var(--color-bg-secondary) / <alpha-value>)",
-      "text-on-gb-primary":
+      "text-on-bg-primary":
         "rgb(var(--color-text-on-bg-primary) / <alpha-value>)",
-      "text-on-gb-secondary":
+      "text-on-bg-secondary":
         "rgb(var(--color-text-on-bg-secondary) / <alpha-value>)",
       sky: "#72B2E6",
       white: "#FFFFFF",
