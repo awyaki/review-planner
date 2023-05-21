@@ -24,7 +24,7 @@ const roundedVariant = {
     | "";
 };
 
-export type RoundedVariantKeys = keyof typeof roundedVariant;
+export type RoundedVariantKeys = "top" | "bottom" | "both" | "none";
 
 type Props = {
   text: string;
