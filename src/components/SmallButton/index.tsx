@@ -2,7 +2,7 @@ import { type FC } from "react";
 
 type Props = {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const SmallButton: FC<Props> = ({ text, onClick }) => {
