@@ -2,12 +2,16 @@
 import { useState } from "react";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
+import Link from "next/link";
+
 const Page: NextPage = () => {
   const [inputValue, setInputValue] = useState("");
   return (
     <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
       <header className="flex justify-end mb-10">
-        <SmallButton onClick={() => {}} text="メニュー" />
+        <Link href="/menu">
+          <SmallButton onClick={() => {}} text="メニュー" />
+        </Link>
       </header>
       <input
         type="text"
