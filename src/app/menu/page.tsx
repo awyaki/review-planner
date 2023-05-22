@@ -25,7 +25,7 @@ const Page: NextPage = () => {
           <span>戻る</span>
         </button>
       </header>
-      <h1 className="mb-4 text-xl">Menu</h1>
+      <h1 className="mb-4 text-xl">メニュー</h1>
       <ul className="mb-10">
         {menuItems.map((text, i, items) => {
           const _rounded = (() => {
