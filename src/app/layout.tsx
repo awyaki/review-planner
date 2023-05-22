@@ -8,7 +8,7 @@ type Props = {
 
 const RootLayout: React.FC<Props> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body>
         <ThemeColorContextProvider>
           <BaseContextProvider>{children}</BaseContextProvider>
