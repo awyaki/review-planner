@@ -10,7 +10,7 @@ const Page: NextPage = () => {
     <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
       <header className="flex justify-end mb-10">
         <Link href="/menu">
-          <SmallButton onClick={() => {}} text="メニュー" />
+          <SmallButton text="メニュー" />
         </Link>
       </header>
       <input
