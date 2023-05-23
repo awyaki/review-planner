@@ -9,7 +9,7 @@ type Props = {
 };
 
 const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
-  const { theme, themeName, changeTheme } = useContext(ThemeColorContext);
+  const { themeName, changeTheme } = useContext(ThemeColorContext);
   return (
     <Sheet onClose={onClose}>
       <h2 className="mb-5 text-lg">テーマカラー</h2>
