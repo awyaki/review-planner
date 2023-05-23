@@ -11,9 +11,9 @@ type Props = {
 
 const colorVariant = {
   normal:
-    "absolute bottom-0 left-0 w-screen bg-bg-primary text-text-on-bg-primary rounded-t-2xl",
+    "absolute bottom-0 left-0 w-screen bg-bg-primary text-text-on-bg-primary rounded-t-2xl z-20",
   reverse:
-    "absolute bottom-0 left-0 w-screen bg-bg-secondary text-text-on-bg-secondary rounded-t-2xl",
+    "absolute bottom-0 left-0 w-screen bg-bg-secondary text-text-on-bg-secondary rounded-t-2xl z-20",
 };
 
 const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
@@ -26,7 +26,7 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
         onClick={onClose}
-        className="absolute top-0 left-0 w-screen h-screen cursor-pointer bg-gray bg-opacity-20"
+        className="absolute top-0 left-0 z-10 w-screen h-screen cursor-pointer bg-gray bg-opacity-20"
       ></motion.div>
       <motion.section
         initial={{ opacity: 0, y: 30 }}
