@@ -1,5 +1,4 @@
-import { SmallButton, LargeButton } from "@/components";
-import { motion } from "framer-motion";
+import { SmallButton } from "@/components";
 import { Sheet } from "@/components";
 
 type Props = {
