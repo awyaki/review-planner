@@ -13,8 +13,9 @@ const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
       <div className="flex flex-col justify-between">
         <div className="px-5 mb-10">
           <div className="flex items-center mb-10">
-            <span className="w-1/6 h-10 mr-2 text-3xl border-b-2 border-text-on-bg-secondary">
+            <span className="w-1/4 h-10 mr-2 text-3xl text-center border-b-2 border-text-on-bg-secondary">
               {inputValue}
+              {inputValue !== "" ? "日" : ""}
             </span>
           </div>
           <ul className="grid grid-cols-3 grid-rows-3 gap-y-4 gap-x-6">
