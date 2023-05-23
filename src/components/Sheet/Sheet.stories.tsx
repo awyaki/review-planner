@@ -31,3 +31,11 @@ const OpenCloseTest: React.FC = () => {
 export const AbstructedSheet: Story = {
   render: () => <OpenCloseTest />,
 };
+
+export const SecandaryColorSheet: Story = {
+  render: () => (
+    <Sheet onClose={() => {}} color="reverse">
+      <h2>Secondary Color</h2>
+    </Sheet>
+  ),
+};
