@@ -32,7 +32,7 @@ const Page: NextPage = () => {
             <SmallButton onClick={handleOpen} text="通知を追加" />
           </div>
         </div>
-        <div>
+        <div className="absolute bottom-0 left-0 w-full">
           <button className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray">
             キャンセル
           </button>
