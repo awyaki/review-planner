@@ -16,9 +16,6 @@ const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
             <span className="w-1/6 h-10 mr-2 text-3xl border-b-2 border-text-on-bg-secondary">
               {inputValue}
             </span>
-            <button onClick={() => setInputValue("")}>
-              <CancelIcon />
-            </button>
           </div>
           <ul className="grid grid-cols-3 grid-rows-3 gap-y-4 gap-x-6">
             {[1, 3, 5, 7, 14, 21, 30, 60, 90].map((day) => (
@@ -44,23 +41,6 @@ const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
         </div>
       </div>
     </Sheet>
-  );
-};
-
-const CancelIcon: React.FC = () => {
-  return (
-    <svg width={32} height={32}>
-      <circle
-        strokeWidth={2}
-        cx={16}
-        cy={16}
-        r={12}
-        fill="none"
-        stroke="#ffffff"
-      />
-      <path stroke="#ffffff" d="M 11 11 L 21 21" />
-      <path stroke="#ffffff" d="M 21 11 L 11 21" />
-    </svg>
   );
 };
 
