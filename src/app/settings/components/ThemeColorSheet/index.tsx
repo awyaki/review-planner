@@ -12,30 +12,32 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
   const { themeName, changeTheme } = useContext(ThemeColorContext);
   return (
     <Sheet onClose={onClose}>
-      <h2 className="mb-5 text-lg">テーマカラー</h2>
-      <ul className="flex p-3 mb-5 bg-gray rounded-md">
-        {themeNames.map((_themeName, i) => {
-          const isChecked = themeName === _themeName;
-          return (
-            <li
-              key={_themeName}
-              className={
-                i !== themeNames.length - 1
-                  ? `mr-3 flex items-center`
-                  : "flex items-center"
-              }
-            >
-              <button onClick={() => changeTheme(_themeName)}>
-                <CheckableThemeColorCircle
-                  isChecked={isChecked}
-                  background={themes[_themeName]["bg-primary"].code}
-                  color={themes[_themeName]["primary"].code}
-                />
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="px-5 pb-5">
+        <h2 className="mb-5 text-lg">テーマカラー</h2>
+        <ul className="flex p-3 bg-gray rounded-md">
+          {themeNames.map((_themeName, i) => {
+            const isChecked = themeName === _themeName;
+            return (
+              <li
+                key={_themeName}
+                className={
+                  i !== themeNames.length - 1
+                    ? `mr-3 flex items-center`
+                    : "flex items-center"
+                }
+              >
+                <button onClick={() => changeTheme(_themeName)}>
+                  <CheckableThemeColorCircle
+                    isChecked={isChecked}
+                    background={themes[_themeName]["bg-primary"].code}
+                    color={themes[_themeName]["primary"].code}
+                  />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </Sheet>
   );
 };
