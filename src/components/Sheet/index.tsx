@@ -22,7 +22,7 @@ const Sheet: React.FC<Props> = ({ onClose, children }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 30 }}
         transition={{ duration: 0.2 }}
-        className="absolute bottom-0 left-0 w-screen pb-5 bg-white text-dark-gray rounded-t-2xl"
+        className="absolute bottom-0 left-0 w-screen pb-5 bg-bg-primary text-text-on-bg-primary rounded-t-2xl"
       >
         <div className="px-5 pt-5">
           <button className="flex justify-center w-full mb-2" onClick={onClose}>
