@@ -7,6 +7,13 @@ type Props = {
   children?: React.ReactNode;
 };
 
+const colorVariant = {
+  normal:
+    "absolute bottom-0 left-0 w-screen pb-5 bg-bg-primary text-text-on-bg-primary rounded-t-2xl",
+  reverse:
+    "absolute bottom-0 left-0 w-screen pb-5 bg-bg-secondary text-text-on-bg-secondary rounded-t-2xl",
+};
+
 const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
   return (
     <>
@@ -23,12 +30,11 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 30 }}
         transition={{ duration: 0.2 }}
-        className="absolute bottom-0 left-0 w-screen pb-5 bg-bg-primary text-text-on-bg-primary rounded-t-2xl"
+        className={`${colorVariant[color]}`}
       >
         <div className="px-5 pt-5">
           <button className="flex justify-center w-full mb-2" onClick={onClose}>
             <div>
-              <span className="text-xs text-dark-gray">閉じる</span>
               <svg width={36} height={20}>
                 <motion.path
                   stroke={colors["dark-gray"].code}
