@@ -35,6 +35,7 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
         <div className="px-5 pt-5">
           <button className="flex justify-center w-full mb-2" onClick={onClose}>
             <div>
+              <span className="text-xs">閉じる</span>
               <svg width={36} height={20}>
                 <motion.path
                   stroke={colors["dark-gray"].code}
