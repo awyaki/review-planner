@@ -8,17 +8,13 @@ export const useAddOneNotificationSheet = (): [
 ] => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   const render = (): React.ReactNode => {
     return (
       <AnimatePresence>
-        {isOpen && <AddOneNotificationSheet onClose={handleClose} />}
+        {isOpen && <AddOneNotificationSheet onClose={() => setIsOpen(false)} />}
       </AnimatePresence>
     );
   };
 
-  return [render, handleClose];
+  return [render, () => {}];
 };
