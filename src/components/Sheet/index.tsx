@@ -35,7 +35,7 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
         transition={{ duration: 0.2 }}
         className={`${colorVariant[color]}`}
       >
-        <div className="px-5 pt-5">
+        <div className="pt-5">
           <button className="flex justify-center w-full mb-2" onClick={onClose}>
             <div>
               <span className="text-xs">閉じる</span>
