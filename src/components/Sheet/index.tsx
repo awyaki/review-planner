@@ -1,5 +1,7 @@
+import { useContext } from "react";
+import { ThemeColorContext } from "@/providers";
 import { motion } from "framer-motion";
-import { colors } from "@/lib/colors";
+import { colors, themes } from "@/lib/colors";
 
 type Props = {
   onClose: () => void;
@@ -15,6 +17,7 @@ const colorVariant = {
 };
 
 const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
+  const { theme } = useContext(ThemeColorContext);
   return (
     <>
       <motion.div
@@ -38,7 +41,13 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
               <span className="text-xs">閉じる</span>
               <svg width={36} height={20}>
                 <motion.path
-                  stroke={colors["dark-gray"].code}
+                  stroke={
+                    theme[
+                      color === "normal"
+                        ? "text-on-bg-primary"
+                        : "text-on-bg-secondary"
+                    ].code
+                  }
                   strokeLinecap="round"
                   strokeWidth={3}
                   initial={{ d: "M 0 3 L 18 3" }}
@@ -47,7 +56,13 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
                   transition={{ duration: 0.2 }}
                 />
                 <motion.path
-                  stroke={colors["dark-gray"].code}
+                  stroke={
+                    theme[
+                      color === "normal"
+                        ? "text-on-bg-primary"
+                        : "text-on-bg-secondary"
+                    ].code
+                  }
                   strokeLinecap="round"
                   strokeWidth={3}
                   initial={{ d: "M 36 3 L 18 3" }}
