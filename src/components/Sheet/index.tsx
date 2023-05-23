@@ -3,10 +3,11 @@ import { colors } from "@/lib/colors";
 
 type Props = {
   onClose: () => void;
+  color?: "normal" | "reverse";
   children?: React.ReactNode;
 };
 
-const Sheet: React.FC<Props> = ({ onClose, children }) => {
+const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
   return (
     <>
       <motion.div
