@@ -16,5 +16,9 @@ export const useAddOneNotificationSheet = (): [
     );
   };
 
-  return [render, () => {}];
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  return [render, handleOpen];
 };
