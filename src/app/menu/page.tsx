@@ -8,12 +8,6 @@ import Link from "next/link";
 const Page: NextPage = () => {
   const router = useRouter();
 
-  const menuItems = [
-    "IDを発行する",
-    "発行済みのIDを見る",
-    "通知スケジュールのプリセットを作成する",
-  ];
-
   return (
     <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
       <header className="pt-2 pb-6">
@@ -27,22 +21,15 @@ const Page: NextPage = () => {
       </header>
       <h1 className="mb-4 text-xl">メニュー</h1>
       <ul className="mb-10">
-        {menuItems.map((text, i, items) => {
-          const _rounded = (() => {
-            if (i === 0) return "top";
-            if (i === items.length - 1) return "bottom";
-            return "none";
-          })();
+        <MenuItem text="IDを発行する" rounded="top" color="light-gray" />
 
-          return (
-            <MenuItem
-              key={text}
-              text={text}
-              rounded={_rounded}
-              color={i % 2 === 0 ? "light-gray" : "gray"}
-            />
-          );
-        })}
+        <MenuItem text="発行済みのIDを見る" rounded="none" color="gray" />
+
+        <MenuItem
+          text="通知スケジュールのプリセットを作成する"
+          rounded="bottom"
+          color="light-gray"
+        />
       </ul>
       <ul>
         <li className="rounded-t-lg rounded-b-lg bg-light-gray text-dark-gray">
