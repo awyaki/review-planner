@@ -1,0 +1,37 @@
+"use client";
+import { type NextPage } from "next";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { SmallButton, List } from "@/components";
+
+const Page: NextPage = () => {
+  const router = useRouter();
+  return (
+    <>
+      <article className="flex flex-col justify-between h-screen bg-bg-primary text-text-on-bg-primary">
+        <div className="px-5 pt-5">
+          <header className="flex justify-end mb-5">
+            <Link href="/menu">
+              <SmallButton text="メニュー" />
+            </Link>
+          </header>
+          <h2 className="mb-8 text-xl">通知プリセット</h2>
+          <div className="mb-8">
+            <List
+              data={[
+                { id: "default", text: "Default" },
+                { id: "english", text: "英語学習" },
+              ]}
+            />
+          </div>
+          <SmallButton
+            onClick={() => router.push("/notifications/create")}
+            text="新規プリセットを作成"
+          />
+        </div>
+      </article>
+    </>
+  );
+};
+
+export default Page;
