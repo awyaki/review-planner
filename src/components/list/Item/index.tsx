@@ -4,12 +4,13 @@ import { motion, type PanHandlers, useAnimate } from "framer-motion";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 
 const colorVariant = {
-  gray: "bg-gray text-dark-gray shrink-0 py-2 px-5 w-full",
-  "light-gray": "bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full",
+  gray: "bg-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none",
+  "light-gray":
+    "bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none",
 } satisfies {
   [k in Colors]?:
-    | `bg-gray text-dark-gray shrink-0 py-2 px-5 w-full`
-    | `bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full`;
+    | `bg-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none`
+    | `bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none`;
 };
 
 export type ColorVariants = "gray" | "light-gray";
