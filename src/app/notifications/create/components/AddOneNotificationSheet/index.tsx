@@ -11,7 +11,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
   return (
     <Sheet onClose={onClose} color="reverse">
       <div className="flex flex-col justify-between">
-        <div className="px-5 mb-10">
+        <div className="px-5 pb-28">
           <div className="flex items-center mb-10">
             <span className="w-1/4 h-10 mr-2 text-3xl text-center border-b-2 border-text-on-bg-secondary">
               {inputValue}
@@ -29,7 +29,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
             ))}
           </ul>
         </div>
-        <div>
+        <div className="absolute bottom-0 left-0 w-full">
           <button
             className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray"
             onClick={onClose}
