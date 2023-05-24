@@ -11,9 +11,9 @@ type Props = {
 
 const colorVariant = {
   normal:
-    "absolute bottom-0 left-0 w-screen bg-bg-primary text-text-on-bg-primary rounded-t-2xl z-20",
+    "absolute bottom-0 left-0 w-screen bg-bg-primary text-text-on-bg-primary rounded-t-2xl z-20 min-h-[66%]",
   reverse:
-    "absolute bottom-0 left-0 w-screen bg-bg-secondary text-text-on-bg-secondary rounded-t-2xl z-20",
+    "absolute bottom-0 left-0 w-screen bg-bg-secondary text-text-on-bg-secondary rounded-t-2xl z-20 min-h-[66%]",
 };
 
 const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
