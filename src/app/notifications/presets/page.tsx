@@ -3,6 +3,7 @@ import { type NextPage } from "next";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SmallButton, List } from "@/components";
+import { AiOutlineLeft } from "react-icons/ai";
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -10,7 +11,14 @@ const Page: NextPage = () => {
     <>
       <article className="flex flex-col justify-between h-screen bg-bg-primary text-text-on-bg-primary">
         <div className="px-5 pt-5">
-          <header className="flex justify-end mb-5">
+          <header className="flex items-center justify-between mb-5">
+            <button
+              className="flex items-center mb-2 text-primary"
+              onClick={() => router.back()}
+            >
+              <AiOutlineLeft className="mr-1" />
+              <span>戻る</span>
+            </button>
             <Link href="/menu">
               <SmallButton text="メニュー" />
             </Link>
