@@ -4,8 +4,11 @@ import { useAddOneNotificationSheet } from "./hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
 import Link from "next/link";
+import { AiOutlineLeft } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 const Page: NextPage = () => {
+  const router = useRouter();
   const [inputValue, setInputValue] = useState("");
   const [render, handleOpen] = useAddOneNotificationSheet();
   return (
@@ -13,7 +16,14 @@ const Page: NextPage = () => {
       {render()}
       <article className="flex flex-col justify-between h-screen bg-bg-primary text-text-on-bg-primary">
         <div className="px-5 pt-5">
-          <header className="flex justify-end mb-5">
+          <header className="flex items-center justify-between mb-5">
+            <button
+              className="flex items-center mb-2 text-primary"
+              onClick={() => router.back()}
+            >
+              <AiOutlineLeft className="mr-1" />
+              <span>戻る</span>
+            </button>
             <Link href="/menu">
               <SmallButton text="メニュー" />
             </Link>
