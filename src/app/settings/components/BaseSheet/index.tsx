@@ -10,23 +10,25 @@ const BaseSheet: React.FC<Props> = ({ onClose }) => {
   const { base, changeBase } = useContext(BaseContext);
   return (
     <Sheet onClose={onClose}>
-      <h2 className="mb-5 text-lg">IDの表示形式</h2>
-      <ul>
-        <li className="mb-3">
-          <BaseSelectButton
-            isSelected={base === "decimal"}
-            text="十進法"
-            onClick={() => changeBase("decimal")}
-          />
-        </li>
-        <li>
-          <BaseSelectButton
-            isSelected={base === "hexadecimal"}
-            text="十六進法"
-            onClick={() => changeBase("hexadecimal")}
-          />
-        </li>
-      </ul>
+      <div className="px-5 pb-5">
+        <h2 className="mb-5 text-lg">IDの表示形式</h2>
+        <ul>
+          <li className="mb-3">
+            <BaseSelectButton
+              isSelected={base === "decimal"}
+              text="十進法"
+              onClick={() => changeBase("decimal")}
+            />
+          </li>
+          <li>
+            <BaseSelectButton
+              isSelected={base === "hexadecimal"}
+              text="十六進法"
+              onClick={() => changeBase("hexadecimal")}
+            />
+          </li>
+        </ul>
+      </div>
     </Sheet>
   );
 };
