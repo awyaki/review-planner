@@ -24,12 +24,13 @@ const Page: NextPage = () => {
         <MenuItem text="IDを発行する" rounded="top" color="light-gray" />
 
         <MenuItem text="発行済みのIDを見る" rounded="none" color="gray" />
-
-        <MenuItem
-          text="通知スケジュールのプリセットを作成する"
-          rounded="bottom"
-          color="light-gray"
-        />
+        <Link href="notifications/presets">
+          <MenuItem
+            text="通知スケジュールのプリセットを作成する"
+            rounded="bottom"
+            color="light-gray"
+          />
+        </Link>
       </ul>
       <ul>
         <li className="rounded-t-lg rounded-b-lg bg-light-gray text-dark-gray">
