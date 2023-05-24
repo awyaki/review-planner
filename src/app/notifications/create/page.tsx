@@ -43,7 +43,10 @@ const Page: NextPage = () => {
           </div>
         </div>
         <div className="absolute bottom-0 left-0 w-full">
-          <button className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray">
+          <button
+            className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray"
+            onClick={() => router.back()}
+          >
             キャンセル
           </button>
           <button className="w-1/2 py-5 rounded-tr-md bg-primary text-text-on-primary">
