@@ -8,7 +8,7 @@ type Props = {
 const LargeButton: FC<Props> = ({ text, onClick }) => {
   return (
     <button
-      className="w-full py-4 text-white bg-sky rounded-t-xl"
+      className="w-full py-4 text-text-on-bg-secondary bg-bg-secondary rounded-t-xl"
       onClick={onClick}
     >
       {text}
