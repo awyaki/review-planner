@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { BaseContext } from "@/providers";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -12,6 +13,9 @@ const Page: NextPage = () => {
   const router = useRouter();
   const [schedule, setSchedule] = useState<number[]>([1, 3, 5]);
   const [render, handleOpen] = useAddOneNotificationSheet();
+  const { base } = useContext(BaseContext);
+
+  const NEXT_ID = 1234;
   return (
     <>
       {render()}
@@ -31,7 +35,11 @@ const Page: NextPage = () => {
           </header>
           <div className="mb-8">
             <span className="block mb-1 text-sm">次のID</span>
-            <span className="block text-4xl">1234</span>
+            <span className="block text-4xl">
+              {base === "decimal"
+                ? NEXT_ID
+                : NEXT_ID.toString(16).toUpperCase()}
+            </span>
           </div>
           <h1 className="mb-4 text-xl">新規IDの発行</h1>
           <div className="mb-8">
