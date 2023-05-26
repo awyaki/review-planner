@@ -29,6 +29,10 @@ const Page: NextPage = () => {
               <SmallButton text="メニュー" />
             </Link>
           </header>
+          <div className="mb-8">
+            <span className="block mb-1 text-sm">次のID</span>
+            <span className="block text-4xl">1234</span>
+          </div>
           <h1 className="mb-4 text-xl">新規IDの発行</h1>
           <div className="mb-8">
             {schedule.length === 0 ? (
