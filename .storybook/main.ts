@@ -21,6 +21,7 @@ const config: StorybookConfig = {
       "@/lib/colors": path.resolve(__dirname, "../src/lib/colors"),
       "@/components": path.resolve(__dirname, "../src/components"),
       "@/providers": path.resolve(__dirname, "../src/providers"),
+      "@/hooks": path.resolve(__dirname, "../src/hooks"),
     };
     return config;
   },
