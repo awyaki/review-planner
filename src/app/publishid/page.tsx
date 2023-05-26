@@ -6,7 +6,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
 import { List, SmallButton, LargeButton } from "@/components";
 import { EmptyScheduleItem } from "./components";
-import { useAddOneNotificationSheet } from "./hooks";
+import { useAddOneNotificationSheet } from "@/hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
