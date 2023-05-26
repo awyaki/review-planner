@@ -41,7 +41,12 @@ const Page: NextPage = () => {
                 : NEXT_ID.toString(16).toUpperCase()}
             </span>
           </div>
-          <h1 className="mb-4 text-xl">新規IDの発行</h1>
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-xl">新規IDの発行</h1>
+            <button className="px-2 py-1 rounded-lg bg-primary text-text-on-primary">
+              プリセットから選択
+            </button>
+          </div>
           <div className="mb-8">
             {schedule.length === 0 ? (
               <ul>
