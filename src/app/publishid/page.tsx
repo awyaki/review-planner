@@ -20,7 +20,7 @@ const Page: NextPage = () => {
     <>
       {render()}
       <article className="h-screen bg-bg-primary text-text-on-bg-primary">
-        <div className="px-5 pt-5">
+        <h1 className="invisible">新規IDの作成</h1>
           <header className="flex items-center justify-between mb-5">
             <button
               className="flex items-center text-primary"
@@ -42,7 +42,6 @@ const Page: NextPage = () => {
             </span>
           </div>
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl">新規IDの発行</h1>
             <button className="px-2 py-1 rounded-lg bg-primary text-text-on-primary">
               プリセットから選択
             </button>
@@ -61,7 +60,6 @@ const Page: NextPage = () => {
             )}
           </div>
           <SmallButton text="通知を追加" onClick={handleOpen} />
-        </div>
         <div className="absolute bottom-0 left-0 w-full">
           <LargeButton text="IDを発行" onClick={() => {}} />
         </div>
