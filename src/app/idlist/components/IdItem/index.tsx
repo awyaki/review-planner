@@ -4,25 +4,27 @@ type ColorVariants = "gray" | "light-gray";
 
 type RoundedVariants = "top" | "bottom" | "both" | "none";
 
+type BaseOfVariants = "text-left w-full py-2 px-5";
 const variants = {
   gray: {
-    top: "w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg",
-    bottom: "w-full py-2 px-5 bg-gray text-dark-gray rounded-b-lg",
-    both: "w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg rounded-b-lg",
-    none: "w-full py-2 px-5 bg-gray text-dark-gray",
+    top: "text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg",
+    bottom: "text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-b-lg",
+    both: "text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg rounded-b-lg",
+    none: "text-left w-full py-2 px-5 bg-gray text-dark-gray",
   },
   "light-gray": {
-    top: "w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg",
-    bottom: "w-full py-2 px-5 bg-light-gray text-dark-gray rounded-b-lg",
-    both: "w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg rounded-b-lg",
-    none: "w-full py-2 px-5 bg-light-gray text-dark-gray",
+    top: "text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg",
+    bottom:
+      "text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-b-lg",
+    both: "text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg rounded-b-lg",
+    none: "text-left w-full py-2 px-5 bg-light-gray text-dark-gray",
   },
 } satisfies {
   [color in ColorVariants]: {
     [round in RoundedVariants]:
-      | `w-full py-2 px-5 bg-${color} text-dark-gray rounded-${"t" | "b"}-lg`
-      | `w-full py-2 px-5 bg-${color} text-dark-gray rounded-t-lg rounded-b-lg`
-      | `w-full py-2 px-5 bg-${color} text-dark-gray`;
+      | `${BaseOfVariants} bg-${color} text-dark-gray rounded-${"t" | "b"}-lg`
+      | `${BaseOfVariants} bg-${color} text-dark-gray rounded-t-lg rounded-b-lg`
+      | `${BaseOfVariants} bg-${color} text-dark-gray`;
   };
 };
 
