@@ -12,13 +12,14 @@ import { useAddOneNotificationSheet } from "@/hooks";
 const Page: NextPage = () => {
   const router = useRouter();
   const [schedule, setSchedule] = useState<number[]>([1, 3, 5]);
-  const [render, handleOpen] = useAddOneNotificationSheet();
+  const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
+    useAddOneNotificationSheet();
   const { base } = useContext(BaseContext);
 
   const NEXT_ID = 1234;
   return (
     <>
-      {render()}
+      {renderAddOneNotificationSheet()}
       <article className="h-screen bg-bg-primary text-text-on-bg-primary">
         <h1 className="invisible">新規IDの作成</h1>
         <section className="px-5 pt-5">
@@ -61,7 +62,10 @@ const Page: NextPage = () => {
               ></List>
             )}
           </div>
-          <SmallButton text="通知を追加" onClick={handleOpen} />
+          <SmallButton
+            text="通知を追加"
+            onClick={handleOpenAddOneNotificationSheet}
+          />
         </section>
         <div className="absolute bottom-0 left-0 w-full">
           <LargeButton text="IDを発行" onClick={() => {}} />
