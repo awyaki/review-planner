@@ -5,12 +5,15 @@ import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
 import { SmallButton } from "@/components";
 import { IdItem } from "./components";
+import { useAddOneNotificationSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const reacentlyIds = [123, 124, 125, 126];
+  const [render, handleOpen] = useAddOneNotificationSheet();
   return (
     <>
+      {render()}
       <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
         <header className="flex items-center justify-between mb-5">
           <button
@@ -48,7 +51,7 @@ const Page: NextPage = () => {
             );
           })}
         </ul>
-        <SmallButton text="検索する" onClick={() => {}} />
+        <SmallButton text="検索する" onClick={handleOpen} />
       </article>
     </>
   );
