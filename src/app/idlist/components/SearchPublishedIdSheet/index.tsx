@@ -20,7 +20,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
         <section className="mb-8">
           <h2 className="mb-3 text-lg">検索条件</h2>
           <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
-            <label htmlFor="seachById">IDで検索</label>
+            <label htmlFor="searchById">IDで検索</label>
             <input
               className="w-20 px-2 text-right rounded-sm searchById outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
               value={query}
