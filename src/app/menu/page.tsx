@@ -24,7 +24,9 @@ const Page: NextPage = () => {
         <Link href="/publishid">
           <MenuItem text="IDを発行する" rounded="top" color="light-gray" />
         </Link>
-        <MenuItem text="発行済みのIDを見る" rounded="none" color="gray" />
+        <Link href="/idlist">
+          <MenuItem text="発行済みのIDを見る" rounded="none" color="gray" />
+        </Link>
         <Link href="notifications/presets">
           <MenuItem
             text="通知スケジュールのプリセットを作成する"
