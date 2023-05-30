@@ -4,20 +4,22 @@ type ColorVariants = "gray" | "light-gray";
 
 type RoundedVariants = "top" | "bottom" | "both" | "none";
 
-type BaseOfVariants = "text-left w-full py-2 px-5";
+type BaseOfVariants =
+  "flex justify-between items-center text-left w-full py-2 px-5";
 const variants = {
   gray: {
-    top: "text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg",
-    bottom: "text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-b-lg",
-    both: "text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg rounded-b-lg",
-    none: "text-left w-full py-2 px-5 bg-gray text-dark-gray",
+    top: "flex justify-between items-center text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg",
+    bottom:
+      "flex justify-between items-center text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-b-lg",
+    both: "flex justify-between items-center text-left w-full py-2 px-5 bg-gray text-dark-gray rounded-t-lg rounded-b-lg",
+    none: "flex justify-between items-center text-left w-full py-2 px-5 bg-gray text-dark-gray",
   },
   "light-gray": {
-    top: "text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg",
+    top: "flex justify-between items-center text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg",
     bottom:
-      "text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-b-lg",
-    both: "text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg rounded-b-lg",
-    none: "text-left w-full py-2 px-5 bg-light-gray text-dark-gray",
+      "flex justify-between items-center text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-b-lg",
+    both: "flex justify-between items-center text-left w-full py-2 px-5 bg-light-gray text-dark-gray rounded-t-lg rounded-b-lg",
+    none: "flex justify-between items-center text-left w-full py-2 px-5 bg-light-gray text-dark-gray",
   },
 } satisfies {
   [color in ColorVariants]: {
@@ -30,18 +32,26 @@ const variants = {
 
 type Props = {
   id: string;
+  isCompleted: boolean;
   color: ColorVariants;
   rounded?: RoundedVariants;
   onClick: (id: string) => void;
 };
 
-export const IdItem: FC<Props> = ({ id, color, onClick, rounded = "none" }) => {
+export const IdItem: FC<Props> = ({
+  id,
+  color,
+  onClick,
+  isCompleted,
+  rounded = "none",
+}) => {
   return (
     <button
       className={`${variants[color][rounded]}`}
       onClick={() => onClick(id)}
     >
-      {id}
+      <span>{id}</span>
+      {isCompleted && <span className="text-sm">完了</span>}
     </button>
   );
 };

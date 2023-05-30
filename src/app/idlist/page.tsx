@@ -39,6 +39,7 @@ const Page: NextPage = () => {
               <li key={id}>
                 <IdItem
                   id={id.toString()}
+                  isCompleted={i % 2 === 0}
                   color={color}
                   rounded={rounded}
                   onClick={() => {}}
