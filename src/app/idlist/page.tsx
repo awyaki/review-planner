@@ -45,7 +45,7 @@ const Page: NextPage = () => {
                   isCompleted={i % 2 === 0}
                   color={color}
                   rounded={rounded}
-                  onClick={() => {}}
+                  onClick={() => router.push(`/idinfo/${id}`)}
                 />
               </li>
             );
