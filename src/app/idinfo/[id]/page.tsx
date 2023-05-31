@@ -47,7 +47,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
               onClick={handleOpenSelectPresetSheet}
             >
-              プリセットから選択して追加
+              プリセットを選択
             </button>
           </div>
           <ul className="mb-3">
