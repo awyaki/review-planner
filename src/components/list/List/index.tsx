@@ -5,10 +5,9 @@ import { AnimatePresence } from "framer-motion";
 type Props = {
   data: { id: string; text: string }[];
   onDelete?: (id: string) => void;
-  onUpdate?: (id: string) => void;
 };
 
-const List: FC<Props> = ({ data, onDelete, onUpdate }) => {
+const List: FC<Props> = ({ data, onDelete }) => {
   const getRounded = (i: number): RoundedVariants => {
     const length = data.length;
     if (length === 1) return "both";
@@ -37,7 +36,6 @@ const List: FC<Props> = ({ data, onDelete, onUpdate }) => {
             rounded={getRounded(i)}
             color={getColor(i)}
             onDelete={onDelete ? () => onDelete(id) : undefined}
-            onUpdate={onUpdate ? () => onUpdate(id) : undefined}
           />
         ))}
       </AnimatePresence>
