@@ -10,10 +10,9 @@ type Props = {
   data: { id: string; text: string }[];
   onClick?: (id: string) => void;
   onDelete?: (id: string) => void;
-  onUpdate?: (id: string) => void;
 };
 
-const ClickableList: FC<Props> = ({ data, onClick, onDelete, onUpdate }) => {
+const ClickableList: FC<Props> = ({ data, onClick, onDelete }) => {
   const getRounded = (i: number): RoundedVariants => {
     const length = data.length;
     if (length === 1) return "both";
@@ -43,7 +42,6 @@ const ClickableList: FC<Props> = ({ data, onClick, onDelete, onUpdate }) => {
             color={getColor(i)}
             onClick={onClick ? () => onClick(id) : undefined}
             onDelete={onDelete ? () => onDelete(id) : undefined}
-            onUpdate={onUpdate ? () => onUpdate(id) : undefined}
           />
         ))}
       </AnimatePresence>
