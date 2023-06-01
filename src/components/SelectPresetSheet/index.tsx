@@ -25,6 +25,17 @@ export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
             </li>
           ))}
         </ul>
+        <div className="absolute bottom-0 left-0 w-full">
+          <button
+            className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray"
+            onClick={onClose}
+          >
+            キャンセル
+          </button>
+          <button className="w-1/2 py-5 rounded-tr-md bg-bg-primary text-primary">
+            確定
+          </button>
+        </div>
       </div>
     </Sheet>
   );
