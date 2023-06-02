@@ -2,7 +2,7 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { SmallButton, List } from "@/components";
+import { SmallButton, ClickableList } from "@/components";
 import { AiOutlineLeft } from "react-icons/ai";
 
 const Page: NextPage = () => {
@@ -25,7 +25,7 @@ const Page: NextPage = () => {
           </header>
           <h2 className="mb-8 text-xl">通知プリセット</h2>
           <div className="mb-8">
-            <List
+            <ClickableList
               data={[
                 { id: "default", text: "Default" },
                 { id: "english", text: "英語学習" },
