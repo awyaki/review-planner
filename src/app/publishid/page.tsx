@@ -5,14 +5,19 @@ import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
-import { List, SmallButton, LargeButton } from "@/components";
+import { Schedule, SmallButton, LargeButton } from "@/components";
 import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [schedule, setSchedule] = useState<number[]>([1, 3, 5]);
+  const [schedule, setSchedule] = useState<Map<Date, number[]>>(
+    new Map([
+      [new Date("2023-6-23"), [1, 3, 5]],
+      [new Date("2023-7-1"), [1, 2, 3]],
+    ])
+  );
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet();
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
@@ -57,16 +62,14 @@ const Page: NextPage = () => {
             </button>
           </div>
           <div className="mb-8">
-            {schedule.length === 0 ? (
+            {schedule.size === 0 ? (
               <ul>
                 <li>
                   <EmptyScheduleItem />
                 </li>
               </ul>
             ) : (
-              <List
-                data={schedule.map((i) => ({ id: `${i}`, text: `${i}日後` }))}
-              ></List>
+              <Schedule schedule={schedule}></Schedule>
             )}
           </div>
           <SmallButton
