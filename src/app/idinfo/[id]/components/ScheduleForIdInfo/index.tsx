@@ -1,4 +1,5 @@
 import { NotificationItem } from "../NotificationItem";
+import { List } from "@/components";
 
 type Props = {
   schedules: {
@@ -22,33 +23,14 @@ export const ScheduleForIdInfo: React.FC<Props> = ({ schedules }) => {
           return (
             <li className="mb-5" key={baseDate.toString()}>
               <div className="mb-2">{`基準：${baseDate.toLocaleDateString()}`}</div>
-
-              <ul className="mb-3">
-                {daysAfter.map((day, i) => {
-                  const color: Parameters<
-                    typeof NotificationItem
-                  >["0"]["color"] = i % 2 === 0 ? "light-gray" : "gray";
-                  const rounded: Parameters<
-                    typeof NotificationItem
-                  >["0"]["rounded"] = (() => {
-                    if (daysAfter.length === 1) return "both";
-                    if (i === 0) return "top";
-                    if (i === daysAfter.length - 1) return "bottom";
-                    return "none";
-                  })();
-                  return (
-                    <li key={day}>
-                      <NotificationItem
-                        color={color}
-                        rounded={rounded}
-                        day={`${day}日`}
-                        isCompleted={true}
-                        onClick={() => {}}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
+              <List
+                data={daysAfter.map((day) => ({
+                  id: day.toString(),
+                  text: `${day}日後`,
+                  isCompleted: true,
+                }))}
+                onDelete={() => {}}
+              />
             </li>
           );
         })}
