@@ -3,7 +3,7 @@ import { Item, type ColorVariants, RoundedVariants } from "../Item";
 import { AnimatePresence } from "framer-motion";
 
 type Props = {
-  data: { id: string; text: string }[];
+  data: { id: string; text: string; isCompleted?: boolean }[];
   onDelete?: (id: string) => void;
 };
 
@@ -29,13 +29,14 @@ const List: FC<Props> = ({ data, onDelete }) => {
   return (
     <ul>
       <AnimatePresence>
-        {data.map(({ id, text }, i) => (
+        {data.map(({ id, text, isCompleted }, i) => (
           <Item
             key={id}
             text={text}
             rounded={getRounded(i)}
             color={getColor(i)}
             onDelete={onDelete ? () => onDelete(id) : undefined}
+            isCompleted={isCompleted}
           />
         ))}
       </AnimatePresence>

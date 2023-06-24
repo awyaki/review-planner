@@ -4,13 +4,13 @@ import { motion, type PanHandlers, useAnimate } from "framer-motion";
 import { MdDelete } from "react-icons/md";
 
 const colorVariant = {
-  gray: "bg-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none",
+  gray: "flex justify-between bg-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none",
   "light-gray":
-    "bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none",
+    "flex justify-between bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none",
 } satisfies {
   [k in Colors]?:
-    | `bg-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none`
-    | `bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none`;
+    | `flex justify-between bg-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none`
+    | `flex justify-between bg-light-gray text-dark-gray shrink-0 py-2 px-5 w-full select-none`;
 };
 
 export type ColorVariants = "gray" | "light-gray";
@@ -34,9 +34,16 @@ type Props = {
   color: ColorVariants;
   onDelete?: () => void;
   rounded?: RoundedVariants;
+  isCompleted?: boolean;
 };
 
-const Item: FC<Props> = ({ text, color, rounded = "none", onDelete }) => {
+const Item: FC<Props> = ({
+  text,
+  color,
+  rounded = "none",
+  onDelete,
+  isCompleted,
+}) => {
   const [scope, animate] = useAnimate();
 
   const itemBodySelector = "item-body";
@@ -91,6 +98,7 @@ const Item: FC<Props> = ({ text, color, rounded = "none", onDelete }) => {
         onPan={handlePan}
       >
         {text}
+        {isCompleted && <span className="text-sm">完了</span>}
       </motion.div>
       <motion.div
         className={`flex items-center justify-center w-0 text-white shrink-0 ${deleteIconSelector} bg-dark-gray`}
