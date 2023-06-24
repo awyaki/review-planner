@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
 import { SmallButton } from "@/components";
-import { NotificationItem } from "./components";
+import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import { BaseContext } from "@/providers";
 
@@ -16,7 +16,10 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { base } = useContext(BaseContext);
-  const notifications = [1, 3, 5, 7, 14];
+  const schedules: Parameters<typeof ScheduleForIdInfo>["0"]["schedules"] = [
+    { id: 123, baseDate: new Date("2023-6-24"), daysAfter: [1, 2, 3] },
+    { id: 124, baseDate: new Date("2023-7-1"), daysAfter: [1, 3, 5, 7] },
+  ];
 
   return (
     <>
@@ -50,31 +53,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               プリセットを選択
             </button>
           </div>
-          <ul className="mb-3">
-            {notifications.map((day, i) => {
-              const color: Parameters<typeof NotificationItem>["0"]["color"] =
-                i % 2 === 0 ? "light-gray" : "gray";
-              const rounded: Parameters<
-                typeof NotificationItem
-              >["0"]["rounded"] = (() => {
-                if (notifications.length === 1) return "both";
-                if (i === 0) return "top";
-                if (i === notifications.length - 1) return "bottom";
-                return "none";
-              })();
-              return (
-                <li key={day}>
-                  <NotificationItem
-                    color={color}
-                    rounded={rounded}
-                    day={`${day}日`}
-                    isCompleted={true}
-                    onClick={() => {}}
-                  />
-                </li>
-              );
-            })}
-          </ul>
+          <ScheduleForIdInfo schedules={schedules} />
           <SmallButton
             text="通知を追加"
             onClick={handleOpenAddOneNotificationSheet}
