@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import NotificationsCreate from "./page";
+import NotificationsEdit from "./page";
 import { ThemeColorContextProvider, BaseContextProvider } from "@/providers";
 
-const meta: Meta<typeof NotificationsCreate> = {
-  title: "NotificationsCreate",
-  component: NotificationsCreate,
+const meta: Meta<typeof NotificationsEdit> = {
+  title: "NotificationsEdit",
+  component: NotificationsEdit,
   decorators: [
     (Story) => {
       return (
@@ -20,10 +20,10 @@ const meta: Meta<typeof NotificationsCreate> = {
 
 export default meta;
 
-type Story = StoryObj<typeof NotificationsCreate>;
+type Story = StoryObj<typeof NotificationsEdit>;
 
 export const Primary: Story = {
-  render: () => <NotificationsCreate />,
+  render: () => <NotificationsEdit />,
   parameters: {
     nextjs: {
       appDirectory: true,
