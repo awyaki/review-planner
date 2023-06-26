@@ -30,6 +30,9 @@ const Page: NextPage = () => {
                 { id: "default", text: "Default" },
                 { id: "english", text: "英語学習" },
               ]}
+              onClick={(id: string) =>
+                router.push(`/notifications/presets/${id}`)
+              }
             />
           </div>
           <SmallButton
