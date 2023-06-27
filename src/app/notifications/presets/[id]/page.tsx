@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { type NextPage } from "next";
-import { List, SmallButton } from "@/components";
+import { Schedule, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
@@ -37,7 +37,14 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
           <div className="mb-10">
-            <List data={[{ id: "hoge", text: "Hello World" }]} />
+            <Schedule
+              schedule={
+                new Map([
+                  [new Date("2023-6-27"), [1, 2, 3]],
+                  [new Date("2023-7-1"), [1, 3, 5, 7]],
+                ])
+              }
+            />
           </div>
           <div>
             <SmallButton onClick={handleOpen} text="通知を追加" />
