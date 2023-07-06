@@ -8,6 +8,7 @@ const client = new OAuth2Client(CLIENT_ID);
 export const verify = async (
   token: string
 ): Promise<{
+  name: string | undefined;
   userId: string;
   picture: string | undefined;
 }> => {
@@ -21,6 +22,7 @@ export const verify = async (
     if (!payload) throw new FailToGetPayload();
 
     return {
+      name: payload["name"],
       userId: payload["sub"],
       picture: payload["picture"],
     };
