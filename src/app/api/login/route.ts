@@ -4,6 +4,7 @@ import { parseIntoGoogleOneTapRequestBody } from "@/lib/google-auth";
 import { verify } from "@/lib/google-auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { createResponse, getSession } from "@/lib/session";
 
 class UnexpectedRequest extends Error {}
 
@@ -54,6 +55,17 @@ export async function POST(request: NextRequest) {
     // retrieve user information from DB
     // make session
 
+    // TODO: research how getSession work.
+    // Why does getSession have to take `request` and `response`
+    const response = new Response();
+    const session = await getSession(request, response);
+
+    session.user = {
+      id: user.userId,
+      name: user.name ?? "",
+    };
+
+    await session.save();
     redirect("http://localhost:3000/menu");
   } catch (e) {
     throw e;
