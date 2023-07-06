@@ -51,6 +51,7 @@ export async function POST(request: NextRequest) {
     // confirm the presense of user in database
     // if the user don't exist, make new user accout on this app
 
+    // retrieve user information from DB
     // make session
 
     redirect("http://localhost:3000/menu");
