@@ -22,11 +22,9 @@ export async function POST(request: NextRequest) {
     const contentType = headers.get("content-type");
     if (!contentType || contentType !== "application/x-www-form-urlencoded")
       throw new UnexpectedRequest();
-    if (!body) throw new UnexpectedRequest();
 
     const cookiesCsrfToken = cookies.get("g_csrf_token")?.value;
     if (!cookiesCsrfToken) throw new UnexpectedRequest();
-    console.log(cookiesCsrfToken);
 
     // parse request body
     const parsedBody = parseIntoGoogleOneTapRequestBody(
