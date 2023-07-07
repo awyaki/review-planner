@@ -1,11 +1,6 @@
 "use client";
 import { createContext, useState } from "react";
-
-export type User = {
-  id: string;
-  google_id: string;
-  picture: string;
-};
+import { User } from "@/types";
 
 export const AuthContext = createContext<{
   user: User | null;
