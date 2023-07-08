@@ -25,8 +25,8 @@ export interface Data {
   };
 }
 
-export const getSession = (req: Request, res: Response) => {
-  const session = getIronSession<Data>(req, res, {
+export const getSession = async (req: Request, res: Response) => {
+  const session = await getIronSession<Data>(req, res, {
     password: parseIntoString(secret),
     cookieName: "session",
     cookieOptions: {
