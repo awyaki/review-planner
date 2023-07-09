@@ -1,5 +1,6 @@
 /*
  * CAUTION: This module depends on canary feature of iron-session(@8.0.0-alpha.0)
+ * see https://github.com/vvo/iron-session/issues/586#issuecomment-1568830066
  * */
 import { getIronSession, createResponse } from "iron-session";
 import { User } from "@/types";
