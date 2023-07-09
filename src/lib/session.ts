@@ -4,6 +4,8 @@
 import { getIronSession, createResponse } from "iron-session";
 import { User } from "@/types";
 
+export const SESSION_COOKIE_NAME = "_review_planner_session";
+
 class MissingPasword extends Error {}
 
 const secret = process.env.SECRET_COOKIE_PASWORD;
@@ -28,7 +30,7 @@ export interface Data {
 export const getSession = async (req: Request, res: Response) => {
   const session = await getIronSession<Data>(req, res, {
     password: parseIntoString(secret),
-    cookieName: "session",
+    cookieName: SESSION_COOKIE_NAME,
     cookieOptions: {
       secure: process.env.NODE_ENV === "production",
     },
