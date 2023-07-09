@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import qs from "querystring";
 import { parseIntoGoogleOneTapRequestBody } from "@/lib/google-auth";
 import { verify } from "@/lib/google-auth";
@@ -47,7 +46,6 @@ export async function POST(request: NextRequest) {
 
     // retrieve user infomation
     const user = await verify(credential);
-    console.log(user);
 
     // confirm the presense of user in database
     // if the user don't exist, make new user accout on this app
@@ -57,7 +55,8 @@ export async function POST(request: NextRequest) {
 
     // TODO: research how getSession work.
     // Why does getSession have to take `request` and `response`
-    const response = new Response();
+    const response = NextResponse.json({ url: "/menu" });
+
     const session = await getSession(request, response);
 
     session.user = {
@@ -65,8 +64,9 @@ export async function POST(request: NextRequest) {
       name: user.name ?? "",
     };
 
+    console.log(session);
     await session.save();
-    redirect("http://localhost:3000/menu");
+    return response;
   } catch (e) {
     throw e;
   }
