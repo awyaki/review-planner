@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     // Why does getSession have to take `request` and `response`
     const response = new Response(null, {
       status: 302,
-      headers: { Location: `http://localhost:3000/publishid` },
+      headers: { Location: `http://localhost:3000/menu` },
     });
 
     const session = await getSession(request, response);
