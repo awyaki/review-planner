@@ -1,4 +1,5 @@
 import { List } from "@/components";
+import { dateToString } from "@/lib";
 
 type Props = {
   schedule: Map<Date, number[]>;
@@ -17,7 +18,7 @@ export const Schedule: React.FC<Props> = ({ schedule }) => {
         .map(([date, days]) => {
           return (
             <li className="mb-5" key={date.toString()}>
-              <div className="mb-2">{`基準：${date.toLocaleDateString()}`}</div>
+              <div className="mb-2">{`基準：${dateToString(date)}`}</div>
               <List
                 data={days.map((day) => ({
                   id: day.toString(),
