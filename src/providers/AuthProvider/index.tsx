@@ -2,11 +2,12 @@
 import { createContext, useState } from "react";
 import { User } from "@/types";
 
+import Script from "next/script";
+
 export const AuthContext = createContext<{
   user: User | null;
 }>({ user: null });
 
-import Script from "next/script";
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
