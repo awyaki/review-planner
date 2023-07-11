@@ -1,9 +1,8 @@
 import qs from "querystring";
 import { parseIntoGoogleOneTapRequestBody } from "@/lib/google-auth";
 import { verify } from "@/lib/google-auth";
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { createResponse, getSession } from "@/lib/session";
+import { getSession } from "@/lib/session";
 
 class UnexpectedRequest extends Error {}
 
