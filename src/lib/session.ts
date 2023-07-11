@@ -3,7 +3,7 @@
  * see https://github.com/vvo/iron-session/issues/586#issuecomment-1568830066
  * */
 import { getIronSession, createResponse } from "iron-session";
-import { User } from "@/types";
+import { SessionUser } from "@/types";
 
 export const SESSION_COOKIE_NAME = "_review_planner_session";
 
@@ -22,10 +22,7 @@ const parseIntoString = (secret: unknown): string => {
 };
 
 export interface Data {
-  user?: {
-    id: string;
-    name: string;
-  };
+  user?: SessionUser;
 }
 
 export const getSession = async (req: Request, res: Response) => {
@@ -42,7 +39,7 @@ export const getSession = async (req: Request, res: Response) => {
 
 declare module "iron-session" {
   interface IronSessionData {
-    user?: User;
+    user?: SessionUser;
   }
 }
 export { createResponse };

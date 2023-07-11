@@ -65,6 +65,7 @@ export async function POST(request: NextRequest) {
     session.user = {
       id: user.userId,
       name: user.name ?? "",
+      picture: user.picture ?? "",
     };
 
     console.log(session);
