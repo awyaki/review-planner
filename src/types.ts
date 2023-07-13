@@ -11,6 +11,8 @@ export type SessionUser = {
   picture: string;
 };
 
+class FailedToParseIntoSessionUser extends Error {}
+
 const isSessionUser = (sessionUser: unknown): sessionUser is SessionUser => {
   if (sessionUser === null) return false;
   if (typeof sessionUser !== "object") return false;
@@ -18,4 +20,11 @@ const isSessionUser = (sessionUser: unknown): sessionUser is SessionUser => {
   if (!Object.hasOwn(sessionUser, "name")) return false;
   if (!Object.hasOwn(sessionUser, "picture")) return false;
   return true;
+};
+
+export const parseIntoSessionUser = (
+  sessionUser: unknown
+): SessionUser | FailedToParseIntoSessionUser => {
+  if (isSessionUser(sessionUser)) return sessionUser;
+  return new FailedToParseIntoSessionUser("Faild to parse.");
 };
