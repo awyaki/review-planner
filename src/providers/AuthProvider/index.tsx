@@ -1,22 +1,35 @@
 "use client";
 import { createContext, useState } from "react";
-import { User } from "@/types";
+import { parseIntoSessionUser, FailedToParseIntoSessionUser } from "@/types";
 
 import Script from "next/script";
 
 export const AuthContext = createContext<{
-  user: User | null;
+  user: { id: string; name: string } | null;
 }>({ user: null });
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+const getUser = async () => {
+  const res = await fetch("http://localhost:3000/api/user");
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const _user = await res.json();
+  const user = parseIntoSessionUser(_user);
+  if (user instanceof FailedToParseIntoSessionUser) throw new Error();
+  return user;
+};
+
+export const AuthProvider = async ({
   children,
+}: {
+  children: React.ReactNode;
 }) => {
   // fetch user data from database with sesssion id and google id
   // After fetching data, if user is null, redirect login page
   // and make user create a new account
-
-  const [user, setUser] = useState<User | null>(null);
-
+  const user = await getUser();
+  console.log(user);
   return (
     <AuthContext.Provider value={{ user }}>
       <Script src="https://accounts.google.com/gsi/client" async defer></Script>
