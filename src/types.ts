@@ -10,3 +10,12 @@ export type SessionUser = {
   name: string;
   picture: string;
 };
+
+const isSessionUser = (sessionUser: unknown): sessionUser is SessionUser => {
+  if (sessionUser === null) return false;
+  if (typeof sessionUser !== "object") return false;
+  if (!Object.hasOwn(sessionUser, "id")) return false;
+  if (!Object.hasOwn(sessionUser, "name")) return false;
+  if (!Object.hasOwn(sessionUser, "picture")) return false;
+  return true;
+};
