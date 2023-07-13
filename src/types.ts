@@ -11,7 +11,7 @@ export type SessionUser = {
   picture: string;
 };
 
-class FailedToParseIntoSessionUser extends Error {}
+export class FailedToParseIntoSessionUser extends Error {}
 
 const isSessionUser = (sessionUser: unknown): sessionUser is SessionUser => {
   if (sessionUser === null) return false;
