@@ -1,3 +1,4 @@
+"use client";
 import { createContext } from "react";
 import { useSessionUser } from "./hooks";
 import Script from "next/script";
