@@ -67,7 +67,6 @@ export async function POST(request: NextRequest) {
       picture: user.picture ?? "",
     };
 
-    console.log(session);
     await session.save();
     return response;
   } catch (e) {
