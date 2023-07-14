@@ -34,10 +34,12 @@ export const getSessionUser = async (): Promise<SessionUser | null> => {
 
     const payload = parseIntoHasUserProperty(await res.json());
 
-    if (payload instanceof FailedToParseIntoHasUserProperty) throw new Error();
+    if (payload instanceof FailedToParseIntoHasUserProperty)
+      throw new Error("Failed to parse into object that has user property .");
 
     const user = parseIntoSessionUser(payload.user);
-    if (user instanceof FailedToParseIntoSessionUser) throw new Error();
+    if (user instanceof FailedToParseIntoSessionUser)
+      throw new Error("Failed to parse into SessionUser");
     return user;
   } catch (e) {
     if (e instanceof Error) console.error(e.message);
