@@ -3,7 +3,7 @@ import {
   ThemeColorContextProvider,
   BaseContextProvider,
   AuthProvider,
-} from "../providers";
+} from "./providers";
 
 type Props = {
   children: React.ReactNode;
