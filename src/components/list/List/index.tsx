@@ -1,3 +1,4 @@
+"use client";
 import { type FC } from "react";
 import { Item, type ColorVariants, RoundedVariants } from "../Item";
 import { AnimatePresence } from "framer-motion";

@@ -1,3 +1,4 @@
+"use client";
 import { useContext } from "react";
 import { ThemeColorContext } from "@/app/providers";
 import { motion } from "framer-motion";
