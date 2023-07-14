@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CheckableThemeColorCircle } from "../CheckableThemeColorCircle";
 import { Sheet } from "@/components";
 import { themeNames, themes } from "@/lib/colors";
-import { ThemeColorContext } from "@/providers";
+import { ThemeColorContext } from "@/app/providers";
 
 type Props = {
   onClose: () => void;

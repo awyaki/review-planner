@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Sheet } from "@/components";
-import { BaseContext } from "@/providers";
+import { BaseContext } from "@/app/providers";
 
 type Props = {
   onClose: () => void;

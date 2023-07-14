@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeColorContext } from "@/providers";
+import { ThemeColorContext } from "@/app/providers";
 import { motion } from "framer-motion";
 import { colors, themes } from "@/lib/colors";
 

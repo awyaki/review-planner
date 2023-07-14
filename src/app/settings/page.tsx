@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
-import { ThemeColorContext, BaseContext } from "@/providers";
+import { ThemeColorContext, BaseContext } from "@/app/providers";
 import { useAccountSheet, useThemeColorSheet, useBaseSheet } from "./hooks";
 
 const Page: NextPage = () => {

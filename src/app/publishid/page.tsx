@@ -1,6 +1,6 @@
 "use client";
 import { useState, useContext } from "react";
-import { BaseContext } from "@/providers";
+import { BaseContext } from "@/app/providers";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
