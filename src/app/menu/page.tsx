@@ -1,24 +1,12 @@
-"use client";
 import { NextPage } from "next";
-import { useRouter } from "next/navigation";
 import { MenuItem } from "./components";
-import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
+import { Header } from "@/app/components";
 
 const Page: NextPage = () => {
-  const router = useRouter();
-
   return (
     <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
-      <header className="pt-2 pb-6">
-        <button
-          className="flex items-center mb-2"
-          onClick={() => router.back()}
-        >
-          <AiOutlineLeft className="mr-1" />
-          <span>戻る</span>
-        </button>
-      </header>
+      <Header />
       <h1 className="mb-4 text-xl">メニュー</h1>
       <ul className="mb-10">
         <Link href="/publishid">
