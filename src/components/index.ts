@@ -6,3 +6,4 @@ export * from "./Sheet";
 export * from "./AddOneNotificationSheet";
 export * from "./SelectPresetSheet";
 export * from "./Schedule";
+export * from "./GoogleOneTap";
