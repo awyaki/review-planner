@@ -23,7 +23,9 @@ const parseIntoHasUserProperty = (
 };
 
 export const getSessionUser = async (): Promise<SessionUser | null> => {
-  const res = await fetch("http://localhost:3000/api/user");
+  const res = await fetch("http://localhost:3000/api/user", {
+    cache: "no-store",
+  });
 
   try {
     if (!res.ok) {
