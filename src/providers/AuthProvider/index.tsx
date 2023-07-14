@@ -1,5 +1,4 @@
-"use client";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import { useSessionUser } from "./hooks";
 import Script from "next/script";
 
