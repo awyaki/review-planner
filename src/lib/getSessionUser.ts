@@ -25,18 +25,15 @@ const parseIntoHasUserProperty = (
 export const getSessionUser = async (): Promise<SessionUser | null> => {
   const res = await fetch("http://localhost:3000/api/user", {
     cache: "no-store",
+    next: { revalidate: 0 },
   });
-
   try {
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
-
     const payload = parseIntoHasUserProperty(await res.json());
-
     if (payload instanceof FailedToParseIntoHasUserProperty)
       throw new Error("Failed to parse into object that has user property .");
-
     const user = parseIntoSessionUser(payload.user);
     if (user instanceof FailedToParseIntoSessionUser)
       throw new Error("Failed to parse into SessionUser");
