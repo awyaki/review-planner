@@ -39,5 +39,5 @@ const getUser = async () => {
 };
 
 export const useSessionUser = () => {
-  return useSWR("/api/user", getUser);
+  return useSWR<SessionUser>("/api/user", getUser);
 };
