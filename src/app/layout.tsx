@@ -1,5 +1,9 @@
 import "./globals.css";
-import { ThemeColorContextProvider, BaseContextProvider } from "./providers";
+import {
+  ThemeColorContextProvider,
+  BaseContextProvider,
+  AuthProvider,
+} from "./providers";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +14,9 @@ const RootLayout: React.FC<Props> = ({ children }) => {
     <html lang="ja">
       <body>
         <ThemeColorContextProvider>
-          <BaseContextProvider>{children}</BaseContextProvider>
+          <BaseContextProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </BaseContextProvider>
         </ThemeColorContextProvider>
       </body>
     </html>

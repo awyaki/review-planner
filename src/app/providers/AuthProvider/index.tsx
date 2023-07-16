@@ -8,11 +8,9 @@ export const AuthContext = createContext<{
 }>({ user: null });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // fetch user data from database with sesssion id and google id
-  // After fetching data, if user is null, redirect login page
-  // and make user create a new account
-  const { data } = useSessionUser();
-  console.log("authProvider", data);
+  const { data, isLoading } = useSessionUser();
+  // TODO: replace with Loading component
+  if (isLoading) return <>loading...</>;
   return (
     <AuthContext.Provider value={{ user: data ?? null }}>
       {!data ? (
@@ -30,6 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             data-auto_select="true"
             data-itp_support="true"
           ></div>
+          {/* TODO: replace with "Please login page" component */}
           <p>ログインしてください</p>
         </>
       ) : (
