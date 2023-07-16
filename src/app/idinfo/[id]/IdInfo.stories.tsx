@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IdInfoPage from "./page";
-import { ThemeColorContextProvider } from "@/providers";
+import { ThemeColorContextProvider } from "@/app/providers";
 
 const meta: Meta<typeof IdInfoPage> = {
   title: "IdInfoPage",

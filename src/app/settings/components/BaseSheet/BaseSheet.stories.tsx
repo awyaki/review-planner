@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { BaseSheet } from "./index";
-import { BaseContextProvider } from "@/providers";
+import { BaseContextProvider } from "@/app/providers";
 
 const meta: Meta<typeof BaseSheet> = {
   title: "Sheet",

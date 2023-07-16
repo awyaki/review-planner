@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import NotificationsCreate from "./page";
-import { ThemeColorContextProvider, BaseContextProvider } from "@/providers";
+import {
+  ThemeColorContextProvider,
+  BaseContextProvider,
+} from "@/app/providers";
 
 const meta: Meta<typeof NotificationsCreate> = {
   title: "NotificationsCreate",

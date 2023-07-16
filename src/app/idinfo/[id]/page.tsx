@@ -7,7 +7,7 @@ import Link from "next/link";
 import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
-import { BaseContext } from "@/providers";
+import { BaseContext } from "@/app/providers";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
