@@ -28,8 +28,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             data-auto_select="true"
             data-itp_support="true"
           ></div>
-          {/* TODO: replace with "Please login page" component */}
-          <p>ログインしてください</p>
+          <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
+            <div
+              className="g_id_signin"
+              data-type="standard"
+              data-size="large"
+              data-theme="outline"
+              data-text="sign_in_with"
+              data-shape="rectangular"
+              data-logo_alignment="left"
+            ></div>
+          </article>
         </>
       ) : (
         <>{children}</>
