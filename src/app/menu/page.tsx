@@ -2,7 +2,7 @@ import { MenuItem } from "./components";
 import Link from "next/link";
 import { Header } from "@/app/components";
 
-const Page = async () => {
+const Page = () => {
   return (
     <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
       <Header />
