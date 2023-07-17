@@ -39,5 +39,9 @@ const getUser = async () => {
 };
 
 export const useSessionUser = () => {
-  return useSWR<SessionUser>("/api/user", getUser);
+  return useSWR<SessionUser>("/api/user", getUser, {
+    revalidateOnFocus: false,
+    revalidateOnMount: true,
+    revalidateIfStale: false,
+  });
 };
