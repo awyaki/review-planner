@@ -18,6 +18,7 @@ const config: StorybookConfig = {
     if (!config.resolve?.alias) return config;
     config.resolve.alias = {
       ...config.resolve.alias,
+      "@/app": path.resolve(__dirname, "../src/app"),
       "@/lib/colors": path.resolve(__dirname, "../src/lib/colors"),
       "@/components": path.resolve(__dirname, "../src/components"),
       "@/providers": path.resolve(__dirname, "../src/providers"),
