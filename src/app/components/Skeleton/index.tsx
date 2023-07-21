@@ -3,6 +3,7 @@ import { SettingSkeleton } from "./SettingSkeleton";
 import { IdInfoSkeleton } from "./IdInfoSkeleton";
 import { IdListSkeleton } from "./IdListSkeleton";
 import { NotificationCreateSkeleton } from "./NotificationCreateSkeleton";
+import { NotificationPresetsSkeleton } from "./NotificationPresetsSkeleton";
 
 type Props = {
   path: string;
@@ -24,6 +25,8 @@ export const Skeleton: React.FC<Props> = ({ path }) => {
     }
     case "notifications": {
       if (splitted[2] === "create") return <NotificationCreateSkeleton />;
+      if (splitted[2] === "presets") return <NotificationPresetsSkeleton />;
+      return <>Loading...</>;
     }
     case "idlist": {
       return <IdListSkeleton />;
