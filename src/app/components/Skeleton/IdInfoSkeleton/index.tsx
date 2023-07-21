@@ -1,4 +1,5 @@
 import { HeaderWithMenuSkeleton } from "../HeaderWithMenuSkeleton";
+import { SmallButtonSkeleton } from "../SmallButtonSkeleton";
 export const IdInfoSkeleton = () => {
   return (
     <>
@@ -28,7 +29,7 @@ export const IdInfoSkeleton = () => {
               </ul>
             </li>
           </ul>
-          <div className="w-24 py-3 rounded-lg bg-bg-secondary text-text-on-bg-secondary"></div>
+          <SmallButtonSkeleton />
         </section>
       </article>
     </>
