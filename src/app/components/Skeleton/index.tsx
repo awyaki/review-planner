@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const Skeleton: React.FC<Props> = ({ path }) => {
-  // ex. when path is /idinfo/125, path.split("/") will ["", "idinfo", "125"]
+  // ex. when path is /idinfo/125, path.split("/") will become ["", "idinfo", "125"]
   const splitted = path.split("/");
 
   switch (splitted[1]) {
