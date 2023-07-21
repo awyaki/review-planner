@@ -1,6 +1,7 @@
 import { MenuSkeleton } from "./MenuSkeleton";
 import { SettingSkeleton } from "./SettingSkeleton";
 import { IdInfoSkeleton } from "./IdInfoSkeleton";
+import { IdListSkeleton } from "./IdListSkeleton";
 
 type Props = {
   path: string;
@@ -19,6 +20,9 @@ export const Skeleton: React.FC<Props> = ({ path }) => {
     }
     case "idinfo": {
       return <IdInfoSkeleton />;
+    }
+    case "idlist": {
+      return <IdListSkeleton />;
     }
     default: {
       return <>Loading...</>;
