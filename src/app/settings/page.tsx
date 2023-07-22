@@ -4,14 +4,15 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
-import { ThemeColorContext, BaseContext } from "@/app/providers";
+import { ThemeColorContext, BaseContext, AuthContext } from "@/app/providers";
 import { useAccountSheet, useThemeColorSheet, useBaseSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const { theme } = useContext(ThemeColorContext);
   const { base } = useContext(BaseContext);
-  const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet();
+  const user = useContext(AuthContext);
+  const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet(user);
   const [renderThemeColorSheet, handleOpenThemeColorSheet] =
     useThemeColorSheet();
   const [renderBaseSheet, handleOpenBaseSheet] = useBaseSheet();
@@ -38,7 +39,7 @@ const Page: NextPage = () => {
               onClick={handleOpenAccountSheet}
             >
               <span>アカウント</span>
-              <span>Example name</span>
+              <span>{user?.name}</span>
             </button>
           </li>
           <li className="list-none bg-gray">

@@ -1,17 +1,15 @@
-"use client";
 import { SmallButton } from "@/components";
 import { Sheet } from "@/components";
-import { useContext } from "react";
-import { AuthContext } from "@/app/providers";
 import Image from "next/image";
 import { useLogoutButton } from "./hooks";
+import { SessionUser } from "@/types";
 
 type Props = {
+  user: SessionUser | null;
   onClose: () => void;
 };
 
-const AccountSheet: React.FC<Props> = ({ onClose }) => {
-  const user = useContext(AuthContext);
+const AccountSheet: React.FC<Props> = ({ onClose, user }) => {
   const renderLogoutButton = useLogoutButton();
   if (!user) return <></>;
   return (

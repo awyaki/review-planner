@@ -11,5 +11,10 @@ export default meta;
 type Story = StoryObj<typeof AccountSheet>;
 
 export const Account: Story = {
-  render: () => <AccountSheet onClose={() => {}} />,
+  render: () => (
+    <AccountSheet
+      onClose={() => {}}
+      user={{ id: "", name: "Hoge taro", picture: "" }}
+    />
+  ),
 };
