@@ -17,7 +17,7 @@ const AccountSheet: React.FC<Props> = ({ onClose }) => {
     <Sheet onClose={onClose}>
       <div className="px-5 pb-5">
         <h2 className="mb-5 text-lg">アカウント</h2>
-        <div className="flex mb-5 gap-5">
+        <div className="flex items-center mb-5 gap-5">
           <Image
             className="rounded-full"
             src={user.picture}
