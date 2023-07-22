@@ -4,6 +4,7 @@ import { Sheet } from "@/components";
 import { useContext } from "react";
 import { AuthContext } from "@/app/providers";
 import Image from "next/image";
+import { useLogoutButton } from "./hooks";
 
 type Props = {
   onClose: () => void;
@@ -11,7 +12,7 @@ type Props = {
 
 const AccountSheet: React.FC<Props> = ({ onClose }) => {
   const user = useContext(AuthContext);
-
+  const renderLogoutButton = useLogoutButton();
   if (!user) return <></>;
   return (
     <Sheet onClose={onClose}>
@@ -27,9 +28,7 @@ const AccountSheet: React.FC<Props> = ({ onClose }) => {
           />
           <div>{user.name}</div>
         </div>
-        <div className="mb-8">
-          <SmallButton text="サインアウト" onClick={() => {}} />
-        </div>
+        <div className="mb-8">{renderLogoutButton()}</div>
         <div>
           <SmallButton text="アカウント削除" onClick={() => {}} />
         </div>
