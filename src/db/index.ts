@@ -24,3 +24,5 @@ export class MySubClassedDexie extends Dexie {
 }
 
 export const db = new MySubClassedDexie();
+
+export * from "./functions";

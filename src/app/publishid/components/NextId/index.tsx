@@ -2,12 +2,7 @@
 import { useContext } from "react";
 import { BaseContext } from "@/app/providers";
 import useSWR from "swr";
-import { db } from "@/db";
-
-const fetchNextId = async (): Promise<number> => {
-  const nextID = await db.NextID.get("next_id");
-  return nextID ?? 0;
-};
+import { fetchNextId } from "@/db";
 
 export const NextId: React.FC = () => {
   const { base } = useContext(BaseContext);
