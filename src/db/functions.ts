@@ -5,6 +5,15 @@ export const fetchNextId = async (): Promise<number> => {
   return nextID ?? 0;
 };
 
+export const incrementNextId = async (): Promise<void> => {
+  const id = await db.NextID.get("next_id");
+  if (id) {
+    await db.NextID.put(id + 1, "next_id");
+  } else {
+    await db.NextID.add(0, "next_id");
+  }
+};
+
 export const addId = async (
   id: number,
   notifications: Notification[]
