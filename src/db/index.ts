@@ -1,6 +1,6 @@
 import Dexie, { Table } from "dexie";
 
-export type Notification = { baseDate: Date; daysAfter: number };
+export type Notification = { baseDate: Date; daysAfter: number[] };
 
 export type ID = {
   id: number;
