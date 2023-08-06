@@ -10,15 +10,17 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
+import { Notification } from "@/db";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [schedule, setSchedule] = useState<Map<Date, number[]>>(
-    new Map([
-      [new Date("2023-6-23"), [1, 3, 5]],
-      [new Date("2023-7-1"), [1, 2, 3]],
-    ])
-  );
+  const [schedule, setSchedule] = useState<Notification[]>([
+    { baseDate: new Date("2023-6-23"), daysAfter: [1, 3, 5] },
+    {
+      baseDate: new Date("2023-7-2"),
+      daysAfter: [1, 2, 3],
+    },
+  ]);
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet();
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
@@ -56,7 +58,7 @@ const Page: NextPage = () => {
             </button>
           </div>
           <div className="mb-8">
-            {schedule.size === 0 ? (
+            {schedule.length === 0 ? (
               <ul>
                 <li>
                   <EmptyScheduleItem />
