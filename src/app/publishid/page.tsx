@@ -47,7 +47,7 @@ const Page: NextPage = () => {
           </header>
           <div className="mb-8">
             <span className="block mb-1 text-sm">次のID</span>
-            {!isLoading ? <>Loading...</> : <NextId nextId={nextId ?? 0} />}
+            {isLoading ? <>Loading...</> : <NextId nextId={nextId ?? 0} />}
           </div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl">通知スケジュール</h2>
