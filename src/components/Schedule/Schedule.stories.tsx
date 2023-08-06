@@ -13,12 +13,13 @@ type Story = StoryObj<typeof Schedule>;
 export const Primary: Story = {
   render: () => (
     <Schedule
-      schedule={
-        new Map([
-          [new Date("2023-6-23"), [1, 2, 3]],
-          [new Date("2023-7-1"), [1, 3, 5, 7]],
-        ])
-      }
+      schedule={[
+        { baseDate: new Date("2023-6-23"), daysAfter: [1, 3, 5] },
+        {
+          baseDate: new Date("2023-7-2"),
+          daysAfter: [1, 2, 3],
+        },
+      ]}
     />
   ),
 };
