@@ -25,7 +25,7 @@ const Page: NextPage = () => {
     useAddOneNotificationSheet();
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
-  const { data: nextId, isLoading } = useSWR("/nextid", fetchNextId);
+  const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -77,9 +77,10 @@ const Page: NextPage = () => {
         <div className="absolute bottom-0 left-0 w-full">
           <LargeButton
             text="IDを発行"
-            onClick={() => {
-              addId(nextId ?? 0, schedule);
-              incrementNextId();
+            onClick={async () => {
+              await addId(nextId ?? 0, schedule);
+              await incrementNextId();
+              mutate();
             }}
           />
         </div>
