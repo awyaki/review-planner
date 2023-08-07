@@ -7,18 +7,18 @@ export type ID = {
   notifications: Notification[];
 };
 
-export type NextID = number;
+export type NextID = { id?: number; nextId: number };
 
 export class MySubClassedDexie extends Dexie {
   ID!: Table<ID>;
-  NextID!: Table<NextID>;
+  NextID!: Table<NextID, number>;
 
   constructor() {
     super("review_planner");
     this.version(1).stores({
       ID: "&id",
       // assume NextID object store will have only one record whose is `next_id`.
-      NextID: "id",
+      NextID: "++id",
     });
   }
 }

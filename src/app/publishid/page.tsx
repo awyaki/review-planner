@@ -9,7 +9,7 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
-import { addId, fetchNextId, Notification } from "@/db";
+import { addId, incrementNextId, fetchNextId, Notification } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
@@ -75,7 +75,13 @@ const Page: NextPage = () => {
           />
         </section>
         <div className="absolute bottom-0 left-0 w-full">
-          <LargeButton text="IDを発行" onClick={() => {}} />
+          <LargeButton
+            text="IDを発行"
+            onClick={() => {
+              addId(nextId ?? 0, schedule);
+              incrementNextId();
+            }}
+          />
         </div>
       </article>
     </>

@@ -1,16 +1,16 @@
 import { db, Notification } from "./index";
 
 export const fetchNextId = async (): Promise<number> => {
-  const nextID = await db.NextID.get("next_id");
-  return nextID ?? 0;
+  const nextID = await db.NextID.get(0);
+  return nextID?.nextId ?? 0;
 };
 
 export const incrementNextId = async (): Promise<void> => {
-  const id = await db.NextID.get("next_id");
-  if (id) {
-    await db.NextID.put(id + 1, "next_id");
+  const nextId = await db.NextID.get(0);
+  if (nextId) {
+    await db.NextID.put({ id: 0, nextId: nextId.nextId + 1 });
   } else {
-    await db.NextID.add(0, "next_id");
+    await db.NextID.add({ id: 0, nextId: 1 });
   }
 };
 
