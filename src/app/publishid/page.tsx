@@ -38,6 +38,9 @@ const Page: NextPage = () => {
     useSelectPresetSheet();
   const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
 
+  const handleDeleteNotification = useCallback((id: number) => {
+    setSchedule((cur) => cur.filter((s) => s.id !== id));
+  }, []);
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -78,7 +81,10 @@ const Page: NextPage = () => {
                 </li>
               </ul>
             ) : (
-              <Schedule schedule={schedule} onDelete={() => {}}></Schedule>
+              <Schedule
+                schedule={schedule}
+                onDelete={handleDeleteNotification}
+              ></Schedule>
             )}
           </div>
           <SmallButton
