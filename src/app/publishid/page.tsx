@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -39,6 +39,21 @@ const Page: NextPage = () => {
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
+
+  const handleDeleteNotification = useCallback((id: number) => {
+    setSchedule((cur) => {
+      return cur
+        .map((schedule) => {
+          const newSchedule = { ...schedule };
+          const newDaysAfter = schedule.daysAfter.filter(
+            ({ id: _id }) => _id !== id
+          );
+          newSchedule.daysAfter = newDaysAfter;
+          return newSchedule;
+        })
+        .filter((schedule) => schedule.daysAfter.length !== 0);
+    });
+  }, []);
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -79,7 +94,10 @@ const Page: NextPage = () => {
                 </li>
               </ul>
             ) : (
-              <Schedule schedule={schedule}></Schedule>
+              <Schedule
+                schedule={schedule}
+                onDelete={handleDeleteNotification}
+              ></Schedule>
             )}
           </div>
           <SmallButton
