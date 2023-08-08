@@ -14,8 +14,9 @@ export const Primary: Story = {
   render: () => (
     <Schedule
       schedule={[
-        { baseDate: new Date("2023-6-23"), daysAfter: [1, 3, 5] },
+        { id: 1, baseDate: new Date("2023-6-23"), daysAfter: [1, 3, 5] },
         {
+          id: 2,
           baseDate: new Date("2023-7-2"),
           daysAfter: [1, 2, 3],
         },
