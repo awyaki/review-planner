@@ -24,7 +24,7 @@ export const Schedule: React.FC<Props> = ({ schedule, onDelete }) => {
               <List
                 data={daysAfter.map((day) => ({
                   id: day.id,
-                  text: `${day.toString()}日後`,
+                  text: `${day.value.toString()}日後`,
                 }))}
                 onDelete={onDelete}
               />
