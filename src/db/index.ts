@@ -3,7 +3,7 @@ import Dexie, { Table } from "dexie";
 export type Notification = {
   id: number;
   baseDate: Date;
-  daysAfter: { id: number; value: number }[];
+  daysAfter: number;
 };
 
 export type ID = {

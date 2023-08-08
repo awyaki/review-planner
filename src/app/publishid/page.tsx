@@ -18,42 +18,26 @@ const Page: NextPage = () => {
     {
       id: 1,
       baseDate: new Date("2023-6-23"),
-      daysAfter: [
-        { id: 0, value: 1 },
-        { id: 1, value: 3 },
-        { id: 2, value: 5 },
-      ],
+      daysAfter: 1,
     },
     {
       id: 2,
-      baseDate: new Date("2023-7-2"),
-      daysAfter: [
-        { id: 3, value: 1 },
-        { id: 4, value: 3 },
-        { id: 5, value: 5 },
-      ],
+      baseDate: new Date("2023-6-23"),
+      daysAfter: 3,
+    },
+    {
+      id: 3,
+      baseDate: new Date("2023-7-23"),
+      daysAfter: 5,
     },
   ]);
+
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet();
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
 
-  const handleDeleteNotification = useCallback((id: number) => {
-    setSchedule((cur) => {
-      return cur
-        .map((schedule) => {
-          const newSchedule = { ...schedule };
-          const newDaysAfter = schedule.daysAfter.filter(
-            ({ id: _id }) => _id !== id
-          );
-          newSchedule.daysAfter = newDaysAfter;
-          return newSchedule;
-        })
-        .filter((schedule) => schedule.daysAfter.length !== 0);
-    });
-  }, []);
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -94,10 +78,7 @@ const Page: NextPage = () => {
                 </li>
               </ul>
             ) : (
-              <Schedule
-                schedule={schedule}
-                onDelete={handleDeleteNotification}
-              ></Schedule>
+              <Schedule schedule={schedule} onDelete={() => {}}></Schedule>
             )}
           </div>
           <SmallButton

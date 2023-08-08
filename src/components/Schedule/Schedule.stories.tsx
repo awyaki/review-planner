@@ -17,20 +17,17 @@ export const Primary: Story = {
         {
           id: 1,
           baseDate: new Date("2023-6-23"),
-          daysAfter: [
-            { id: 0, value: 1 },
-            { id: 1, value: 3 },
-            { id: 2, value: 5 },
-          ],
+          daysAfter: 1,
         },
         {
           id: 2,
-          baseDate: new Date("2023-7-2"),
-          daysAfter: [
-            { id: 0, value: 1 },
-            { id: 1, value: 3 },
-            { id: 2, value: 5 },
-          ],
+          baseDate: new Date("2023-6-23"),
+          daysAfter: 3,
+        },
+        {
+          id: 3,
+          baseDate: new Date("2023-7-23"),
+          daysAfter: 5,
         },
       ]}
     />

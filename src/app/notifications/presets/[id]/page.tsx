@@ -37,28 +37,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
           <div className="mb-10">
-            <Schedule
-              schedule={[
-                {
-                  id: 1,
-                  baseDate: new Date("2023-6-23"),
-                  daysAfter: [
-                    { id: 0, value: 1 },
-                    { id: 1, value: 3 },
-                    { id: 2, value: 5 },
-                  ],
-                },
-                {
-                  id: 2,
-                  baseDate: new Date("2023-7-2"),
-                  daysAfter: [
-                    { id: 0, value: 1 },
-                    { id: 1, value: 3 },
-                    { id: 2, value: 5 },
-                  ],
-                },
-              ]}
-            />
+            <Schedule schedule={[]} />
           </div>
           <div>
             <SmallButton onClick={handleOpen} text="通知を追加" />
