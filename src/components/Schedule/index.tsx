@@ -23,8 +23,8 @@ export const Schedule: React.FC<Props> = ({ schedule, onDelete }) => {
             <li className="mb-5" key={baseDate.toString()}>
               <div className="mb-2">{`基準：${dateToString(baseDate)}`}</div>
               <List
-                data={days.map((day) => ({
-                  id: day.id,
+                data={days.map(({ id, day }) => ({
+                  id,
                   text: `${day.toString()}日後`,
                 }))}
                 onDelete={onDelete}
