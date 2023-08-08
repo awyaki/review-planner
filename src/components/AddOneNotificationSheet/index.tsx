@@ -4,9 +4,13 @@ import { Sheet } from "@/components";
 
 type Props = {
   onClose: () => void;
+  onAddNotification?: (baseDate: Date, daysAfter: number) => void;
 };
 
-const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
+const AddOneNotificationSheet: React.FC<Props> = ({
+  onClose,
+  onAddNotification,
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
   return (
@@ -46,7 +50,14 @@ const AddOneNotificationSheet: React.FC<Props> = ({ onClose }) => {
           >
             キャンセル
           </button>
-          <button className="w-1/2 py-5 rounded-tr-md bg-bg-primary text-primary">
+          <button
+            className="w-1/2 py-5 rounded-tr-md bg-bg-primary text-primary"
+            onClick={() =>
+              onAddNotification
+                ? onAddNotification(new Date(baseDate), Number(inputValue))
+                : undefined
+            }
+          >
             作成
           </button>
         </div>
