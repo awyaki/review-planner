@@ -42,12 +42,20 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
                 {
                   id: 1,
                   baseDate: new Date("2023-6-23"),
-                  daysAfter: [1, 3, 5],
+                  daysAfter: [
+                    { id: 0, value: 1 },
+                    { id: 1, value: 3 },
+                    { id: 2, value: 5 },
+                  ],
                 },
                 {
                   id: 2,
                   baseDate: new Date("2023-7-2"),
-                  daysAfter: [1, 2, 3],
+                  daysAfter: [
+                    { id: 0, value: 1 },
+                    { id: 1, value: 3 },
+                    { id: 2, value: 5 },
+                  ],
                 },
               ]}
             />
