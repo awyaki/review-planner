@@ -36,7 +36,7 @@ const Page: NextPage = () => {
             onChange={(e) => setInputValue(e.target.value)}
           />
           <div className="mb-10">
-            <List data={[{ id: "hoge", text: "Hello World" }]} />
+            <List data={[{ id: 0, text: "Hello World" }]} />
           </div>
           <div>
             <SmallButton onClick={handleOpen} text="通知を追加" />

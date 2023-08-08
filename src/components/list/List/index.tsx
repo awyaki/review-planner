@@ -4,8 +4,8 @@ import { Item, type ColorVariants, RoundedVariants } from "../Item";
 import { AnimatePresence } from "framer-motion";
 
 type Props = {
-  data: { id: string; text: string; isCompleted?: boolean }[];
-  onDelete?: (id: string) => void;
+  data: { id: number; text: string; isCompleted?: boolean }[];
+  onDelete?: (id: number) => void;
 };
 
 const List: FC<Props> = ({ data, onDelete }) => {

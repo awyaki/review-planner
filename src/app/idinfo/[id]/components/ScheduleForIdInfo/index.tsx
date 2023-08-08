@@ -25,7 +25,7 @@ export const ScheduleForIdInfo: React.FC<Props> = ({ schedules }) => {
               <div className="mb-2">{`基準：${baseDate.toLocaleDateString()}`}</div>
               <List
                 data={daysAfter.map((day) => ({
-                  id: day.toString(),
+                  id: day,
                   text: `${day}日後`,
                   isCompleted: true,
                 }))}

@@ -4,9 +4,10 @@ import { Notification } from "@/db";
 
 type Props = {
   schedule: Notification[];
+  onDelete?: (id: number) => void;
 };
 
-export const Schedule: React.FC<Props> = ({ schedule }) => {
+export const Schedule: React.FC<Props> = ({ schedule, onDelete }) => {
   return (
     <ul>
       {schedule
@@ -22,9 +23,10 @@ export const Schedule: React.FC<Props> = ({ schedule }) => {
               <div className="mb-2">{`基準：${dateToString(baseDate)}`}</div>
               <List
                 data={daysAfter.map((day) => ({
-                  id: day.toString(),
+                  id: day.id,
                   text: `${day.toString()}日後`,
                 }))}
+                onDelete={onDelete}
               />
             </li>
           );
