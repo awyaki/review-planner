@@ -4,7 +4,7 @@ import { Sheet } from "@/components";
 
 type Props = {
   onClose: () => void;
-  onAddNotification?: (baseDate: Date, daysAfter: number) => void;
+  onAddNotification?: (id: number, baseDate: Date, daysAfter: number) => void;
 };
 
 const AddOneNotificationSheet: React.FC<Props> = ({

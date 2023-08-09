@@ -3,7 +3,7 @@ import { AddOneNotificationSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
 
 export const useAddOneNotificationSheet = (
-  onAddNotification?: (baseDate: Date, daysAfter: number) => void
+  onAddNotification?: (id: number, baseDate: Date, daysAfter: number) => void
 ): [() => React.ReactNode, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 
