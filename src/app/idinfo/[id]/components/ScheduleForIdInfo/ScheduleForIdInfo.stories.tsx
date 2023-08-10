@@ -13,16 +13,21 @@ type Story = StoryObj<typeof ScheduleForIdInfo>;
 export const Primary: Story = {
   render: () => (
     <ScheduleForIdInfo
-      schedules={[
+      schedule={[
         {
-          id: 123,
-          baseDate: new Date(),
-          daysAfter: [1, 2, 3],
+          id: 1,
+          baseDate: new Date("2023-6-23"),
+          daysAfter: 1,
         },
         {
-          id: 124,
-          baseDate: new Date(),
-          daysAfter: [1, 3, 5, 7],
+          id: 2,
+          baseDate: new Date("2023-6-23"),
+          daysAfter: 3,
+        },
+        {
+          id: 3,
+          baseDate: new Date("2023-7-23"),
+          daysAfter: 5,
         },
       ]}
     />

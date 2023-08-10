@@ -16,9 +16,22 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { base } = useContext(BaseContext);
-  const schedules: Parameters<typeof ScheduleForIdInfo>["0"]["schedules"] = [
-    { id: 123, baseDate: new Date("2023-6-24"), daysAfter: [1, 2, 3] },
-    { id: 124, baseDate: new Date("2023-7-1"), daysAfter: [1, 3, 5, 7] },
+  const schedules: Parameters<typeof ScheduleForIdInfo>["0"]["schedule"] = [
+    {
+      id: 1,
+      baseDate: new Date("2023-6-23"),
+      daysAfter: 1,
+    },
+    {
+      id: 2,
+      baseDate: new Date("2023-6-23"),
+      daysAfter: 3,
+    },
+    {
+      id: 3,
+      baseDate: new Date("2023-7-23"),
+      daysAfter: 5,
+    },
   ];
 
   return (
@@ -53,7 +66,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               プリセットを選択
             </button>
           </div>
-          <ScheduleForIdInfo schedules={schedules} />
+          <ScheduleForIdInfo schedule={schedules} />
           <SmallButton
             text="通知を追加"
             onClick={handleOpenAddOneNotificationSheet}
