@@ -29,3 +29,7 @@ export const addId = async (
 ): Promise<void> => {
   await db.ID.add({ id, notifications });
 };
+
+export const getAllIDs = async () => {
+  return await db.ID.toArray();
+};
