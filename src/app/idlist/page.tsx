@@ -6,10 +6,14 @@ import Link from "next/link";
 import { SmallButton } from "@/components";
 import { IdItem } from "./components";
 import { useAddOneNotificationSheet } from "./hooks";
+import useSWR from "swr";
+import { getAllIDs } from "@/db";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const reacentlyIds = [123, 124, 125, 126];
+  const { data: ids, isLoading } = useSWR("/ids", getAllIDs);
+  const reacentlyIds = ids?.map(({ id }) => id).slice(-5) ?? [];
+
   const [render, handleOpen] = useAddOneNotificationSheet();
   return (
     <>
