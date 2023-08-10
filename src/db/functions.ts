@@ -14,6 +14,15 @@ export const incrementNextId = async (): Promise<void> => {
   }
 };
 
+export const fetchMaxIdOfNotifications = async () => {
+  const notifications = (await db.ID.toArray()).flatMap((v) => v.notifications);
+  const maxIdOfNotification = notifications.reduce(
+    (a, b) => Math.max(a, b.id),
+    0
+  );
+  return maxIdOfNotification;
+};
+
 export const addId = async (
   id: number,
   notifications: Notification[]
