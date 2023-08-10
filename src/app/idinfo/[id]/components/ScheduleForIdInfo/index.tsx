@@ -1,4 +1,3 @@
-import { NotificationItem } from "../NotificationItem";
 import { List } from "@/components";
 
 type Props = {
