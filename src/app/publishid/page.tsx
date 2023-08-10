@@ -9,7 +9,13 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
-import { addId, incrementNextId, fetchNextId, Notification } from "@/db";
+import {
+  addId,
+  incrementNextId,
+  fetchNextId,
+  fetchMaxIdOfNotifications,
+  Notification,
+} from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
@@ -32,8 +38,23 @@ const Page: NextPage = () => {
     },
   ]);
 
+  const handleAddNotification = useCallback(
+    async (baseDate: Date, daysAfter: number) => {
+      const storeedNextId = (await fetchMaxIdOfNotifications()) + 1;
+      setSchedule((cur) => {
+        const nextId = cur.reduce((a, b) => Math.max(a, b.id), 0) + 1;
+        return cur.concat({
+          id: Math.max(storeedNextId, nextId),
+          baseDate,
+          daysAfter,
+        });
+      });
+    },
+    []
+  );
+
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet();
+    useAddOneNotificationSheet(handleAddNotification);
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);

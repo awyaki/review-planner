@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Sheet } from "@/components";
 
 type Props = {
   onClose: () => void;
-  onAddNotification?: (id: number, baseDate: Date, daysAfter: number) => void;
+  onAddNotification?: (baseDate: Date, daysAfter: number) => Promise<void>;
 };
 
 const AddOneNotificationSheet: React.FC<Props> = ({
@@ -13,6 +13,14 @@ const AddOneNotificationSheet: React.FC<Props> = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
+
+  const handleAddNotification = useCallback(async () => {
+    onAddNotification
+      ? await onAddNotification(new Date(baseDate), Number(inputValue))
+      : undefined;
+    onClose();
+  }, [baseDate, inputValue, onAddNotification, onClose]);
+
   return (
     <Sheet onClose={onClose} color="reverse">
       <div className="flex flex-col justify-between">
@@ -52,11 +60,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({
           </button>
           <button
             className="w-1/2 py-5 rounded-tr-md bg-bg-primary text-primary"
-            onClick={() =>
-              onAddNotification
-                ? onAddNotification(new Date(baseDate), Number(inputValue))
-                : undefined
-            }
+            onClick={handleAddNotification}
           >
             作成
           </button>
