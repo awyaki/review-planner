@@ -119,6 +119,7 @@ const Page: NextPage = () => {
             onClick={async () => {
               await addId(nextId ?? 0, schedule);
               await incrementNextId();
+              setSchedule([]);
               mutate();
             }}
           />
