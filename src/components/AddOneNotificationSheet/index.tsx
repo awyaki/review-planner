@@ -36,7 +36,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({
           </div>
           <div className="mb-8">
             <input
-              className="w-24 mr-3 bg-light-gray"
+              className="w-24 mr-3 bg-light-gray text-dark-gray"
               type="number"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
