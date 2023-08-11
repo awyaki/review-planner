@@ -51,7 +51,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({
             ))}
           </ul>
         </div>
-        <div className="absolute bottom-0 left-0 w-full">
+        <div className="w-full">
           <button
             className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray"
             onClick={onClose}
