@@ -1,5 +1,5 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -8,20 +8,33 @@ import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import { BaseContext } from "@/app/providers";
-import { getNotificationsOfId } from "@/db";
+import { getNotificationsOfId, db, fetchMaxIdOfNotifications } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
-  const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet();
-  const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet();
-  const { base } = useContext(BaseContext);
-  const { data: notifications } = useSWR(
+  const { data: notifications, mutate } = useSWR(
     "/id/notifications",
     async () => await getNotificationsOfId(Number(params.id))
   );
+  const handleAddNotification = useCallback(
+    async (baseDate: Date, daysAfter: number) => {
+      const notifications = await getNotificationsOfId(Number(params.id));
+      const maxId = await fetchMaxIdOfNotifications();
+
+      await db.ID.put({
+        id: Number(params.id),
+        notifications: notifications.concat({ id: maxId, baseDate, daysAfter }),
+      });
+      mutate();
+    },
+    [params, mutate]
+  );
+  const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
+    useAddOneNotificationSheet(handleAddNotification);
+  const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
+    useSelectPresetSheet();
+  const { base } = useContext(BaseContext);
   return (
     <>
       {renderAddOneNotificationSheet()}
