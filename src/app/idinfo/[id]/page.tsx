@@ -24,12 +24,32 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
 
       await db.ID.put({
         id: Number(params.id),
-        notifications: notifications.concat({ id: maxId, baseDate, daysAfter }),
+        notifications: notifications.concat({
+          id: maxId + 1,
+          baseDate,
+          daysAfter,
+        }),
       });
       mutate();
     },
     [params, mutate]
   );
+
+  const handleDelete = useCallback(
+    async (id: number) => {
+      const notifications = await getNotificationsOfId(Number(params.id));
+      const index = notifications.findIndex((n) => n.id === id);
+      await db.ID.put({
+        id: Number(params.id),
+        notifications: notifications
+          .slice(0, index)
+          .concat(notifications.slice(index + 1)),
+      });
+      mutate();
+    },
+    [params, mutate]
+  );
+
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet(handleAddNotification);
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
@@ -67,7 +87,10 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               プリセットを選択
             </button>
           </div>
-          <ScheduleForIdInfo schedule={notifications ?? []} />
+          <ScheduleForIdInfo
+            schedule={notifications ?? []}
+            onDelete={handleDelete}
+          />
           <SmallButton
             text="通知を追加"
             onClick={handleOpenAddOneNotificationSheet}
