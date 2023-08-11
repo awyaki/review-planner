@@ -8,6 +8,8 @@ import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import { BaseContext } from "@/app/providers";
+import { getNotificationsOfId } from "@/db";
+import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
@@ -16,24 +18,10 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { base } = useContext(BaseContext);
-  const schedules: Parameters<typeof ScheduleForIdInfo>["0"]["schedule"] = [
-    {
-      id: 1,
-      baseDate: new Date("2023-6-23"),
-      daysAfter: 1,
-    },
-    {
-      id: 2,
-      baseDate: new Date("2023-6-23"),
-      daysAfter: 3,
-    },
-    {
-      id: 3,
-      baseDate: new Date("2023-7-23"),
-      daysAfter: 5,
-    },
-  ];
-
+  const { data: notifications } = useSWR(
+    "/id/notifications",
+    async () => await getNotificationsOfId(Number(params.id))
+  );
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -66,7 +54,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               プリセットを選択
             </button>
           </div>
-          <ScheduleForIdInfo schedule={schedules} />
+          <ScheduleForIdInfo schedule={notifications ?? []} />
           <SmallButton
             text="通知を追加"
             onClick={handleOpenAddOneNotificationSheet}

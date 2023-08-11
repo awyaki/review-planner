@@ -33,3 +33,14 @@ export const addId = async (
 export const getAllIDs = async () => {
   return await db.ID.toArray();
 };
+
+export const getNotificationsOfId = async (id: number) => {
+  const idCollection = db.ID.where("id").equals(id);
+  const notifications = idCollection;
+  let res: Notification[] = [];
+  await notifications.each((id) => {
+    console.log(id.notifications);
+    res = id.notifications;
+  });
+  return res;
+};
