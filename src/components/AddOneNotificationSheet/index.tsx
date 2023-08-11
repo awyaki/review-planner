@@ -25,7 +25,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({
     <Sheet onClose={onClose} color="reverse">
       <div className="flex flex-col justify-between">
         <div className="px-5 pb-28">
-          <div className="flex">
+          <div className="flex mb-5">
             <span>基準：</span>
             <input
               className="px-1 mb-3 rounded-sm text-dark-gray"
@@ -34,36 +34,29 @@ const AddOneNotificationSheet: React.FC<Props> = ({
               value={baseDate}
             />
           </div>
-          <div className="flex items-center mb-10">
-            <span className="w-1/4 h-10 mr-2 text-3xl text-center border-b-2 border-text-on-bg-secondary">
-              {inputValue}
-              {inputValue !== "" ? "日" : ""}
-            </span>
+          <div className="mb-8">
+            <input
+              className="w-24 mr-3 bg-light-gray"
+              type="number"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <span>日</span>
           </div>
-          <ul className="grid grid-cols-3 grid-rows-3 gap-y-4 gap-x-6">
-            {[1, 3, 5, 7, 14, 21, 30, 60, 90].map((day) => (
-              <li className="" key={day}>
-                <DayButton
-                  day={day}
-                  onClick={() => setInputValue(day.toString())}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="w-full">
-          <button
-            className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray"
-            onClick={onClose}
-          >
-            キャンセル
-          </button>
-          <button
-            className="w-1/2 py-5 rounded-tr-md bg-bg-primary text-primary"
-            onClick={handleAddNotification}
-          >
-            作成
-          </button>
+          <div className="flex gap-3">
+            <button
+              className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
+              onClick={onClose}
+            >
+              キャンセル
+            </button>
+            <button
+              className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
+              onClick={handleAddNotification}
+            >
+              作成
+            </button>
+          </div>
         </div>
       </div>
     </Sheet>
