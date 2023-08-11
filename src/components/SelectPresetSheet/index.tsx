@@ -12,7 +12,7 @@ export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
   return (
     <Sheet color="reverse" onClose={onClose}>
-      <div className="px-5">
+      <div className="px-5 pb-5">
         <h2 className="mb-5 text-lg">通知プリセットを選択</h2>
         <div className="flex">
           <span>基準：</span>
@@ -34,15 +34,20 @@ export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
             </li>
           ))}
         </ul>
-        <button
-          className="w-1/2 py-5 rounded-tl-md bg-gray text-dark-gray"
-          onClick={onClose}
-        >
-          キャンセル
-        </button>
-        <button className="w-1/2 py-5 rounded-tr-md bg-bg-primary text-primary">
-          確定
-        </button>
+        <div className="flex gap-3">
+          <button
+            className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
+            onClick={onClose}
+          >
+            キャンセル
+          </button>
+          <button
+            className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
+            onClick={() => {}}
+          >
+            確定
+          </button>
+        </div>
       </div>
     </Sheet>
   );
