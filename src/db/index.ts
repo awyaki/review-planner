@@ -6,6 +6,12 @@ export type Notification = {
   daysAfter: number;
 };
 
+export type Preset = {
+  id: number;
+  name: number;
+  notifications: Notification[];
+};
+
 export type ID = {
   id: number;
   notifications: Notification[];
@@ -21,6 +27,7 @@ export class MySubClassedDexie extends Dexie {
     super("review_planner");
     this.version(1).stores({
       ID: "&id",
+      Preset: "++id",
       // assume NextID object store will have only one record whose is `next_id`.
       NextID: "++id",
     });
