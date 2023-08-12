@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { useAddOneNotificationSheet } from "@/hooks";
+import { useState, useCallback } from "react";
+import { useAddOneNotificationSheetForPreset } from "./hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
 import Link from "next/link";
@@ -10,7 +10,27 @@ import { useRouter } from "next/navigation";
 const Page: NextPage = () => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
-  const [render, handleOpen] = useAddOneNotificationSheet();
+  const [notifications, setNotifications] = useState<
+    {
+      id: number;
+      day: number;
+    }[]
+  >([]);
+
+  const handleAddNotification = useCallback((day: number) => {
+    setNotifications((cur) => {
+      const maxId = cur.reduce((a, b) => Math.max(a, b.id), 0);
+      return cur.concat({ id: maxId + 1, day });
+    });
+  }, []);
+
+  const handleDeleteNotification = useCallback((id: number) => {
+    setNotifications((cur) => cur.filter((n) => n.id !== id));
+  }, []);
+
+  const [render, handleOpen] = useAddOneNotificationSheetForPreset(
+    handleAddNotification
+  );
   return (
     <>
       {render()}
@@ -36,7 +56,13 @@ const Page: NextPage = () => {
             onChange={(e) => setInputValue(e.target.value)}
           />
           <div className="mb-10">
-            <List data={[{ id: 0, text: "Hello World" }]} />
+            <List
+              data={notifications.map(({ id, day }) => ({
+                id,
+                text: `${day.toString()}日後`,
+              }))}
+              onDelete={handleDeleteNotification}
+            />
           </div>
           <div>
             <SmallButton onClick={handleOpen} text="通知を追加" />
