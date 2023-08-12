@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useAddOneNotificationSheet } from "@/hooks";
+import { useAddOneNotificationSheetForPreset } from "../../hooks";
 import { type NextPage } from "next";
 import { Schedule, SmallButton } from "@/components";
 import Link from "next/link";
@@ -11,7 +11,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
   const router = useRouter();
   const [inputValue, setInputValue] = useState(id);
-  const [render, handleOpen] = useAddOneNotificationSheet();
+  const [render, handleOpen] = useAddOneNotificationSheetForPreset();
   return (
     <>
       {render()}
