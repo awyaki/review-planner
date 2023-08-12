@@ -1,6 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
-import { useAddOneNotificationSheetForPreset } from "./hooks";
+import { useAddOneNotificationSheetForPreset } from "../hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
 import Link from "next/link";
