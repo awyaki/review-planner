@@ -9,7 +9,7 @@ export type Notification = {
 export type Preset = {
   id: number;
   name: number;
-  notifications: number[];
+  notifications: Notification[];
 };
 
 export type ID = {
