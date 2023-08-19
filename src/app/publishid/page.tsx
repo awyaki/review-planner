@@ -92,22 +92,22 @@ const Page: NextPage = () => {
               ></Schedule>
             )}
           </div>
-          <SmallButton
-            text="通知を追加"
-            onClick={handleOpenAddOneNotificationSheet}
-          />
-        </section>
-        <div className="absolute bottom-0 left-0 w-full">
-          <LargeButton
-            text="IDを発行"
+          <div className="mb-10">
+            <SmallButton
+              text="通知を追加"
+              onClick={handleOpenAddOneNotificationSheet}
+            />
+          </div>
+          <button
+            className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
             onClick={async () => {
               await addId(nextId ?? 0, schedule);
               await incrementNextId();
               setSchedule([]);
               mutate();
             }}
-          />
-        </div>
+          >IDを発行</button>
+        </section>
       </article>
     </>
   );
