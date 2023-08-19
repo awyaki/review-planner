@@ -8,7 +8,7 @@ export type Notification = {
 
 export type Preset = {
   id: number;
-  name: number;
+  name: string;
   notifications: Notification[];
 };
 
@@ -22,7 +22,7 @@ export type NextID = { id?: number; nextId: number };
 export class MySubClassedDexie extends Dexie {
   ID!: Table<ID>;
   NextID!: Table<NextID, number>;
-
+  Preset!: Table<Preset>;
   constructor() {
     super("review_planner");
     this.version(1).stores({
