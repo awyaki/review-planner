@@ -48,9 +48,8 @@ export const getNotificationsOfId = async (id: number) => {
 // Presets
 
 export const addPreset = async (
-  id: number,
   name: string,
   notifications: Notification[]
 ) => {
-  await db.Preset.add({ id, name, notifications });
+  await db.Preset.add({ name, notifications });
 };
