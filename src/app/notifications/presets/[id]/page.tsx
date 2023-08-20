@@ -6,7 +6,12 @@ import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getPreset, updatePreset, getMaxIdOfDaysAfterOfPreset } from "@/db";
+import {
+  getPreset,
+  updatePreset,
+  getMaxIdOfDaysAfterOfPreset,
+  deleteDaysAfterOfPreset,
+} from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
@@ -40,6 +45,14 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const [render, handleOpen] =
     useAddOneNotificationSheetForPreset(handleUpdate);
 
+  const handleDelete = useCallback(
+    async (id: number) => {
+      await deleteDaysAfterOfPreset(id);
+      mutate();
+    },
+    [deleteDaysAfterOfPreset]
+  );
+
   return (
     <>
       {render()}
@@ -71,7 +84,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
                   id,
                   text: `${daysAfter.toString()}日後`,
                 }))}
-                onDelete={() => {}}
+                onDelete={handleDelete}
               />
             ) : undefined}
           </div>
