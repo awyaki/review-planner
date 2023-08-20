@@ -54,6 +54,12 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     [deleteDaysAfterOfPreset]
   );
 
+  const handleUpdate = useCallback(async () => {
+    const daysAfters = (await getPreset(Number(id)))?.notifications ?? [];
+    await updatePreset(Number(id), inputValue, daysAfters);
+    router.push("notifications/presets");
+  }, [inputValue, getPreset, id, updatePreset, router]);
+
   return (
     <>
       {render()}
@@ -102,7 +108,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           </button>
           <button
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
-            onClick={() => {}}
+            onClick={handleUpdate}
           >
             更新
           </button>
