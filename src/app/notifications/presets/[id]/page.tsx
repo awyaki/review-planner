@@ -101,7 +101,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
             onClick={() => {}}
           >
-            作成
+            更新
           </button>
         </div>
       </article>
