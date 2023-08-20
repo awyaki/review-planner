@@ -44,8 +44,8 @@ const Page: NextPage = () => {
                   ? data.map((p) => ({ id: String(p.id), text: p.name }))
                   : []
               }
-              onClick={(id: string) =>
-                router.push(`/notifications/presets/${id}`)
+              onClick={(id: string, name?: string) =>
+                router.push(`/notifications/presets/${id}?name=${name}`)
               }
               onDelete={handleDeletePreset}
             />

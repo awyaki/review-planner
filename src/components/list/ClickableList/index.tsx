@@ -9,7 +9,7 @@ import { AnimatePresence } from "framer-motion";
 
 type Props = {
   data: { id: string; text: string }[];
-  onClick?: (id: string) => void;
+  onClick?: (id: string, name?: string) => void;
   onDelete?: (id: string) => void;
 };
 
@@ -41,7 +41,7 @@ const ClickableList: FC<Props> = ({ data, onClick, onDelete }) => {
             text={text}
             rounded={getRounded(i)}
             color={getColor(i)}
-            onClick={onClick ? () => onClick(id) : undefined}
+            onClick={onClick ? () => onClick(id, text) : undefined}
             onDelete={onDelete ? () => onDelete(id) : undefined}
           />
         ))}
