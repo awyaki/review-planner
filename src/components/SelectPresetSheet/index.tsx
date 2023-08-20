@@ -1,17 +1,41 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Sheet } from "@/components";
 import useSWR from "swr";
-import { getAllPreset } from "@/db";
+import { getAllPreset, DaysAfterForPreset } from "@/db";
 
 type Props = {
   onClose: () => void;
+  onAddPreset?: (
+    baseDate: Date,
+    daysAfter: DaysAfterForPreset[]
+  ) => Promise<void>;
 };
 
-export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
+export const SelectPresetSheet: React.FC<Props> = ({
+  onClose,
+  onAddPreset,
+}) => {
   const { data: presets } = useSWR("/presets", getAllPreset);
   const [selected, setSelected] = useState<number | null>(null);
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
+
+  const daysAfters: DaysAfterForPreset[] = useMemo(() => {
+    if (presets) {
+      const index = presets.findIndex((p) => p.id === selected);
+      if (index === -1) return [];
+      const preset = presets[index];
+      return preset.notifications;
+    } else {
+      return [];
+    }
+  }, [selected, presets]);
+
+  const handleAddpreset = useCallback(() => {
+    if (onAddPreset) onAddPreset(new Date(baseDate), daysAfters);
+    onClose();
+  }, [onAddPreset, daysAfters, baseDate, onClose]);
+
   return (
     <Sheet color="reverse" onClose={onClose}>
       <div className="px-5 pb-5">
@@ -47,7 +71,7 @@ export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
           </button>
           <button
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
-            onClick={() => {}}
+            onClick={handleAddpreset}
           >
             確定
           </button>

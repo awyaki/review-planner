@@ -46,8 +46,8 @@ const Page: NextPage = () => {
       const storeedNextId = (await fetchMaxIdOfNotifications()) + 1;
       setSchedule((cur) => {
         const nextId = cur.reduce((a, b) => Math.max(a, b.id), 0) + 1;
-        const addedTail: DaysAfter[] = daysAfters.map((da) => ({
-          id: Math.max(storeedNextId, nextId),
+        const addedTail: DaysAfter[] = daysAfters.map((da, i) => ({
+          id: Math.max(storeedNextId + i, nextId + i),
           baseDate,
           daysAfter: da.daysAfter,
         }));
@@ -58,7 +58,7 @@ const Page: NextPage = () => {
   );
 
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet();
+    useSelectPresetSheet(handleAddPreset);
   const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
 
   const handleDeleteNotification = useCallback((id: number) => {
