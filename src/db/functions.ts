@@ -54,6 +54,10 @@ export const addPreset = async (
   await db.Preset.add({ name, notifications });
 };
 
+export const getAllPreset = async () => {
+  return await db.Preset.toArray();
+};
+
 export const getMaxIdOfDaysAfterOfPreset = async () => {
   const presets = await db.Preset.toArray();
   const allDaysAfterId = presets.flatMap((preset) =>
