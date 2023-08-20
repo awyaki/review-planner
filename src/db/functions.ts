@@ -70,3 +70,7 @@ export const getMaxIdOfDaysAfterOfPreset = async () => {
 export const deletePreset = async (id: number) => {
   return await db.Preset.delete(id);
 };
+
+export const getPreset = async (id: number) => {
+  return db.Preset.get(id);
+};
