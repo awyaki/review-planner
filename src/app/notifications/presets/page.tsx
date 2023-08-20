@@ -4,9 +4,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SmallButton, ClickableList } from "@/components";
 import { AiOutlineLeft } from "react-icons/ai";
+import { getAllPreset } from "@/db";
+import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
+  const { data } = useSWR("/presets", getAllPreset);
   return (
     <>
       <article className="flex flex-col justify-between h-screen bg-bg-primary text-text-on-bg-primary">
@@ -26,10 +29,11 @@ const Page: NextPage = () => {
           <h2 className="mb-8 text-xl">通知プリセット</h2>
           <div className="mb-8">
             <ClickableList
-              data={[
-                { id: "default", text: "Default" },
-                { id: "english", text: "英語学習" },
-              ]}
+              data={
+                data
+                  ? data.map((p) => ({ id: String(p.id), text: p.name }))
+                  : []
+              }
               onClick={(id: string) =>
                 router.push(`/notifications/presets/${id}`)
               }
