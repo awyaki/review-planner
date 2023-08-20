@@ -1,14 +1,16 @@
 "use client";
 import { useState } from "react";
 import { Sheet } from "@/components";
+import useSWR from "swr";
+import { getAllPreset } from "@/db";
 
 type Props = {
   onClose: () => void;
 };
 
 export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
-  const presets = ["単語用", "長期用", "短め"];
-  const [selected, setSelected] = useState("単語用");
+  const { data: presets } = useSWR("/presets", getAllPreset);
+  const [selected, setSelected] = useState<number | null>(null);
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
   return (
     <Sheet color="reverse" onClose={onClose}>
@@ -24,15 +26,17 @@ export const SelectPresetSheet: React.FC<Props> = ({ onClose }) => {
           />
         </div>
         <ul className="mb-4">
-          {presets.map((item, i) => (
-            <li key={item} className={i === presets.length - 1 ? "" : "mb-3"}>
-              <SelectPresetButton
-                text={item}
-                onClick={() => setSelected(item)}
-                isSelected={selected === item}
-              />
-            </li>
-          ))}
+          {presets
+            ? presets.map(({ id, name }, i) => (
+                <li key={id} className={i === presets.length - 1 ? "" : "mb-3"}>
+                  <SelectPresetButton
+                    text={name}
+                    onClick={() => setSelected(id ?? null)}
+                    isSelected={selected === id}
+                  />
+                </li>
+              ))
+            : undefined}
         </ul>
         <div className="flex gap-3">
           <button
