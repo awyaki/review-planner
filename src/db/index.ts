@@ -6,6 +6,8 @@ export type DaysAfter = {
   daysAfter: number;
 };
 
+export type DaysAfterForPreset = Omit<DaysAfter, "baseDate">;
+
 export type Preset = {
   id?: number;
   name: string;
