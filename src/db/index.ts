@@ -11,7 +11,7 @@ export type DaysAfterForPreset = Omit<DaysAfter, "baseDate">;
 export type Preset = {
   id?: number;
   name: string;
-  notifications: DaysAfter[];
+  notifications: DaysAfterForPreset[];
 };
 
 export type ID = {

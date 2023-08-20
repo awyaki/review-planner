@@ -1,4 +1,4 @@
-import { db, DaysAfter } from "./index";
+import { db, DaysAfter, DaysAfterForPreset } from "./index";
 
 export const fetchNextId = async (): Promise<number> => {
   const nextID = await db.NextID.get(0);
@@ -47,7 +47,10 @@ export const getNotificationsOfId = async (id: number) => {
 
 // Presets
 
-export const addPreset = async (name: string, notifications: DaysAfter[]) => {
+export const addPreset = async (
+  name: string,
+  notifications: DaysAfterForPreset[]
+) => {
   await db.Preset.add({ name, notifications });
 };
 
