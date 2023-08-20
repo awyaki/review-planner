@@ -74,3 +74,11 @@ export const deletePreset = async (id: number) => {
 export const getPreset = async (id: number) => {
   return db.Preset.get(id);
 };
+
+export const updatePreset = async (
+  id: number,
+  name: string,
+  daysAfters: DaysAfterForPreset[]
+) => {
+  db.Preset.put({ id, name, notifications: daysAfters });
+};
