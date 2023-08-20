@@ -82,3 +82,17 @@ export const updatePreset = async (
 ) => {
   db.Preset.put({ id, name, notifications: daysAfters });
 };
+
+export const deleteDaysAfterOfPreset = async (id: number) => {
+  const presets = await db.Preset.toArray();
+  const index = presets.findIndex((p) =>
+    p.notifications.some((n) => n.id === id)
+  );
+  const preset = presets[index];
+  console.log("preset", preset);
+  const presetId = preset.id;
+  const name = preset.name;
+  const daysAfters = preset.notifications ?? [];
+  const newDaysAfter = daysAfters.filter((da) => da.id !== id);
+  db.Preset.put({ id: presetId, name, notifications: newDaysAfter });
+};
