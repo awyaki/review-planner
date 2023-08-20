@@ -2,21 +2,23 @@
 import { useState } from "react";
 import { useAddOneNotificationSheetForPreset } from "../../hooks";
 import { type NextPage } from "next";
-import { Schedule, SmallButton } from "@/components";
+import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getPreset } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
+  const searchParams = useSearchParams();
+  const presetName = searchParams.get("name") ?? "";
   const router = useRouter();
 
   const { data } = useSWR(`/notifications/presets/${id}`, () =>
     getPreset(Number(id))
   );
-  const [inputValue, setInputValue] = useState(data?.name ?? "");
+  const [inputValue, setInputValue] = useState(presetName);
   const [render, handleOpen] = useAddOneNotificationSheetForPreset();
   return (
     <>
@@ -43,7 +45,15 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
           <div className="mb-10">
-            <Schedule schedule={[]} />
+            {data ? (
+              <List
+                data={data.notifications.map(({ id, daysAfter }) => ({
+                  id,
+                  text: `${daysAfter.toString()}日後`,
+                }))}
+                onDelete={() => {}}
+              />
+            ) : undefined}
           </div>
           <div>
             <SmallButton onClick={handleOpen} text="通知を追加" />
