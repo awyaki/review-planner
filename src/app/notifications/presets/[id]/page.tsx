@@ -25,7 +25,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   );
   const [inputValue, setInputValue] = useState(presetName);
 
-  const handleUpdate = useCallback(
+  const handleUpdateDaysAfter = useCallback(
     async (day: number) => {
       if (data) {
         const name = data.name;
@@ -42,8 +42,9 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     [mutate, updatePreset, data]
   );
 
-  const [render, handleOpen] =
-    useAddOneNotificationSheetForPreset(handleUpdate);
+  const [render, handleOpen] = useAddOneNotificationSheetForPreset(
+    handleUpdateDaysAfter
+  );
 
   const handleDelete = useCallback(
     async (id: number) => {
