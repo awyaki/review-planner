@@ -15,6 +15,7 @@ import {
   fetchNextId,
   fetchMaxIdOfNotifications,
   DaysAfter,
+  DaysAfterForPreset,
 } from "@/db";
 import useSWR from "swr";
 
@@ -39,6 +40,23 @@ const Page: NextPage = () => {
 
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet(handleAddNotification);
+
+  const handleAddPreset = useCallback(
+    async (baseDate: Date, daysAfters: DaysAfterForPreset[]) => {
+      const storeedNextId = (await fetchMaxIdOfNotifications()) + 1;
+      setSchedule((cur) => {
+        const nextId = cur.reduce((a, b) => Math.max(a, b.id), 0) + 1;
+        const addedTail: DaysAfter[] = daysAfters.map((da) => ({
+          id: Math.max(storeedNextId, nextId),
+          baseDate,
+          daysAfter: da.daysAfter,
+        }));
+        return cur.concat(addedTail);
+      });
+    },
+    [fetchMaxIdOfNotifications]
+  );
+
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
