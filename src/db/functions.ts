@@ -50,3 +50,12 @@ export const getNotificationsOfId = async (id: number) => {
 export const addPreset = async (name: string, notifications: DaysAfter[]) => {
   await db.Preset.add({ name, notifications });
 };
+
+export const getMaxIdOfDaysAfterOfPreset = async () => {
+  const presets = await db.Preset.toArray();
+  const allDaysAfterId = presets.flatMap((preset) =>
+    preset.notifications.map((n) => n.id)
+  );
+  const maxIdOfDaysAfter = allDaysAfterId.reduce((a, b) => Math.max(a, b), 0);
+  return maxIdOfDaysAfter;
+};
