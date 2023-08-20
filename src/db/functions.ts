@@ -47,9 +47,6 @@ export const getNotificationsOfId = async (id: number) => {
 
 // Presets
 
-export const addPreset = async (
-  name: string,
-  notifications: Notification[]
-) => {
+export const addPreset = async (name: string, notifications: DaysAfter[]) => {
   await db.Preset.add({ name, notifications });
 };
