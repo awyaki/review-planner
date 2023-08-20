@@ -1,10 +1,10 @@
 import { List } from "@/components";
 import { dateToString } from "@/lib";
-import { Notification } from "@/db";
+import { DaysAfter } from "@/db";
 import { reconstructByBaseDate } from "@/lib";
 
 type Props = {
-  schedule: Notification[];
+  schedule: DaysAfter[];
   onDelete?: (id: number) => void;
 };
 

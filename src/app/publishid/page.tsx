@@ -14,13 +14,13 @@ import {
   incrementNextId,
   fetchNextId,
   fetchMaxIdOfNotifications,
-  Notification,
+  DaysAfter,
 } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [schedule, setSchedule] = useState<Notification[]>([]);
+  const [schedule, setSchedule] = useState<DaysAfter[]>([]);
 
   const handleAddNotification = useCallback(
     async (baseDate: Date, daysAfter: number) => {
@@ -106,7 +106,9 @@ const Page: NextPage = () => {
               setSchedule([]);
               mutate();
             }}
-          >IDを発行</button>
+          >
+            IDを発行
+          </button>
         </section>
       </article>
     </>

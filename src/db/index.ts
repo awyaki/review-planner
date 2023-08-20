@@ -1,6 +1,6 @@
 import Dexie, { Table } from "dexie";
 
-export type Notification = {
+export type DaysAfter = {
   id: number;
   baseDate: Date;
   daysAfter: number;
@@ -9,12 +9,12 @@ export type Notification = {
 export type Preset = {
   id?: number;
   name: string;
-  notifications: Notification[];
+  notifications: DaysAfter[];
 };
 
 export type ID = {
   id: number;
-  notifications: Notification[];
+  notifications: DaysAfter[];
 };
 
 export type NextID = { id?: number; nextId: number };

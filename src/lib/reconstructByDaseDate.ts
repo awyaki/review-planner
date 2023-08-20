@@ -1,6 +1,6 @@
-import { Notification } from "@/db";
+import { DaysAfter } from "@/db";
 export const reconstructByBaseDate = (
-  schedule: Notification[]
+  schedule: DaysAfter[]
 ): { baseDate: Date; days: { id: number; day: number }[] }[] => {
   return schedule.reduce<
     { baseDate: Date; days: { id: number; day: number }[] }[]

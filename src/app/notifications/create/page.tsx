@@ -6,6 +6,7 @@ import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { addPreset } from "@/db";
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -31,6 +32,12 @@ const Page: NextPage = () => {
   const [render, handleOpen] = useAddOneNotificationSheetForPreset(
     handleAddNotification
   );
+
+  const handleAddPreset = useCallback(
+    async (name: string, notifications: Notification[]) => {},
+    []
+  );
+
   return (
     <>
       {render()}

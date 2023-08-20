@@ -1,4 +1,4 @@
-import { db, Notification } from "./index";
+import { db, DaysAfter } from "./index";
 
 export const fetchNextId = async (): Promise<number> => {
   const nextID = await db.NextID.get(0);
@@ -25,7 +25,7 @@ export const fetchMaxIdOfNotifications = async () => {
 
 export const addId = async (
   id: number,
-  notifications: Notification[]
+  notifications: DaysAfter[]
 ): Promise<void> => {
   await db.ID.add({ id, notifications });
 };
@@ -37,7 +37,7 @@ export const getAllIDs = async () => {
 export const getNotificationsOfId = async (id: number) => {
   const idCollection = db.ID.where("id").equals(id);
   const notifications = idCollection;
-  let res: Notification[] = [];
+  let res: DaysAfter[] = [];
   await notifications.each((id) => {
     console.log(id.notifications);
     res = id.notifications;
