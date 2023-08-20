@@ -86,10 +86,12 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
         <div className="mb-10">
           {data ? (
             <List
-              data={data.notifications.map(({ id, daysAfter }) => ({
-                id,
-                text: `${daysAfter.toString()}日後`,
-              }))}
+              data={data.notifications
+                .sort((a, b) => (a.daysAfter > b.daysAfter ? 1 : -1))
+                .map(({ id, daysAfter }) => ({
+                  id,
+                  text: `${daysAfter.toString()}日後`,
+                }))}
               onDelete={handleDelete}
             />
           ) : undefined}
