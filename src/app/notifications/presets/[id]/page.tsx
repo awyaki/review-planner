@@ -6,11 +6,17 @@ import { Schedule, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { getPreset } from "@/db";
+import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
   const router = useRouter();
-  const [inputValue, setInputValue] = useState(id);
+
+  const { data } = useSWR(`/notifications/presets/${id}`, () =>
+    getPreset(Number(id))
+  );
+  const [inputValue, setInputValue] = useState(data?.name ?? "");
   const [render, handleOpen] = useAddOneNotificationSheetForPreset();
   return (
     <>
