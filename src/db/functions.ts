@@ -66,3 +66,7 @@ export const getMaxIdOfDaysAfterOfPreset = async () => {
   const maxIdOfDaysAfter = allDaysAfterId.reduce((a, b) => Math.max(a, b), 0);
   return maxIdOfDaysAfter;
 };
+
+export const deletePreset = async (id: number) => {
+  return await db.Preset.delete(id);
+};
