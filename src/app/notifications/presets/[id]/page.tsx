@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useAddOneNotificationSheetForPreset } from "../../hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getPreset } from "@/db";
+import { getPreset, updatePreset, getMaxIdOfDaysAfterOfPreset } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
@@ -15,11 +15,31 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const presetName = searchParams.get("name") ?? "";
   const router = useRouter();
 
-  const { data } = useSWR(`/notifications/presets/${id}`, () =>
+  const { data, mutate } = useSWR(`/notifications/presets/${id}`, () =>
     getPreset(Number(id))
   );
   const [inputValue, setInputValue] = useState(presetName);
-  const [render, handleOpen] = useAddOneNotificationSheetForPreset();
+
+  const handleUpdate = useCallback(
+    async (day: number) => {
+      if (data) {
+        const name = data.name;
+        const daysAfters = data.notifications;
+        const nextId = (await getMaxIdOfDaysAfterOfPreset()) + 1;
+        await updatePreset(
+          Number(id),
+          name,
+          daysAfters.concat({ id: nextId, daysAfter: day })
+        );
+        mutate();
+      }
+    },
+    [mutate, updatePreset, data]
+  );
+
+  const [render, handleOpen] =
+    useAddOneNotificationSheetForPreset(handleUpdate);
+
   return (
     <>
       {render()}
