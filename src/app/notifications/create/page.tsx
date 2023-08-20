@@ -38,7 +38,6 @@ const Page: NextPage = () => {
   );
 
   const handleAddPreset = useCallback(async () => {
-    console.log("handleAddPreset");
     const nextId = (await getMaxIdOfDaysAfterOfPreset()) + 1;
     const daysAfters: DaysAfterForPreset[] = notifications.map((n, i) => ({
       id: nextId + i,
@@ -46,7 +45,7 @@ const Page: NextPage = () => {
     }));
     await addPreset(inputValue, daysAfters);
     router.push("/notifications/presets");
-  }, []);
+  }, [inputValue, addPreset]);
 
   return (
     <>
