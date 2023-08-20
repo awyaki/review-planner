@@ -45,7 +45,7 @@ const Page: NextPage = () => {
     }));
     await addPreset(inputValue, daysAfters);
     router.push("/notifications/presets");
-  }, [inputValue, addPreset]);
+  }, [inputValue, addPreset, notifications]);
 
   return (
     <>
