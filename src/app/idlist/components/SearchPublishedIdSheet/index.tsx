@@ -31,26 +31,30 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
           <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
             <span>範囲で検索</span>
             <div>
-              <label htmlFor="min-query" className="mr-2 text-sm">
-                最小
-              </label>
-              <input
-                id="min-query"
-                className="w-20 px-2 mr-5 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
-                inputMode="numeric"
-                value={minIdQuery}
-                onChange={(e) => setMinIdQuery(e.target.value)}
-              />
-              <label htmlFor="max-query" className="mr-2 text-sm">
-                最大
-              </label>
-              <input
-                id="max-query"
-                className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
-                inputMode="numeric"
-                value={maxIdQuery}
-                onChange={(e) => setMaxIdQuery(e.target.value)}
-              />
+              <div className="mb-3">
+                <label htmlFor="min-query" className="mr-2 text-sm">
+                  最小
+                </label>
+                <input
+                  id="min-query"
+                  className=" w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
+                  inputMode="numeric"
+                  value={minIdQuery}
+                  onChange={(e) => setMinIdQuery(e.target.value)}
+                />
+              </div>
+              <div>
+                <label htmlFor="max-query" className="mr-2 text-sm">
+                  最大
+                </label>
+                <input
+                  id="max-query"
+                  className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
+                  inputMode="numeric"
+                  value={maxIdQuery}
+                  onChange={(e) => setMaxIdQuery(e.target.value)}
+                />
+              </div>
             </div>
           </div>
           <SelectButton
