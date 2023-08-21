@@ -8,7 +8,6 @@ type Props = {
 };
 
 export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
-  const [completeCondition, setCompleteCondition] = useState(false);
   const [query, setQuery] = useState("");
   const [minIdQuery, setMinIdQuery] = useState("");
   const [maxIdQuery, setMaxIdQuery] = useState("");
@@ -57,11 +56,6 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
               </div>
             </div>
           </div>
-          <SelectButton
-            text="完了済み"
-            onClick={() => setCompleteCondition((cond) => !cond)}
-            on={completeCondition}
-          />
         </section>
         <section className="pb-5">
           <h2 className="mb-3 text-lg">検索結果</h2>
@@ -91,31 +85,5 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
         </section>
       </div>
     </Sheet>
-  );
-};
-
-type SelectButtonProps = {
-  on: boolean;
-  onClick: () => void;
-  text: string;
-};
-
-const SelectButton: React.FC<SelectButtonProps> = ({ onClick, on, text }) => {
-  const variants = on
-    ? "flex items-center justify-between w-full px-5 py-2 rounded-md  bg-bg-primary text-text-on-bg-primary border border-primary"
-    : "flex items-center justify-between w-full px-5 py-2 rounded-md  border-bg-primary border";
-  return (
-    <button className={variants} onClick={onClick}>
-      <div>{text}</div>
-      <div
-        className={
-          on
-            ? "text-sm text-text-on-bg-primary"
-            : "text-sm text-text-on-primary"
-        }
-      >
-        {on ? "有効" : "無効"}
-      </div>
-    </button>
   );
 };
