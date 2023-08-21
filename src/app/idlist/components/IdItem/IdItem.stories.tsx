@@ -12,35 +12,16 @@ type Story = StoryObj<typeof IdItem>;
 
 export const TopIdItem: Story = {
   render: () => (
-    <IdItem
-      id="123"
-      color="gray"
-      rounded="top"
-      isCompleted={true}
-      onClick={() => {}}
-    />
+    <IdItem id="123" color="gray" rounded="top" onClick={() => {}} />
   ),
 };
 
 export const NormalIdItem: Story = {
-  render: () => (
-    <IdItem
-      id="124"
-      color="light-gray"
-      isCompleted={false}
-      onClick={() => {}}
-    />
-  ),
+  render: () => <IdItem id="124" color="light-gray" onClick={() => {}} />,
 };
 
 export const BottmIdItem: Story = {
   render: () => (
-    <IdItem
-      id="125"
-      color="gray"
-      rounded="bottom"
-      isCompleted={true}
-      onClick={() => {}}
-    />
+    <IdItem id="125" color="gray" rounded="bottom" onClick={() => {}} />
   ),
 };

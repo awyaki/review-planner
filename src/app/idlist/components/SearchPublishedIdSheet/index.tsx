@@ -79,7 +79,6 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
                     color={color}
                     rounded={rounded}
                     onClick={() => {}}
-                    isCompleted={true}
                   />
                 </li>
               );

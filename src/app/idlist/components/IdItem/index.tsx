@@ -32,26 +32,18 @@ const variants = {
 
 type Props = {
   id: string;
-  isCompleted: boolean;
   color: ColorVariants;
   rounded?: RoundedVariants;
   onClick: (id: string) => void;
 };
 
-export const IdItem: FC<Props> = ({
-  id,
-  color,
-  onClick,
-  isCompleted,
-  rounded = "none",
-}) => {
+export const IdItem: FC<Props> = ({ id, color, onClick, rounded = "none" }) => {
   return (
     <button
       className={`${variants[color][rounded]}`}
       onClick={() => onClick(id)}
     >
       <span>{id}</span>
-      {isCompleted && <span className="text-sm">完了</span>}
     </button>
   );
 };
