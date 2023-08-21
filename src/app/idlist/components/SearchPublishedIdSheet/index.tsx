@@ -11,8 +11,6 @@ type Props = {
 export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
   const [{ query, maxIdQuery, minIdQuery, result }, dispatch] =
     useSearchId(ids);
-  console.log("SearchPublishedIdSheet", ids);
-  console.log("SearchPublishedIdSheet result", result);
   return (
     <Sheet color="reverse" onClose={onClose}>
       <div className="px-5">
