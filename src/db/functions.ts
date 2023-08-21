@@ -39,7 +39,6 @@ export const getNotificationsOfId = async (id: number) => {
   const notifications = idCollection;
   let res: DaysAfter[] = [];
   await notifications.each((id) => {
-    console.log(id.notifications);
     res = id.notifications;
   });
   return res;
@@ -89,7 +88,6 @@ export const deleteDaysAfterOfPreset = async (id: number) => {
     p.notifications.some((n) => n.id === id)
   );
   const preset = presets[index];
-  console.log("preset", preset);
   const presetId = preset.id;
   const name = preset.name;
   const daysAfters = preset.notifications ?? [];
