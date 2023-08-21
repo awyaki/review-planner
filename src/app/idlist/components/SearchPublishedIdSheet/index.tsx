@@ -4,10 +4,11 @@ import { Sheet } from "@/components";
 import { IdItem } from "../IdItem";
 
 type Props = {
+  ids: number[];
   onClose: () => void;
 };
 
-export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose }) => {
+export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
   const [query, setQuery] = useState("");
   const [minIdQuery, setMinIdQuery] = useState("");
   const [maxIdQuery, setMaxIdQuery] = useState("");

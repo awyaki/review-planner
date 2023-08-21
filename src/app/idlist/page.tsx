@@ -14,7 +14,9 @@ const Page: NextPage = () => {
   const { data: ids, isLoading } = useSWR("/ids", getAllIDs);
   const reacentlyIds = ids?.map(({ id }) => id).slice(-5) ?? [];
 
-  const [render, handleOpen] = useAddOneNotificationSheet();
+  const [render, handleOpen] = useAddOneNotificationSheet(
+    ids?.map((id) => id.id) ?? []
+  );
   return (
     <>
       {render()}

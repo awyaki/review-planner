@@ -19,5 +19,5 @@ export default meta;
 type Story = StoryObj<typeof SearchPublishedIdSheet>;
 
 export const Primary: Story = {
-  render: () => <SearchPublishedIdSheet onClose={() => {}} />,
+  render: () => <SearchPublishedIdSheet ids={[]} onClose={() => {}} />,
 };
