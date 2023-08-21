@@ -2,6 +2,7 @@
 import { Sheet } from "@/components";
 import { IdItem } from "../IdItem";
 import { useSearchId } from "./hooks";
+import { useRouter } from "next/navigation";
 
 type Props = {
   ids: number[];
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
+  const router = useRouter();
   const [{ query, maxIdQuery, minIdQuery, result }, dispatch] =
     useSearchId(ids);
   return (
@@ -86,7 +88,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
                     id={id.toString()}
                     color={color}
                     rounded={rounded}
-                    onClick={() => {}}
+                    onClick={() => router.push(`/idinfo/${id}`)}
                   />
                 </li>
               );
