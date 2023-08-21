@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
 import { Sheet } from "@/components";
 import { IdItem } from "../IdItem";
+import { useSearchId } from "./hooks";
 
 type Props = {
   ids: number[];
@@ -9,11 +9,10 @@ type Props = {
 };
 
 export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
-  const [query, setQuery] = useState("");
-  const [minIdQuery, setMinIdQuery] = useState("");
-  const [maxIdQuery, setMaxIdQuery] = useState("");
-  const result = [123, 124, 125];
-
+  const [{ query, maxIdQuery, minIdQuery, result }, dispatch] =
+    useSearchId(ids);
+  console.log("SearchPublishedIdSheet", ids);
+  console.log("SearchPublishedIdSheet result", result);
   return (
     <Sheet color="reverse" onClose={onClose}>
       <div className="px-5">
@@ -25,7 +24,9 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
               id="searchById"
               className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) =>
+                dispatch({ type: "changed_query", query: e.target.value })
+              }
             />
           </div>
           <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
@@ -40,7 +41,12 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
                   className=" w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
                   inputMode="numeric"
                   value={minIdQuery}
-                  onChange={(e) => setMinIdQuery(e.target.value)}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "changed_minIdQuery",
+                      minIdQuery: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div>
@@ -52,7 +58,12 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
                   className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
                   inputMode="numeric"
                   value={maxIdQuery}
-                  onChange={(e) => setMaxIdQuery(e.target.value)}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "changed_maxIdQuery",
+                      maxIdQuery: e.target.value,
+                    })
+                  }
                 />
               </div>
             </div>
