@@ -18,11 +18,8 @@ export type Id = {
   id: number;
 };
 
-export type NextID = { id?: number; nextId: number };
-
 export class ReviewPlannerDatabase extends Dexie {
   //ID!: Table<ID>;
-  NextID!: Table<NextID, number>;
   Preset!: Table<Preset>;
   constructor() {
     super("review_planner");
