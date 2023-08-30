@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { SelectPresetSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
-import { DaysAfterForPreset } from "@/db";
 
 export const useSelectPresetSheet = (
-  onAddPreset?: (
-    baseDate: Date,
-    daysAfter: DaysAfterForPreset[]
-  ) => Promise<void>
+  onAddPreset?: () => Promise<void>
 ): [() => JSX.Element, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 

@@ -1,15 +1,15 @@
 import { List } from "@/components";
 import { dateToString } from "@/lib";
-import { DaysAfter } from "@/db";
-import { reconstructByBaseDate } from "@/lib";
 
 type Props = {
-  schedule: DaysAfter[];
   onDelete?: (id: number) => void;
 };
 
-export const Schedule: React.FC<Props> = ({ schedule, onDelete }) => {
-  const reconstructed = reconstructByBaseDate(schedule);
+export const Schedule: React.FC<Props> = ({ onDelete }) => {
+  const reconstructed: {
+    baseDate: Date;
+    days: { id: number; day: number }[];
+  }[] = [];
   return (
     <ul>
       {reconstructed

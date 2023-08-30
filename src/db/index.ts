@@ -1,28 +1,27 @@
 import Dexie, { Table } from "dexie";
-
+/*
 export type DaysAfter = {
   id: number;
   baseDate: Date;
   daysAfter: number;
 };
-
-export type DaysAfterForPreset = Omit<DaysAfter, "baseDate">;
+*/
+// export type DaysAfterForPreset = Omit<DaysAfter, "baseDate">;
 
 export type Preset = {
   id?: number;
   name: string;
-  notifications: DaysAfterForPreset[];
+  //notifications: DaysAfterForPreset[];
 };
 
-export type ID = {
+export type Id = {
   id: number;
-  notifications: DaysAfter[];
 };
 
 export type NextID = { id?: number; nextId: number };
 
 export class MySubClassedDexie extends Dexie {
-  ID!: Table<ID>;
+  //ID!: Table<ID>;
   NextID!: Table<NextID, number>;
   Preset!: Table<Preset>;
   constructor() {
@@ -37,5 +36,3 @@ export class MySubClassedDexie extends Dexie {
 }
 
 export const db = new MySubClassedDexie();
-
-export * from "./functions";

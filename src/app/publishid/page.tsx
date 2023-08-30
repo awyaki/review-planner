@@ -1,69 +1,26 @@
 "use client";
-import { useState, useContext, useCallback } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
-import { Schedule, SmallButton, LargeButton } from "@/components";
+import { Schedule, SmallButton } from "@/components";
 import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
-import {
-  addId,
-  incrementNextId,
-  fetchNextId,
-  fetchMaxIdOfNotifications,
-  DaysAfter,
-  DaysAfterForPreset,
-} from "@/db";
-import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [schedule, setSchedule] = useState<DaysAfter[]>([]);
-
-  const handleAddNotification = useCallback(
-    async (baseDate: Date, daysAfter: number) => {
-      const storeedNextId = (await fetchMaxIdOfNotifications()) + 1;
-      setSchedule((cur) => {
-        const nextId = cur.reduce((a, b) => Math.max(a, b.id), 0) + 1;
-        return cur.concat({
-          id: Math.max(storeedNextId, nextId),
-          baseDate,
-          daysAfter,
-        });
-      });
-    },
-    []
-  );
+  const isLoading = false;
+  const nextId = 3;
+  const schedule = [];
 
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet(handleAddNotification);
-
-  const handleAddPreset = useCallback(
-    async (baseDate: Date, daysAfters: DaysAfterForPreset[]) => {
-      const storeedNextId = (await fetchMaxIdOfNotifications()) + 1;
-      setSchedule((cur) => {
-        const nextId = cur.reduce((a, b) => Math.max(a, b.id), 0) + 1;
-        const addedTail: DaysAfter[] = daysAfters.map((da, i) => ({
-          id: Math.max(storeedNextId + i, nextId + i),
-          baseDate,
-          daysAfter: da.daysAfter,
-        }));
-        return cur.concat(addedTail);
-      });
-    },
-    [fetchMaxIdOfNotifications]
-  );
+    useAddOneNotificationSheet();
 
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet(handleAddPreset);
-  const { data: nextId, isLoading, mutate } = useSWR("/nextid", fetchNextId);
+    useSelectPresetSheet();
 
-  const handleDeleteNotification = useCallback((id: number) => {
-    setSchedule((cur) => cur.filter((s) => s.id !== id));
-  }, []);
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -104,10 +61,7 @@ const Page: NextPage = () => {
                 </li>
               </ul>
             ) : (
-              <Schedule
-                schedule={schedule}
-                onDelete={handleDeleteNotification}
-              ></Schedule>
+              <Schedule onDelete={() => {}}></Schedule>
             )}
           </div>
           <div className="mb-10">
@@ -118,12 +72,7 @@ const Page: NextPage = () => {
           </div>
           <button
             className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
-            onClick={async () => {
-              await addId(nextId ?? 0, schedule);
-              await incrementNextId();
-              setSchedule([]);
-              mutate();
-            }}
+            onClick={() => {}}
           >
             IDを発行
           </button>

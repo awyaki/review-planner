@@ -1,24 +1,12 @@
 "use client";
-import { useCallback } from "react";
 import { type NextPage } from "next";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SmallButton, ClickableList } from "@/components";
 import { AiOutlineLeft } from "react-icons/ai";
-import { getAllPreset, deletePreset } from "@/db";
-import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const { data, mutate } = useSWR("/presets", getAllPreset);
-
-  const handleDeletePreset = useCallback(
-    async (id: string) => {
-      await deletePreset(Number(id));
-      mutate();
-    },
-    [deletePreset]
-  );
 
   return (
     <>
@@ -39,15 +27,11 @@ const Page: NextPage = () => {
           <h2 className="mb-8 text-xl">通知プリセット</h2>
           <div className="mb-8">
             <ClickableList
-              data={
-                data
-                  ? data.map((p) => ({ id: String(p.id), text: p.name }))
-                  : []
-              }
+              data={[]}
               onClick={(id: string, name?: string) =>
                 router.push(`/notifications/presets/${id}?name=${name}`)
               }
-              onDelete={handleDeletePreset}
+              onDelete={() => {}}
             />
           </div>
           <SmallButton

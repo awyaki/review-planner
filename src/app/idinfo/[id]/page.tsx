@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useCallback } from "react";
+import { useContext } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -8,50 +8,12 @@ import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import { BaseContext } from "@/app/providers";
-import { getNotificationsOfId, db, fetchMaxIdOfNotifications } from "@/db";
-import useSWR from "swr";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
-  const { data: notifications, mutate } = useSWR(
-    "/id/notifications",
-    async () => await getNotificationsOfId(Number(params.id))
-  );
-  const handleAddNotification = useCallback(
-    async (baseDate: Date, daysAfter: number) => {
-      const notifications = await getNotificationsOfId(Number(params.id));
-      const maxId = await fetchMaxIdOfNotifications();
-
-      await db.ID.put({
-        id: Number(params.id),
-        notifications: notifications.concat({
-          id: maxId + 1,
-          baseDate,
-          daysAfter,
-        }),
-      });
-      mutate();
-    },
-    [params, mutate]
-  );
-
-  const handleDelete = useCallback(
-    async (id: number) => {
-      const notifications = await getNotificationsOfId(Number(params.id));
-      const index = notifications.findIndex((n) => n.id === id);
-      await db.ID.put({
-        id: Number(params.id),
-        notifications: notifications
-          .slice(0, index)
-          .concat(notifications.slice(index + 1)),
-      });
-      mutate();
-    },
-    [params, mutate]
-  );
 
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet(handleAddNotification);
+    useAddOneNotificationSheet();
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   const { base } = useContext(BaseContext);
@@ -87,10 +49,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               プリセットを選択
             </button>
           </div>
-          <ScheduleForIdInfo
-            schedule={notifications ?? []}
-            onDelete={handleDelete}
-          />
+          <ScheduleForIdInfo onDelete={() => {}} />
           <SmallButton
             text="通知を追加"
             onClick={handleOpenAddOneNotificationSheet}
