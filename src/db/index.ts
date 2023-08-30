@@ -20,7 +20,7 @@ export type Id = {
 
 export type NextID = { id?: number; nextId: number };
 
-export class MySubClassedDexie extends Dexie {
+export class ReviewPlannerDatabase extends Dexie {
   //ID!: Table<ID>;
   NextID!: Table<NextID, number>;
   Preset!: Table<Preset>;
@@ -35,4 +35,4 @@ export class MySubClassedDexie extends Dexie {
   }
 }
 
-export const db = new MySubClassedDexie();
+export const db = new ReviewPlannerDatabase();
