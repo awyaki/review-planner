@@ -12,3 +12,10 @@ export const getAllNDaysAfters = async (): Promise<NDaysAfter[]> => {
   const res = await db.nDaysAfter.toArray();
   return res;
 };
+
+export const getOneNDaysAfter = async (
+  id: number
+): Promise<NDaysAfter | undefined> => {
+  const res = await db.nDaysAfter.get(id);
+  return res;
+};
