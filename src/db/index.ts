@@ -26,8 +26,6 @@ export class ReviewPlannerDatabase extends Dexie {
     this.version(1).stores({
       ID: "++id",
       Preset: "++id",
-      // assume NextID object store will have only one record whose is `next_id`.
-      NextID: "++id",
     });
   }
 }
