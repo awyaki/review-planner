@@ -16,7 +16,7 @@ export type Preset = {
   name: string;
 };
 
-export type nDaysAfterForPreset = {
+export type NDaysAfterForPreset = {
   id?: number;
   n: number;
   belongTo: number;
