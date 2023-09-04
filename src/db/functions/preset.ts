@@ -19,3 +19,8 @@ export const createPreset = async (
     console.error(e);
   }
 };
+
+export const getAllPresets = async () => {
+  const res = await db.preset.toArray();
+  return res;
+};
