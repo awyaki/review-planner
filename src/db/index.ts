@@ -29,7 +29,7 @@ export class ReviewPlannerDatabase extends Dexie {
     super("review_planner");
     this.version(1).stores({
       id: "++id",
-      nDaysAfter: "++id",
+      nDaysAfter: "++id, belongTo",
       preset: "++id",
       nDaysAfterForPrest: "++id",
     });
