@@ -17,7 +17,7 @@ export class ReviewPlannerDatabase extends Dexie {
   constructor() {
     super("review_planner");
     this.version(1).stores({
-      ID: "++id",
+      id: "++id",
       nDaysAfter: "++id",
     });
   }
