@@ -31,7 +31,7 @@ export class ReviewPlannerDatabase extends Dexie {
       id: "++id",
       nDaysAfter: "++id, belongTo",
       preset: "++id",
-      nDaysAfterForPrest: "++id",
+      nDaysAfterForPrest: "++id, belongTo",
     });
   }
 }
