@@ -20,3 +20,7 @@ export const getAllNDaysAftersForPresetOfPresetId = async (
     throw e;
   }
 };
+
+export const deleteOneNDaysAfterForPreset = async (id: number) => {
+  await db.nDaysAfterForPreset.delete(id);
+};
