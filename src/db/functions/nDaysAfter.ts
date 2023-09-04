@@ -29,3 +29,7 @@ export const getAllNDaysAftersOfId = async (
   const res = await db.nDaysAfter.where("belongTo").equals(id).toArray();
   return res;
 };
+
+export const deleteNDaysAfter = async (id: number) => {
+  db.nDaysAfter.delete(id);
+};
