@@ -24,6 +24,7 @@ export type nDaysAfterForPreset = {
 
 export class ReviewPlannerDatabase extends Dexie {
   id!: Table<Id>;
+  preset!: Table<Preset>;
   nDaysAfter!: Table<NDaysAfter>;
   constructor() {
     super("review_planner");
