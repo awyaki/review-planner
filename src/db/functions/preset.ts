@@ -1,4 +1,4 @@
-import { db } from "../index";
+import { db, Preset } from "../index";
 import { parseIntoNumber, NDaysAfterForPresetForClient } from "@/lib";
 
 export const createPreset = async (
@@ -23,4 +23,17 @@ export const createPreset = async (
 export const getAllPresets = async () => {
   const res = await db.preset.toArray();
   return res;
+};
+
+class NotExistSuchPresetError extends Error {
+  message: string = "No preset which has `id` exists.";
+}
+export const getOnePreset = async (id: number): Promise<Preset> => {
+  try {
+    const result = await db.preset.where("id").equals(id).toArray();
+    if (result.length === 0) throw NotExistSuchPresetError;
+    return result[0];
+  } catch (e) {
+    throw e;
+  }
 };
