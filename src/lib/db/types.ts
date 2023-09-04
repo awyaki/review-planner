@@ -6,4 +6,6 @@ export type NDaysAfterForPresetForClient = Required<
   Omit<NDaysAfterForPreset, "belongTo">
 >;
 
-export type PresetForClient = Required<Preset>;
+export type PresetForClient = Required<Preset> & {
+  nDaysAfters: NDaysAfterForPresetForClient[];
+};
