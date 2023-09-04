@@ -19,3 +19,13 @@ export const getOneNDaysAfter = async (
   const res = await db.nDaysAfter.get(id);
   return res;
 };
+
+// This `id` argument is about to be passed id of Id object store,
+// not id of nDaysAfter object store.
+// This function returns all nDaysAfters which belong to the `id`.
+export const getAllNDaysAftersOfId = async (
+  id: number
+): Promise<NDaysAfter[]> => {
+  const res = await db.nDaysAfter.where("belongTo").equals(id).toArray();
+  return res;
+};
