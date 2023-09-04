@@ -19,12 +19,12 @@ export type Id = {
 };
 
 export class ReviewPlannerDatabase extends Dexie {
-  //ID!: Table<ID>;
+  id!: Table<Id>;
   Preset!: Table<Preset>;
   constructor() {
     super("review_planner");
     this.version(1).stores({
-      ID: "&id",
+      ID: "++id",
       Preset: "++id",
       // assume NextID object store will have only one record whose is `next_id`.
       NextID: "++id",
