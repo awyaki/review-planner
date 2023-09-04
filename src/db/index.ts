@@ -16,7 +16,7 @@ export type Preset = {
   name: string;
 };
 
-export type nDaysAfterForPrest = {
+export type nDaysAfterForPreset = {
   id?: number;
   n: number;
   belongTo: number;
@@ -31,7 +31,7 @@ export class ReviewPlannerDatabase extends Dexie {
       id: "++id",
       nDaysAfter: "++id, belongTo",
       preset: "++id",
-      nDaysAfterForPrest: "++id, belongTo",
+      nDaysAfterForPreset: "++id, belongTo",
     });
   }
 }
