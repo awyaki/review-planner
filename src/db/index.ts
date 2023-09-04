@@ -1,23 +1,23 @@
 import Dexie, { Table } from "dexie";
 
 export type Id = {
-  id: number;
+  id?: number;
 };
 
 export type NDaysAfter = {
-  id: number;
+  id?: number;
   belongTo: number;
   n: number;
   base: Date;
 };
 
 export type Preset = {
-  id: number;
+  id?: number;
   name: string;
 };
 
 export type nDaysAfterForPrest = {
-  id: number;
+  id?: number;
   n: number;
   belongTo: number;
 };
