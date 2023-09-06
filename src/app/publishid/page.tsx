@@ -1,5 +1,5 @@
 "use client";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -9,11 +9,12 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
-import { getCurrentId, createId } from "@/db";
+import { getCurrentId, createId, NDaysAfterForClient } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
+  const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
   const schedule = [];
   const { data: currentId, isLoading, mutate } = useSWR("/id", getCurrentId);
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
@@ -71,7 +72,10 @@ const Page: NextPage = () => {
                 </li>
               </ul>
             ) : (
-              <Schedule onDelete={() => {}}></Schedule>
+              <Schedule
+                nDaysAfters={nDaysAfters}
+                onDelete={() => {}}
+              ></Schedule>
             )}
           </div>
           <div className="mb-10">
