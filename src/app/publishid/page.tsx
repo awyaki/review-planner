@@ -1,4 +1,5 @@
 "use client";
+import { useCallback } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -8,18 +9,23 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
-import { getCurrentId } from "@/db";
+import { getCurrentId, createId } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const schedule = [];
-  const { data: currentId, isLoading } = useSWR("/id", getCurrentId);
+  const { data: currentId, isLoading, mutate } = useSWR("/id", getCurrentId);
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet();
 
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
+
+  const handlePublishId = useCallback(async () => {
+    await createId([]);
+    mutate();
+  }, [mutate, createId]);
 
   return (
     <>
@@ -72,7 +78,7 @@ const Page: NextPage = () => {
           </div>
           <button
             className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
-            onClick={() => {}}
+            onClick={handlePublishId}
           >
             IDを発行
           </button>
