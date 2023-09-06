@@ -22,6 +22,8 @@ export type NDaysAfterForPreset = {
 
 // data type for client side
 
+export type NDaysAfterForClient = Required<Omit<NDaysAfter, "belongTo">>;
+
 export type NDaysAfterForPresetForClient = Required<
   Omit<NDaysAfterForPreset, "belongTo">
 >;
