@@ -1,5 +1,7 @@
 import Dexie, { Table } from "dexie";
 
+export * from "./functions";
+
 export type Id = {
   id?: number;
 };
