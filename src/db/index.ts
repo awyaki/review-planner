@@ -24,6 +24,16 @@ export type NDaysAfterForPreset = {
   belongTo: number;
 };
 
+// data type for client side
+
+export type NDaysAfterForPresetForClient = Required<
+  Omit<NDaysAfterForPreset, "belongTo">
+>;
+
+export type PresetForClient = Required<Preset> & {
+  nDaysAfters: NDaysAfterForPresetForClient[];
+};
+
 export class ReviewPlannerDatabase extends Dexie {
   id!: Table<Id>;
   preset!: Table<Preset>;
