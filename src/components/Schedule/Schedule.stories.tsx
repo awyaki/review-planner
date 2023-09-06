@@ -11,5 +11,5 @@ export default meta;
 type Story = StoryObj<typeof Schedule>;
 
 export const Primary: Story = {
-  render: () => <Schedule />,
+  render: () => <Schedule nDaysAfters={[]} />,
 };
