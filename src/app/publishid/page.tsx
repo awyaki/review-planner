@@ -8,13 +8,13 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
+import { getCurrentId } from "@/db";
+import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const isLoading = false;
-  const nextId = 3;
   const schedule = [];
-
+  const { data: currentId, isLoading } = useSWR("/id", getCurrentId);
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet();
 
@@ -42,7 +42,7 @@ const Page: NextPage = () => {
           </header>
           <div className="mb-8">
             <span className="block mb-1 text-sm">次のID</span>
-            {isLoading ? <>Loading...</> : <NextId nextId={nextId ?? 0} />}
+            {isLoading ? <>Loading...</> : <NextId nextId={currentId ?? 0} />}
           </div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl">通知スケジュール</h2>
