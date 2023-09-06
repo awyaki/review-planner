@@ -3,6 +3,7 @@ import {
   parseIntoNumber,
   NDaysAfterForPresetForClient,
   PresetForClient,
+  isNotNullOrUndefined,
 } from "@/lib";
 
 export const createPreset = async (
@@ -54,6 +55,22 @@ export const putOnePreset = async (preset: PresetForClient) => {
       await db.nDaysAfterForPreset.bulkPut(
         nDaysAfters.map(({ id, n }) => ({ id, n, belongTo: presetId }))
       );
+    });
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const deleteOnePreset = async (id: number): Promise<void> => {
+  try {
+    db.transaction("rw", db.preset, db.nDaysAfterForPreset, async () => {
+      const nDaysAftersIds = (
+        await db.nDaysAfterForPreset.where("belongTo").equals(id).toArray()
+      )
+        .map(({ id }) => id)
+        .filter(isNotNullOrUndefined);
+      await db.nDaysAfterForPreset.bulkDelete(nDaysAftersIds);
+      await db.preset.delete(id);
     });
   } catch (e) {
     throw e;
