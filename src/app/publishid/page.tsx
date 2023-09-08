@@ -39,9 +39,9 @@ const Page: NextPage = () => {
     useSelectPresetSheet();
 
   const handlePublishId = useCallback(async () => {
-    await createId([]);
+    await createId(nDaysAfters);
     mutate();
-  }, [mutate, createId]);
+  }, [mutate, createId, nDaysAfters]);
 
   return (
     <>
