@@ -6,7 +6,7 @@ import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
-import { NDaysAfterForPresetForClient } from "@/db";
+import { NDaysAfterForPresetForClient, createPreset } from "@/db";
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -26,6 +26,13 @@ const Page: NextPage = () => {
     setNDaysAfters((cur) => cur.filter((n) => n.id !== id));
   }, []);
 
+  const handleCreatePreset = useCallback(
+    async (name: string, nDaysAfters: NDaysAfterForPresetForClient[]) => {
+      await createPreset(name, nDaysAfters);
+      router.push("/notifications/presets");
+    },
+    [createPreset]
+  );
   const [render, handleOpen] = useAddOneNotificationSheetForPreset(
     handleAddNotification
   );
@@ -74,7 +81,7 @@ const Page: NextPage = () => {
           </button>
           <button
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
-            onClick={() => {}}
+            onClick={() => handleCreatePreset(inputValue, nDaysAfters)}
           >
             作成
           </button>
