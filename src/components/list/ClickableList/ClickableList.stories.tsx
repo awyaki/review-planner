@@ -2,10 +2,10 @@ import { type Meta, StoryObj } from "@storybook/react";
 import { ClickableList } from "./index";
 
 const dataForList: Parameters<typeof ClickableList>["0"]["data"] = [
-  { id: "1", text: "1日後" },
-  { id: "2", text: "2日後" },
-  { id: "3", text: "3日後" },
-  { id: "4", text: "4日後" },
+  { id: 1, text: "1日後" },
+  { id: 2, text: "2日後" },
+  { id: 3, text: "3日後" },
+  { id: 4, text: "4日後" },
 ];
 
 const meta: Meta<typeof ClickableList> = {
@@ -29,15 +29,15 @@ type Story = StoryObj<typeof ClickableList>;
 export const NormalList: Story = {
   args: {
     data: [
-      { id: "1", text: "1日後" },
-      { id: "2", text: "2日後" },
-      { id: "3", text: "3日後" },
+      { id: 1, text: "1日後" },
+      { id: 2, text: "2日後" },
+      { id: 3, text: "3日後" },
     ],
   },
 };
 
 export const OneItemList: Story = {
   args: {
-    data: [{ id: "1", text: "1日後" }],
+    data: [{ id: 1, text: "1日後" }],
   },
 };

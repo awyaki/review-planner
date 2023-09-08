@@ -10,6 +10,7 @@ import useSWR from "swr";
 const Page: NextPage = () => {
   const router = useRouter();
   const { data: presets, isLoading } = useSWR("/presets", getAllPresets);
+
   return (
     <>
       <article className="flex flex-col justify-between h-screen bg-bg-primary text-text-on-bg-primary">
@@ -35,12 +36,12 @@ const Page: NextPage = () => {
                 data={
                   presets
                     ? presets.map(({ id, name }) => ({
-                        id: String(id),
+                        id,
                         text: name,
                       }))
                     : []
                 }
-                onClick={(id: string, name?: string) =>
+                onClick={(id: number, name?: string) =>
                   router.push(`/notifications/presets/${id}?name=${name}`)
                 }
                 onDelete={() => {}}

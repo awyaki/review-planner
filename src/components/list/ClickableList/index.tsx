@@ -8,9 +8,9 @@ import {
 import { AnimatePresence } from "framer-motion";
 
 type Props = {
-  data: { id: string; text: string }[];
-  onClick?: (id: string, name?: string) => void;
-  onDelete?: (id: string) => void;
+  data: { id: number; text: string }[];
+  onClick?: (id: number, name?: string) => void;
+  onDelete?: (id: number) => void;
 };
 
 const ClickableList: FC<Props> = ({ data, onClick, onDelete }) => {
