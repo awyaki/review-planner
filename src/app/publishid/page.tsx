@@ -27,6 +27,11 @@ const Page: NextPage = () => {
     },
     []
   );
+
+  const handleDeleteNDaysAfter = useCallback((id: number) => {
+    setNDaysAfters((cur) => cur.filter((v) => v.id !== id));
+  }, []);
+
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet(handleAddNDaysAfter);
 
@@ -84,7 +89,7 @@ const Page: NextPage = () => {
             ) : (
               <Schedule
                 nDaysAfters={nDaysAfters}
-                onDelete={() => {}}
+                onDelete={handleDeleteNDaysAfter}
               ></Schedule>
             )}
           </div>
