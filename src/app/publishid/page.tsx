@@ -41,6 +41,7 @@ const Page: NextPage = () => {
   const handlePublishId = useCallback(async () => {
     await createId(nDaysAfters);
     mutate();
+    setNDaysAfters([]);
   }, [mutate, createId, nDaysAfters]);
 
   return (
