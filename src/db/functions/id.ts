@@ -8,7 +8,7 @@ export const createId = async (nDaysAfters: NDaysAfterForClient[]) => {
       const id = parseIntoNumber(_id);
       if (id instanceof Error) throw id;
       await db.nDaysAfter.bulkAdd(
-        nDaysAfters.map((d) => ({ ...d, belongTo: id }))
+        nDaysAfters.map(({ id, ...rest }) => ({ ...rest, belongTo: id }))
       );
     });
   } catch (e) {
