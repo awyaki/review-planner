@@ -42,7 +42,7 @@ const reconstructNDaysAfters = (
 ): DaysAftersByDates => {
   return nDaysAfters.reduce<DaysAftersByDates>((acc, nDaysAfter) => {
     const { id, base, n } = nDaysAfter;
-    const index = acc.findIndex((v) => v.base === base);
+    const index = acc.findIndex((v) => v.base.getTime() === base.getTime());
     if (index === -1) {
       return acc.concat({ base, days: [{ id, n }] });
     } else {
