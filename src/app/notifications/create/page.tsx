@@ -6,26 +6,24 @@ import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { NDaysAfterForPresetForClient } from "@/db";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
-  const [notifications, setNotifications] = useState<
-    {
-      id: number;
-      day: number;
-    }[]
+  const [nDaysAfters, setNDaysAfters] = useState<
+    NDaysAfterForPresetForClient[]
   >([]);
 
   const handleAddNotification = useCallback((day: number) => {
-    setNotifications((cur) => {
+    setNDaysAfters((cur) => {
       const maxId = cur.reduce((a, b) => Math.max(a, b.id), 0);
-      return cur.concat({ id: maxId + 1, day });
+      return cur.concat({ id: maxId + 1, n: day });
     });
   }, []);
 
   const handleDeleteNotification = useCallback((id: number) => {
-    setNotifications((cur) => cur.filter((n) => n.id !== id));
+    setNDaysAfters((cur) => cur.filter((n) => n.id !== id));
   }, []);
 
   const [render, handleOpen] = useAddOneNotificationSheetForPreset(
@@ -57,9 +55,9 @@ const Page: NextPage = () => {
         />
         <div className="mb-10">
           <List
-            data={notifications.map(({ id, day }) => ({
+            data={nDaysAfters.map(({ id, n }) => ({
               id,
-              text: `${day.toString()}日後`,
+              text: `${n.toString()}日後`,
             }))}
             onDelete={handleDeleteNotification}
           />
