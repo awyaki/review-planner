@@ -17,7 +17,7 @@ export const createPreset = async (
         throw presetId;
       }
       await db.nDaysAfterForPreset.bulkAdd(
-        nDaysAfters.map(({ id, n }) => ({ id, n, belongTo: presetId }))
+        nDaysAfters.map(({ n }) => ({ n, belongTo: presetId }))
       );
     });
   } catch (e) {
