@@ -25,9 +25,18 @@ export const createPreset = async (
   }
 };
 
-export const getAllPresets = async () => {
+const isNotOptionalOnId = <T extends { id?: unknown }>(
+  v: T
+): v is T & { id: Exclude<T["id"], undefined> } => {
+  return Object.hasOwn(v, "id") && v.id !== undefined;
+};
+
+export const getAllPresets = async (): Promise<
+  Omit<PresetForClient, "nDaysAfters">[]
+> => {
   const res = await db.preset.toArray();
-  return res;
+  const filtered = res.filter(isNotOptionalOnId);
+  return filtered;
 };
 
 class NotExistSuchPresetError extends Error {
