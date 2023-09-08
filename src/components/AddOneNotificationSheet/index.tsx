@@ -1,10 +1,11 @@
 "use client";
 import { useState, useCallback } from "react";
 import { Sheet } from "@/components";
+import { NDaysAfterForClient } from "@/db";
 
 type Props = {
   onClose: () => void;
-  onAddNotification?: (baseDate: Date, daysAfter: number) => Promise<void>;
+  onAddNotification?: (nDaysAfter: Omit<NDaysAfterForClient, "id">) => void;
 };
 
 const AddOneNotificationSheet: React.FC<Props> = ({
@@ -14,9 +15,12 @@ const AddOneNotificationSheet: React.FC<Props> = ({
   const [inputValue, setInputValue] = useState("");
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
 
-  const handleAddNotification = useCallback(async () => {
+  const handleAddNotification = useCallback(() => {
     onAddNotification
-      ? await onAddNotification(new Date(baseDate), Number(inputValue))
+      ? onAddNotification({
+          base: new Date(baseDate),
+          n: Number(inputValue),
+        })
       : undefined;
     onClose();
   }, [baseDate, inputValue, onAddNotification, onClose]);

@@ -15,10 +15,20 @@ import useSWR from "swr";
 const Page: NextPage = () => {
   const router = useRouter();
   const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
-  const schedule = [];
   const { data: currentId, isLoading, mutate } = useSWR("/id", getCurrentId);
+  const handleAddNDaysAfter = useCallback(
+    (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
+      const { base, n } = nDaysAfter;
+      setNDaysAfters((cur) => {
+        const maxId = cur.reduce((a, b) => Math.max(a, b.id), 0);
+        const newNDaysAfter: NDaysAfterForClient = { id: maxId + 1, base, n };
+        return cur.concat(newNDaysAfter);
+      });
+    },
+    []
+  );
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet();
+    useAddOneNotificationSheet(handleAddNDaysAfter);
 
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
@@ -65,7 +75,7 @@ const Page: NextPage = () => {
             </button>
           </div>
           <div className="mb-8">
-            {schedule.length === 0 ? (
+            {nDaysAfters.length === 0 ? (
               <ul>
                 <li>
                   <EmptyScheduleItem />
