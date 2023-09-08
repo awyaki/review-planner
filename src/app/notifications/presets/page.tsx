@@ -1,16 +1,28 @@
 "use client";
+import { useCallback } from "react";
 import { type NextPage } from "next";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { SmallButton, ClickableList } from "@/components";
 import { AiOutlineLeft } from "react-icons/ai";
-import { getAllPresets } from "@/db";
+import { getAllPresets, deleteOnePreset } from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const { data: presets, isLoading } = useSWR("/presets", getAllPresets);
+  const {
+    data: presets,
+    isLoading,
+    mutate,
+  } = useSWR("/presets", getAllPresets);
 
+  const handleDeletePreset = useCallback(
+    async (id: number) => {
+      await deleteOnePreset(id);
+      mutate();
+    },
+    [deleteOnePreset, mutate]
+  );
   return (
     <>
       <article className="flex flex-col justify-between h-screen bg-bg-primary text-text-on-bg-primary">
@@ -44,7 +56,7 @@ const Page: NextPage = () => {
                 onClick={(id: number, name?: string) =>
                   router.push(`/notifications/presets/${id}?name=${name}`)
                 }
-                onDelete={() => {}}
+                onDelete={handleDeletePreset}
               />
             )}
           </div>
