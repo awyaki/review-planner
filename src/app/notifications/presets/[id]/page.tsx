@@ -6,17 +6,22 @@ import { List, SmallButton } from "@/components";
 import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
+import useSWR from "swr";
+import { getOnePreset } from "@/db";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
   const searchParams = useSearchParams();
   const presetName = searchParams.get("name") ?? "";
-  const data: number[] = [];
   const router = useRouter();
 
   const [inputValue, setInputValue] = useState(presetName);
 
   const [render, handleOpen] = useAddOneNotificationSheetForPreset();
+
+  const { data: preset } = useSWR(`/preset/${id}`, async () =>
+    getOnePreset(Number(id))
+  );
 
   return (
     <>
@@ -42,7 +47,15 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <div className="mb-10">
-          {data ? <List data={[]} onDelete={() => {}} /> : undefined}
+          {preset ? (
+            <List
+              data={preset.nDaysAfters.map(({ id, n }) => ({
+                id,
+                text: String(n),
+              }))}
+              onDelete={() => {}}
+            />
+          ) : undefined}
         </div>
         <div className="mb-10">
           <SmallButton onClick={handleOpen} text="通知を追加" />
