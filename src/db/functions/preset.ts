@@ -42,11 +42,19 @@ export const getAllPresets = async (): Promise<
 class NotExistSuchPresetError extends Error {
   message: string = "No preset which has `id` exists.";
 }
-export const getOnePreset = async (id: number): Promise<Preset> => {
+export const getOnePreset = async (id: number): Promise<PresetForClient> => {
   try {
     const result = await db.preset.where("id").equals(id).toArray();
     if (result.length === 0) throw NotExistSuchPresetError;
-    return result[0];
+    const { name } = result[0];
+    const nDaysAfters = (
+      await db.nDaysAfterForPreset.where("belongTo").equals(id).toArray()
+    ).filter(isNotOptionalOnId);
+    return {
+      id,
+      name,
+      nDaysAfters,
+    };
   } catch (e) {
     throw e;
   }
