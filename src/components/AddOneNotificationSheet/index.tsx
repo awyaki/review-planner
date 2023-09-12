@@ -42,6 +42,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({
             <input
               className="w-24 mr-3 bg-light-gray text-dark-gray"
               type="number"
+              min={1}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
