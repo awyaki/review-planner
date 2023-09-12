@@ -33,6 +33,10 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     });
   }, []);
 
+  const handleDeleteNDaysAfter = useCallback((id: number) => {
+    setNDaysAfters((p) => p.filter((nDaysAfter) => nDaysAfter.id !== id));
+  }, []);
+
   const [render, handleOpen] =
     useAddOneNotificationSheetForPreset(handleAddNDaysAfter);
 
@@ -70,7 +74,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
                 id,
                 text: String(n),
               }))}
-              onDelete={() => {}}
+              onDelete={handleDeleteNDaysAfter}
             />
           }
         </div>
