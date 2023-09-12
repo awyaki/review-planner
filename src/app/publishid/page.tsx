@@ -64,51 +64,53 @@ const Page: NextPage = () => {
               <SmallButton text="メニュー" />
             </Link>
           </header>
-          <div className="mb-8">
-            <span className="block mb-1 text-sm">次のID</span>
-            {isLoading ? (
-              <>Loading...</>
-            ) : (
-              <NextId nextId={currentId ? currentId + 1 : 1} />
-            )}
-          </div>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl">通知スケジュール</h2>
-            <button
-              type="button"
-              className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
-              onClick={handleOpenSelectPresetSheet}
-            >
-              プリセットから選択
-            </button>
-          </div>
-          <div className="mb-8">
-            {nDaysAfters.length === 0 ? (
-              <ul>
-                <li>
-                  <EmptyScheduleItem />
-                </li>
-              </ul>
-            ) : (
-              <Schedule
-                nDaysAfters={nDaysAfters}
-                onDelete={handleDeleteNDaysAfter}
-              ></Schedule>
-            )}
-          </div>
-          <div className="mb-10">
-            <SmallButton
-              text="通知を追加"
-              onClick={handleOpenAddOneNotificationSheet}
-            />
-          </div>
-          <button
-            type="button"
-            className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
-            onClick={handlePublishId}
-          >
-            IDを発行
-          </button>
+          {isLoading ? (
+            <>Loading...</>
+          ) : (
+            <>
+              <div className="mb-8">
+                <span className="block mb-1 text-sm">次のID</span>
+                <NextId nextId={currentId ? currentId + 1 : 1} />
+              </div>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl">通知スケジュール</h2>
+                <button
+                  type="button"
+                  className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
+                  onClick={handleOpenSelectPresetSheet}
+                >
+                  プリセットから選択
+                </button>
+              </div>
+              <div className="mb-8">
+                {nDaysAfters.length === 0 ? (
+                  <ul>
+                    <li>
+                      <EmptyScheduleItem />
+                    </li>
+                  </ul>
+                ) : (
+                  <Schedule
+                    nDaysAfters={nDaysAfters}
+                    onDelete={handleDeleteNDaysAfter}
+                  ></Schedule>
+                )}
+              </div>
+              <div className="mb-10">
+                <SmallButton
+                  text="通知を追加"
+                  onClick={handleOpenAddOneNotificationSheet}
+                />
+              </div>
+              <button
+                type="button"
+                className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
+                onClick={handlePublishId}
+              >
+                IDを発行
+              </button>
+            </>
+          )}
         </section>
       </article>
     </>
