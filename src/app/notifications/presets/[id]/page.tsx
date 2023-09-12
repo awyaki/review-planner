@@ -7,11 +7,7 @@ import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import {
-  getOnePreset,
-  createNDaysAfterForPreset,
-  type NDaysAfterForPresetForClient,
-} from "@/db";
+import { getOnePreset, type NDaysAfterForPresetForClient } from "@/db";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
@@ -30,13 +26,12 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
 
   const [inputValue, setInputValue] = useState(presetName);
 
-  const handleAddNDaysAfter = useCallback(
-    async (n: number) => {
-      await createNDaysAfterForPreset(n, Number(id));
-      mutate();
-    },
-    [createNDaysAfterForPreset, id]
-  );
+  const handleAddNDaysAfter = useCallback((n: number) => {
+    setNDaysAfters((p) => {
+      const max = p.reduce((a, b) => Math.max(a, b.id), 0);
+      return p.concat({ id: max + 1, n });
+    });
+  }, []);
 
   const [render, handleOpen] =
     useAddOneNotificationSheetForPreset(handleAddNDaysAfter);
