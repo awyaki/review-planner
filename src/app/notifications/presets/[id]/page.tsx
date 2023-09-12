@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useAddOneNotificationSheetForPreset } from "../../hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
@@ -7,21 +7,43 @@ import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import { getOnePreset } from "@/db";
+import {
+  getOnePreset,
+  createNDaysAfterForPreset,
+  type NDaysAfterForPresetForClient,
+} from "@/db";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
   const searchParams = useSearchParams();
   const presetName = searchParams.get("name") ?? "";
+
+  const { data: preset, mutate } = useSWR(`/preset/${id}`, async () =>
+    getOnePreset(Number(id))
+  );
+
   const router = useRouter();
+
+  const [nDaysAfters, setNDaysAfters] = useState<
+    NDaysAfterForPresetForClient[]
+  >([]);
 
   const [inputValue, setInputValue] = useState(presetName);
 
-  const [render, handleOpen] = useAddOneNotificationSheetForPreset();
-
-  const { data: preset } = useSWR(`/preset/${id}`, async () =>
-    getOnePreset(Number(id))
+  const handleAddNDaysAfter = useCallback(
+    async (n: number) => {
+      await createNDaysAfterForPreset(n, Number(id));
+      mutate();
+    },
+    [createNDaysAfterForPreset, id]
   );
+
+  const [render, handleOpen] =
+    useAddOneNotificationSheetForPreset(handleAddNDaysAfter);
+
+  useEffect(() => {
+    setNDaysAfters(preset?.nDaysAfters ?? []);
+  }, [preset]);
 
   return (
     <>
@@ -47,15 +69,15 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         <div className="mb-10">
-          {preset ? (
+          {
             <List
-              data={preset.nDaysAfters.map(({ id, n }) => ({
+              data={nDaysAfters.map(({ id, n }) => ({
                 id,
                 text: String(n),
               }))}
               onDelete={() => {}}
             />
-          ) : undefined}
+          }
         </div>
         <div className="mb-10">
           <SmallButton onClick={handleOpen} text="通知を追加" />
