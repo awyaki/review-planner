@@ -47,6 +47,7 @@ export const NotificationItem: FC<Props> = ({
 }) => {
   return (
     <button
+      type="button"
       className={`${variants[color][rounded]}`}
       onClick={() => onClick(day)}
     >

@@ -30,6 +30,7 @@ const Page: NextPage = () => {
           <header className="flex items-center justify-between mb-5">
             <button
               className="flex items-center text-primary"
+              type="button"
               onClick={() => router.back()}
             >
               <AiOutlineLeft className="mr-1" />

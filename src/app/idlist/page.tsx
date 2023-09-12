@@ -17,6 +17,7 @@ const Page: NextPage = () => {
       <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
         <header className="flex items-center justify-between mb-5">
           <button
+            type="button"
             className="flex items-center text-primary"
             onClick={() => router.back()}
           >

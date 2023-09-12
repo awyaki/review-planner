@@ -48,7 +48,7 @@ const BaseSelectButton: React.FC<BaseSelectButtonProps> = ({
     ? "flex items-center justify-between w-full px-5 py-2 rounded-md  bg-primary text-text-on-primary border border-primary"
     : "flex items-center justify-between w-full px-5 py-2 rounded-md  border-primary border";
   return (
-    <button className={variants} onClick={onClick}>
+    <button type="button" className={variants} onClick={onClick}>
       <div>{text}</div>
       {isSelected && <div className="text-xs">選択中</div>}
     </button>

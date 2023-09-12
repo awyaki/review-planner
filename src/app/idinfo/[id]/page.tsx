@@ -24,6 +24,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
       <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
         <header className="flex items-center justify-between mb-5">
           <button
+            type="button"
             className="flex items-center text-primary"
             onClick={() => router.back()}
           >
@@ -43,6 +44,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl">通知スケジュール</h2>
             <button
+              type="button"
               className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
               onClick={handleOpenSelectPresetSheet}
             >

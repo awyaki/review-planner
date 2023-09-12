@@ -52,12 +52,14 @@ const AddOneNotificationSheet: React.FC<Props> = ({
             <button
               className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
               onClick={onClose}
+              type="button"
             >
               キャンセル
             </button>
             <button
               className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
               onClick={handleAddNotification}
+              type="button"
             >
               作成
             </button>
@@ -74,6 +76,7 @@ const DayButton: React.FC<{ day: number; onClick: () => void }> = ({
 }) => {
   return (
     <button
+      type="button"
       className="w-full py-2 rounded-md bg-bg-primary text-primary"
       onClick={onClick}
     >

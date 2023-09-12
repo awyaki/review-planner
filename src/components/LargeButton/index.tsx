@@ -10,6 +10,7 @@ const LargeButton: FC<Props> = ({ text, onClick }) => {
     <button
       className="w-full py-4 text-text-on-bg-secondary bg-bg-secondary rounded-t-xl"
       onClick={onClick}
+      type="button"
     >
       {text}
     </button>

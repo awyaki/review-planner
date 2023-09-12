@@ -64,6 +64,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
       <article className="px-5 pt-5 bg-bg-primary text-text-on-bg-primary">
         <header className="flex items-center justify-between mb-5">
           <button
+            type="button"
             className="flex items-center text-primary"
             onClick={() => router.back()}
           >
@@ -99,6 +100,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
         </div>
         <div className="flex gap-3">
           <button
+            type="button"
             className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
             onClick={() => {
               router.push("/notifications/presets");
@@ -107,6 +109,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             キャンセル
           </button>
           <button
+            type="button"
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
             onClick={async () => await handleUpdatePreset(Number(id))}
           >

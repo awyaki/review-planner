@@ -26,6 +26,7 @@ const Page: NextPage = () => {
           <button
             className="flex items-center mb-2"
             onClick={() => router.back()}
+            type="button"
           >
             <AiOutlineLeft className="mr-1" />
             <span>戻る</span>
@@ -35,6 +36,7 @@ const Page: NextPage = () => {
         <ul className="mb-10 text-dark-gray">
           <li className="list-none rounded-t-lg bg-light-gray">
             <button
+              type="button"
               className="flex items-center justify-between w-full p-4"
               onClick={handleOpenThemeColorSheet}
             >
@@ -49,6 +51,7 @@ const Page: NextPage = () => {
           </li>
           <li className="flex justify-between p-4 list-none rounded-b-lg bg-gray">
             <button
+              type="button"
               className="flex items-center justify-between w-full py-1"
               onClick={handleOpenBaseSheet}
             >
