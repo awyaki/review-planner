@@ -53,6 +53,7 @@ const Page: NextPage = () => {
         <section className="px-5 pt-5">
           <header className="flex items-center justify-between mb-5">
             <button
+              type="button"
               className="flex items-center text-primary"
               onClick={() => router.back()}
             >
@@ -74,6 +75,7 @@ const Page: NextPage = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl">通知スケジュール</h2>
             <button
+              type="button"
               className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
               onClick={handleOpenSelectPresetSheet}
             >
@@ -101,6 +103,7 @@ const Page: NextPage = () => {
             />
           </div>
           <button
+            type="button"
             className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
             onClick={handlePublishId}
           >

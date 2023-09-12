@@ -26,7 +26,7 @@ const ThemeColorSheet: React.FC<Props> = ({ onClose }) => {
                     : "flex items-center"
                 }
               >
-                <button onClick={() => changeTheme(_themeName)}>
+                <button type="button" onClick={() => changeTheme(_themeName)}>
                   <CheckableThemeColorCircle
                     isChecked={isChecked}
                     background={themes[_themeName]["bg-primary"].code}

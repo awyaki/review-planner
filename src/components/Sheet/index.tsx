@@ -37,7 +37,11 @@ const Sheet: React.FC<Props> = ({ onClose, children, color = "normal" }) => {
         className={`${colorVariant[color]}`}
       >
         <div className="pt-5">
-          <button className="flex justify-center w-full mb-2" onClick={onClose}>
+          <button
+            className="flex justify-center w-full mb-2"
+            onClick={onClose}
+            type="button"
+          >
             <div>
               <span className="text-xs">閉じる</span>
               <svg width={36} height={20}>

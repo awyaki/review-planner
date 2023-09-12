@@ -42,12 +42,14 @@ export const SelectPresetSheet: React.FC<Props> = ({
         </ul>
         <div className="flex gap-3">
           <button
+            type="button"
             className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
             onClick={onClose}
           >
             キャンセル
           </button>
           <button
+            type="button"
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
             onClick={() => {}}
           >
@@ -74,7 +76,7 @@ const SelectPresetButton: React.FC<SelectPresetButtonProps> = ({
     ? "flex items-center justify-between w-full px-5 py-2 rounded-md  bg-bg-primary text-text-on-bg-primary border border-primary"
     : "flex items-center justify-between w-full px-5 py-2 rounded-md  border-bg-primary border";
   return (
-    <button className={variants} onClick={onClick}>
+    <button className={variants} onClick={onClick} type="button">
       <div>{text}</div>
       {isSelected && <div className="text-xs">選択中</div>}
     </button>

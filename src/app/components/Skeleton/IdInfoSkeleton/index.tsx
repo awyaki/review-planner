@@ -9,7 +9,10 @@ export const IdInfoSkeleton = () => {
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="w-1/12 px-8 py-3 mb-3 text-4xl rounded-md bg-text-on-bg-primary"></h2>
-            <button className="px-12 py-3 rounded-lg bg-primary text-text-on-primary"></button>
+            <button
+              type="button"
+              className="px-12 py-3 rounded-lg bg-primary text-text-on-primary"
+            ></button>
           </div>
           <ul className="mb-4">
             <li className="mb-5">

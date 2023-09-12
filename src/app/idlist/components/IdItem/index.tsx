@@ -40,6 +40,7 @@ type Props = {
 export const IdItem: FC<Props> = ({ id, color, onClick, rounded = "none" }) => {
   return (
     <button
+      type="button"
       className={`${variants[color][rounded]}`}
       onClick={() => onClick(id)}
     >

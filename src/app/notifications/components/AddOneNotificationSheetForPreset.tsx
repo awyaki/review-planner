@@ -34,12 +34,14 @@ export const AddOneNotificationSheetForPreset: React.FC<Props> = ({
           </div>
           <div className="flex gap-3">
             <button
+              type="button"
               className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
               onClick={onClose}
             >
               キャンセル
             </button>
             <button
+              type="button"
               className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
               onClick={handleAddNotification}
             >
