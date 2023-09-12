@@ -70,10 +70,12 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
         <div className="mb-10">
           {
             <List
-              data={nDaysAfters.map(({ id, n }) => ({
-                id,
-                text: String(n),
-              }))}
+              data={nDaysAfters
+                .sort((a, b) => (a.n > b.n ? 1 : -1))
+                .map(({ id, n }) => ({
+                  id,
+                  text: String(n),
+                }))}
               onDelete={handleDeleteNDaysAfter}
             />
           }
