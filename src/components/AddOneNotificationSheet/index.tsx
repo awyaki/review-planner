@@ -15,14 +15,17 @@ const AddOneNotificationSheet: React.FC<Props> = ({
   const [inputValue, setInputValue] = useState("");
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
   const nDaysAfterInput = useRef<HTMLInputElement>(null);
+  const dateInput = useRef<HTMLInputElement>(null);
 
   const handleAddNotification: MouseEventHandler<HTMLButtonElement> =
     useCallback(
       (e) => {
         e.preventDefault();
-        if (nDaysAfterInput.current) {
-          console.log(nDaysAfterInput.current);
-          if (nDaysAfterInput.current.reportValidity()) {
+        if (nDaysAfterInput.current && dateInput.current) {
+          if (
+            dateInput.current.reportValidity() &&
+            nDaysAfterInput.current.reportValidity()
+          ) {
             onAddNotification
               ? onAddNotification({
                   base: new Date(baseDate),
@@ -43,8 +46,10 @@ const AddOneNotificationSheet: React.FC<Props> = ({
           <div className="flex mb-5">
             <span>基準：</span>
             <input
+              ref={dateInput}
               className="px-1 mb-3 rounded-sm text-dark-gray"
               type="date"
+              required
               onChange={(e) => setBaseDate(e.target.value)}
               value={baseDate}
             />
