@@ -16,7 +16,7 @@ const OpenCloseTest: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <>
-      <button type="button" onClick={() => setIsOpen(true)} type="button">
+      <button type="button" onClick={() => setIsOpen(true)}>
         Click to Open the Sheet
       </button>
       <AnimatePresence>
