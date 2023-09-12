@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, MouseEventHandler, useRef } from "react";
 import { Sheet } from "@/components";
 import { NDaysAfterForClient } from "@/db";
 
@@ -14,21 +14,32 @@ const AddOneNotificationSheet: React.FC<Props> = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
+  const nDaysAfterInput = useRef<HTMLInputElement>(null);
 
-  const handleAddNotification = useCallback(() => {
-    onAddNotification
-      ? onAddNotification({
-          base: new Date(baseDate),
-          n: Number(inputValue),
-        })
-      : undefined;
-    onClose();
-  }, [baseDate, inputValue, onAddNotification, onClose]);
+  const handleAddNotification: MouseEventHandler<HTMLButtonElement> =
+    useCallback(
+      (e) => {
+        e.preventDefault();
+        if (nDaysAfterInput.current) {
+          console.log(nDaysAfterInput.current);
+          if (nDaysAfterInput.current.reportValidity()) {
+            onAddNotification
+              ? onAddNotification({
+                  base: new Date(baseDate),
+                  n: Number(inputValue),
+                })
+              : undefined;
+            onClose();
+          }
+        }
+      },
+      [baseDate, inputValue, onAddNotification, onClose, nDaysAfterInput]
+    );
 
   return (
     <Sheet onClose={onClose} color="reverse">
       <div className="flex flex-col justify-between">
-        <div className="px-5 pb-28">
+        <form className="px-5 pb-28">
           <div className="flex mb-5">
             <span>基準：</span>
             <input
@@ -40,9 +51,11 @@ const AddOneNotificationSheet: React.FC<Props> = ({
           </div>
           <div className="mb-8">
             <input
+              ref={nDaysAfterInput}
               className="w-24 mr-3 bg-light-gray text-dark-gray"
               type="number"
               min={1}
+              required
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
@@ -59,12 +72,11 @@ const AddOneNotificationSheet: React.FC<Props> = ({
             <button
               className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
               onClick={handleAddNotification}
-              type="button"
             >
               作成
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </Sheet>
   );
