@@ -7,7 +7,11 @@ import Link from "next/link";
 import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import { getOnePreset, type NDaysAfterForPresetForClient } from "@/db";
+import {
+  getOnePreset,
+  putOnePreset,
+  type NDaysAfterForPresetForClient,
+} from "@/db";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
@@ -36,6 +40,16 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const handleDeleteNDaysAfter = useCallback((id: number) => {
     setNDaysAfters((p) => p.filter((nDaysAfter) => nDaysAfter.id !== id));
   }, []);
+
+  const handleUpdatePreset = useCallback(
+    async (id: number) => {
+      console.log("handleUpdatePreset is clicked");
+      await putOnePreset({ id, name: inputValue, nDaysAfters });
+      mutate();
+      router.push("/notifications/presets");
+    },
+    [inputValue, nDaysAfters, mutate]
+  );
 
   const [render, handleOpen] =
     useAddOneNotificationSheetForPreset(handleAddNDaysAfter);
@@ -94,7 +108,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           </button>
           <button
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
-            onClick={() => {}}
+            onClick={async () => await handleUpdatePreset(Number(id))}
           >
             更新
           </button>
