@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, MouseEventHandler } from "react";
 import { useAddOneNotificationSheetForPreset } from "../hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
@@ -15,6 +15,8 @@ const Page: NextPage = () => {
     NDaysAfterForPresetForClient[]
   >([]);
 
+  const tilteInput = useRef<HTMLInputElement>(null);
+
   const handleAddNotification = useCallback((day: number) => {
     setNDaysAfters((cur) => {
       const maxId = cur.reduce((a, b) => Math.max(a, b.id), 0);
@@ -26,12 +28,17 @@ const Page: NextPage = () => {
     setNDaysAfters((cur) => cur.filter((n) => n.id !== id));
   }, []);
 
-  const handleCreatePreset = useCallback(
-    async (name: string, nDaysAfters: NDaysAfterForPresetForClient[]) => {
-      await createPreset(name, nDaysAfters);
-      router.push("/notifications/presets");
+  const handleCreatePreset: MouseEventHandler<HTMLButtonElement> = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (tilteInput.current) {
+        if (tilteInput.current.reportValidity()) {
+          await createPreset(inputValue, nDaysAfters);
+          router.push("/notifications/presets");
+        }
+      }
     },
-    [createPreset]
+    [createPreset, tilteInput, inputValue, nDaysAfters]
   );
   const [render, handleOpen] = useAddOneNotificationSheetForPreset(
     handleAddNotification
@@ -54,13 +61,18 @@ const Page: NextPage = () => {
             <SmallButton text="メニュー" />
           </Link>
         </header>
-        <input
-          type="text"
-          className="w-full px-3 py-2 mb-5 focus:outline-primary"
-          value={inputValue}
-          placeholder="タイトルを入力"
-          onChange={(e) => setInputValue(e.target.value)}
-        />
+        <form id="title_form">
+          <input
+            ref={tilteInput}
+            type="text"
+            required
+            maxLength={30}
+            className="w-full px-3 py-2 mb-5 focus:outline-primary"
+            value={inputValue}
+            placeholder="タイトルを入力"
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+        </form>
         <div className="mb-10">
           <List
             data={nDaysAfters.map(({ id, n }) => ({
@@ -82,9 +94,9 @@ const Page: NextPage = () => {
             キャンセル
           </button>
           <button
-            type="button"
+            form="title_form"
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
-            onClick={() => handleCreatePreset(inputValue, nDaysAfters)}
+            onClick={handleCreatePreset}
           >
             作成
           </button>
