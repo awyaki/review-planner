@@ -105,7 +105,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
                 .sort((a, b) => (a.n > b.n ? 1 : -1))
                 .map(({ id, n }) => ({
                   id,
-                  text: String(n),
+                  text: `${n}日後`,
                 }))}
               onDelete={handleDeleteNDaysAfter}
             />
