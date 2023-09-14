@@ -1,5 +1,11 @@
 "use client";
-import { useState, useCallback, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  MouseEventHandler,
+} from "react";
 import { useAddOneNotificationSheetForPreset } from "../../hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
@@ -17,6 +23,8 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const { id } = params;
   const searchParams = useSearchParams();
   const presetName = searchParams.get("name") ?? "";
+
+  const titleInput = useRef<HTMLInputElement>(null);
 
   const { data: preset, mutate } = useSWR(`/preset/${id}`, async () =>
     getOnePreset(Number(id))
@@ -41,14 +49,18 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     setNDaysAfters((p) => p.filter((nDaysAfter) => nDaysAfter.id !== id));
   }, []);
 
-  const handleUpdatePreset = useCallback(
-    async (id: number) => {
-      console.log("handleUpdatePreset is clicked");
-      await putOnePreset({ id, name: inputValue, nDaysAfters });
-      mutate();
-      router.push("/notifications/presets");
+  const handleUpdatePreset: MouseEventHandler<HTMLButtonElement> = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (titleInput.current) {
+        if (titleInput.current.reportValidity()) {
+          await putOnePreset({ id: Number(id), name: inputValue, nDaysAfters });
+          mutate();
+          router.push("/notifications/presets");
+        }
+      }
     },
-    [inputValue, nDaysAfters, mutate]
+    [inputValue, nDaysAfters, mutate, id, titleInput, router]
   );
 
   const [render, handleOpen] =
@@ -75,13 +87,17 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             <SmallButton text="メニュー" />
           </Link>
         </header>
-        <input
-          type="text"
-          className="w-full px-3 py-2 mb-5 focus:outline-primary"
-          value={inputValue}
-          placeholder="タイトルを入力"
-          onChange={(e) => setInputValue(e.target.value)}
-        />
+        <form id="title_form">
+          <input
+            ref={titleInput}
+            type="text"
+            required
+            className="w-full px-3 py-2 mb-5 focus:outline-primary"
+            value={inputValue}
+            placeholder="タイトルを入力"
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+        </form>
         <div className="mb-10">
           {
             <List
@@ -109,9 +125,9 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             キャンセル
           </button>
           <button
-            type="button"
+            form="title_form"
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
-            onClick={async () => await handleUpdatePreset(Number(id))}
+            onClick={handleUpdatePreset}
           >
             更新
           </button>
