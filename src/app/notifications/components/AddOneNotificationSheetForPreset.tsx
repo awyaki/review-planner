@@ -39,6 +39,7 @@ export const AddOneNotificationSheetForPreset: React.FC<Props> = ({
               ref={nDaysAfterInput}
               className="w-24 mr-3 bg-light-gray text-dark-gray"
               min={1}
+              max={365}
               required
               type="number"
               value={inputValue}
