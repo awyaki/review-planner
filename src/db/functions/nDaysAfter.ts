@@ -1,4 +1,4 @@
-import {db, NDaysAfter} from "../index";
+import { db, NDaysAfter } from "../index";
 
 export const createNdaysAfter = async (
   n: number,
@@ -6,7 +6,7 @@ export const createNdaysAfter = async (
   base: Date,
   done: boolean
 ): Promise<void> => {
-  await db.nDaysAfter.add({n, belongTo, base, done});
+  await db.nDaysAfter.add({ n, belongTo, base, done });
 };
 
 export const getAllNDaysAfters = async (): Promise<NDaysAfter[]> => {
@@ -33,4 +33,24 @@ export const getAllNDaysAftersOfId = async (
 
 export const deleteNDaysAfter = async (id: number) => {
   db.nDaysAfter.delete(id);
+};
+
+export const filterTodaysNDaysAfters = async (): Promise<NDaysAfter[]> => {
+  try {
+    const now = new Date();
+    const nDaysAfter = await db.nDaysAfter.toArray();
+    return nDaysAfter.filter(({ base, n }) => {
+      const time = new Date();
+      time.setMilliseconds(base.getMilliseconds() + n * 24 * 60 * 60 * 1000);
+      return isSameDate(now, time);
+    });
+  } catch (e) {
+    throw e;
+  }
+};
+
+const isSameDate = (date1: Date, date2: Date): boolean => {
+  const [y1, m1, d1] = [date1.getFullYear(), date1.getMonth(), date1.getDate()];
+  const [y2, m2, d2] = [date2.getFullYear(), date2.getMonth(), date2.getDate()];
+  return y1 == y2 && m1 == m2 && d1 == d2;
 };
