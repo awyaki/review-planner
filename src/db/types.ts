@@ -20,11 +20,6 @@ export type NDaysAfterForPreset = {
   belongTo: number;
 };
 
-export type TodayId = {
-  id: number; // not autoincrement
-  createdAt: Date;
-  done: boolean;
-};
 
 // data type for client side
 
