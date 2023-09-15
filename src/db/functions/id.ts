@@ -1,5 +1,5 @@
-import {parseIntoNumber} from "@/lib";
-import {db, NDaysAfterForClient} from "../index";
+import { parseIntoNumber } from "@/lib";
+import { db, NDaysAfterForClient } from "../index";
 
 export const createId = async (nDaysAfters: NDaysAfterForClient[]) => {
   try {
@@ -8,7 +8,11 @@ export const createId = async (nDaysAfters: NDaysAfterForClient[]) => {
       const id = parseIntoNumber(_id);
       if (id instanceof Error) throw id;
       await db.nDaysAfter.bulkAdd(
-        nDaysAfters.map(({id, ...rest}) => ({...rest, done: false, belongTo: id}))
+        nDaysAfters.map(({ id: _, ...rest }) => ({
+          ...rest,
+          done: false,
+          belongTo: id,
+        }))
       );
     });
   } catch (e) {
