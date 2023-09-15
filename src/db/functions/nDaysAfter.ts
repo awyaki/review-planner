@@ -54,3 +54,15 @@ const isSameDate = (date1: Date, date2: Date): boolean => {
   const [y2, m2, d2] = [date2.getFullYear(), date2.getMonth(), date2.getDate()];
   return y1 == y2 && m1 == m2 && d1 == d2;
 };
+
+export const toggleDoneOfNDaysAfter = async (id: number) => {
+  try {
+    const nDaysAfter = await db.nDaysAfter.get(id);
+    if (!nDaysAfter)
+      throw new Error("Error: Can't get nDaysAfter for given id.");
+    const { done } = nDaysAfter;
+    await db.nDaysAfter.update(id, { done: !done });
+  } catch (e) {
+    throw e;
+  }
+};
