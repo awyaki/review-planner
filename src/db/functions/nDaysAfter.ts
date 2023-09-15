@@ -1,11 +1,12 @@
-import { db, NDaysAfter } from "../index";
+import {db, NDaysAfter} from "../index";
 
 export const createNdaysAfter = async (
   n: number,
   belongTo: number,
-  base: Date
+  base: Date,
+  done: boolean
 ): Promise<void> => {
-  await db.nDaysAfter.add({ n, belongTo, base });
+  await db.nDaysAfter.add({n, belongTo, base, done});
 };
 
 export const getAllNDaysAfters = async (): Promise<NDaysAfter[]> => {

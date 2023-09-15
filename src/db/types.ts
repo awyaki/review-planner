@@ -7,6 +7,7 @@ export type NDaysAfter = {
   belongTo: number;
   n: number;
   base: Date;
+  done: boolean;
 };
 
 export type Preset = {
@@ -23,7 +24,7 @@ export type NDaysAfterForPreset = {
 
 // data type for client side
 
-export type NDaysAfterForClient = Required<Omit<NDaysAfter, "belongTo">>;
+export type NDaysAfterForClient = Required<Omit<NDaysAfter, "belongTo" | "done">>;
 
 export type NDaysAfterForPresetForClient = Required<
   Omit<NDaysAfterForPreset, "belongTo">
