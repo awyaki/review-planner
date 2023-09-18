@@ -16,17 +16,18 @@ const Page = () => {
   );
 
   const nDaysAftersStub: NDaysAfter[] = [
-    { base: new Date(), belongTo: 1, done: true, n: 9 },
-    { base: new Date(), belongTo: 2, done: false, n: 8 },
-    { base: new Date(), belongTo: 3, done: true, n: 6 },
-    { base: new Date(), belongTo: 4, done: false, n: 3 },
-    { base: new Date(), belongTo: 5, done: true, n: 2 },
-    { base: new Date(), belongTo: 6, done: false, n: 1 },
+    { id: 1, base: new Date(), belongTo: 1, done: true, n: 9 },
+    { id: 2, base: new Date(), belongTo: 2, done: false, n: 8 },
+    { id: 3, base: new Date(), belongTo: 3, done: true, n: 6 },
+    { id: 4, base: new Date(), belongTo: 4, done: false, n: 3 },
+    { id: 5, base: new Date(), belongTo: 5, done: true, n: 2 },
+    { id: 6, base: new Date(), belongTo: 6, done: false, n: 1 },
   ];
 
   const ids =
     // nDaysAfters?.map(({ belongTo, done }) => ({ belongTo, done })) ?? [];
-    nDaysAftersStub.map(({ belongTo, done }) => ({ belongTo, done })) ?? [];
+    nDaysAftersStub.map(({ id, belongTo, done }) => ({ id, belongTo, done })) ??
+    [];
 
   return (
     <>
@@ -46,8 +47,8 @@ const Page = () => {
         </header>
         <h2 className="mb-8 text-xl">今日復習すべきID</h2>
         <ul className="flex flex-wrap gap-2">
-          {ids.map(({ belongTo, done }) => (
-            <IdItem key={belongTo} belongTo={belongTo} done={done} />
+          {ids.map(({ id, belongTo, done }) => (
+            <IdItem key={id} belongTo={belongTo} done={done} />
           ))}
         </ul>
       </article>
