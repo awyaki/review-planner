@@ -1,33 +1,34 @@
 "use client";
+import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { filterTodaysNDaysAfters } from "@/db";
 import useSWR from "swr";
 import { AiOutlineLeft } from "react-icons/ai";
 import { SmallButton } from "@/components";
-import { NDaysAfter } from "@/db";
+import { toggleDoneOfNDaysAfter } from "@/db";
 import { IdItem } from "./components";
+import { isNotOptionalOnId } from "@/lib";
 
 const Page = () => {
   const router = useRouter();
-  const { data: nDaysAfters } = useSWR(
+  const { data: nDaysAfters, mutate } = useSWR(
     "/filterNDaysAfters",
     filterTodaysNDaysAfters
   );
 
-  const nDaysAftersStub: NDaysAfter[] = [
-    { id: 1, base: new Date(), belongTo: 1, done: true, n: 9 },
-    { id: 2, base: new Date(), belongTo: 2, done: false, n: 8 },
-    { id: 3, base: new Date(), belongTo: 3, done: true, n: 6 },
-    { id: 4, base: new Date(), belongTo: 4, done: false, n: 3 },
-    { id: 5, base: new Date(), belongTo: 5, done: true, n: 2 },
-    { id: 6, base: new Date(), belongTo: 6, done: false, n: 1 },
-  ];
+  const handleToggleDone = useCallback(
+    async (id: number) => {
+      await toggleDoneOfNDaysAfter(id);
+      mutate();
+    },
+    [toggleDoneOfNDaysAfter, mutate]
+  );
 
   const ids =
-    // nDaysAfters?.map(({ belongTo, done }) => ({ belongTo, done })) ?? [];
-    nDaysAftersStub.map(({ id, belongTo, done }) => ({ id, belongTo, done })) ??
-    [];
+    nDaysAfters
+      ?.map(({ id, belongTo, done }) => ({ id, belongTo, done }))
+      .filter(isNotOptionalOnId) ?? [];
 
   return (
     <>
@@ -48,7 +49,12 @@ const Page = () => {
         <h2 className="mb-8 text-xl">今日復習すべきID</h2>
         <ul className="flex flex-wrap gap-2">
           {ids.map(({ id, belongTo, done }) => (
-            <IdItem key={id} belongTo={belongTo} done={done} />
+            <IdItem
+              key={id}
+              belongTo={belongTo}
+              done={done}
+              onClick={() => handleToggleDone(id)}
+            />
           ))}
         </ul>
       </article>
