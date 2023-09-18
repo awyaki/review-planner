@@ -1,6 +1,7 @@
 type Props = {
   belongTo: number;
   done: boolean;
+  onClick: () => void;
 };
 
 const styleVariant = (done: boolean) =>
@@ -8,10 +9,12 @@ const styleVariant = (done: boolean) =>
     ? "flex rounded-sm border-2 w-11 h-11 justify-center items-center border-primary text-text-on-primary bg-primary"
     : "flex rounded-sm border-2 w-11 h-11 justify-center items-center border-primary";
 
-export const IdItem: React.FC<Props> = ({ belongTo, done }) => {
+export const IdItem: React.FC<Props> = ({ belongTo, done, onClick }) => {
   return (
     <li className={styleVariant(done)}>
-      <button className="w-full h-full align-middle">{belongTo}</button>
+      <button onClick={onClick} className="w-full h-full align-middle">
+        {belongTo}
+      </button>
     </li>
   );
 };
