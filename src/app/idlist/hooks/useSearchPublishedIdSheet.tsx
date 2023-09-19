@@ -2,7 +2,7 @@ import { useState } from "react";
 import { SearchPublishedIdSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
 
-export const useAddOneNotificationSheet = (
+export const useSearchPublishIdSheet = (
   ids: number[]
 ): [() => React.ReactNode, () => void] => {
   const [isOpen, setIsOpen] = useState(false);

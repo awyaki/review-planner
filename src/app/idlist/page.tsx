@@ -5,11 +5,11 @@ import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
 import { SmallButton } from "@/components";
 import { IdItem } from "./components";
-import { useAddOneNotificationSheet } from "./hooks";
+import { useSearchPublishIdSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [render, handleOpen] = useAddOneNotificationSheet([]);
+  const [render, handleOpen] = useSearchPublishIdSheet([]);
   const reacentlyIds: number[] = [];
   return (
     <>
