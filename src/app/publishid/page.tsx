@@ -9,7 +9,12 @@ import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 import { NextId } from "./components";
-import { getCurrentId, createId, NDaysAfterForClient } from "@/db";
+import {
+  getCurrentId,
+  createId,
+  NDaysAfterForClient,
+  getAllNDaysAftersForPresetOfPresetId,
+} from "@/db";
 import useSWR from "swr";
 
 const Page: NextPage = () => {
@@ -35,8 +40,21 @@ const Page: NextPage = () => {
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet(handleAddNDaysAfter);
 
+  const handleAddNDaysAfterBasedOnPreset = useCallback(
+    async (id: number, base: Date) => {
+      const nDaysAfters = await getAllNDaysAftersForPresetOfPresetId(id);
+      setNDaysAfters((p) => {
+        const maxId = p.reduce((a, b) => Math.max(a, b.id), 0);
+        return p.concat(
+          nDaysAfters.map(({ n }, i) => ({ id: maxId + 1 + i, n, base }))
+        );
+      });
+    },
+    [getAllNDaysAftersForPresetOfPresetId]
+  );
+
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet();
+    useSelectPresetSheet(handleAddNDaysAfterBasedOnPreset);
 
   const handlePublishId = useCallback(async () => {
     await createId(nDaysAfters);
