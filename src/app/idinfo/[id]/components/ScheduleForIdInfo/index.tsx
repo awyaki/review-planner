@@ -1,7 +1,9 @@
 import { List } from "@/components";
 import { dateToString } from "@/lib";
+import { NDaysAfterForClient } from "@/db";
 
 type Props = {
+  nDaysAfters: NDaysAfterForClient[];
   onDelete?: (id: number) => void;
 };
 
