@@ -1,6 +1,8 @@
 "use client";
 import { useState, useCallback, useMemo } from "react";
 import { Sheet } from "@/components";
+import useSWR from "swr";
+import { getAllPresets } from "@/db";
 
 type Props = {
   onClose: () => void;
@@ -13,7 +15,7 @@ export const SelectPresetSheet: React.FC<Props> = ({
 }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
-  const presets: { id: number; name: string }[] = [];
+  const { data: presets } = useSWR("/presets", getAllPresets);
   return (
     <Sheet color="reverse" onClose={onClose}>
       <div className="px-5 pb-5">
