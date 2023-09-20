@@ -13,6 +13,7 @@ import {
   NDaysAfter,
   NDaysAfterForClient,
   createNdaysAfter,
+  deleteNDaysAfter,
 } from "@/db";
 import { isNotOptionalOnId } from "@/lib";
 
@@ -35,6 +36,14 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
       mutate();
     },
     [createNdaysAfter, mutate, params]
+  );
+
+  const handleDeleteNDaysAfter = useCallback(
+    async (id: number) => {
+      await deleteNDaysAfter(id);
+      mutate();
+    },
+    [deleteNDaysAfter]
   );
 
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
@@ -73,7 +82,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           </div>
           <ScheduleForIdInfo
             nDaysAfters={nDaysAfters ?? []}
-            onDelete={() => {}}
+            onDelete={handleDeleteNDaysAfter}
           />
           <SmallButton
             text="通知を追加"
