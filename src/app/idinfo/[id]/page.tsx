@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -8,13 +8,19 @@ import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import useSWR from "swr";
-import { getAllNDaysAftersOfId, NDaysAfter } from "@/db";
+import {
+  getAllNDaysAftersOfId,
+  NDaysAfter,
+  NDaysAfterForClient,
+  createNdaysAfter,
+} from "@/db";
 import { isNotOptionalOnId } from "@/lib";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
-  const { data: _nDaysAfters } = useSWR(`/nDaysAfters/${params.id}`, async () =>
-    getAllNDaysAftersOfId(Number(params.id))
+  const { data: _nDaysAfters, mutate } = useSWR(
+    `/nDaysAfters/${params.id}`,
+    async () => getAllNDaysAftersOfId(Number(params.id))
   );
 
   const nDaysAfters: Required<NDaysAfter>[] = useMemo(
@@ -22,8 +28,17 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     [_nDaysAfters]
   );
 
+  const handleAddNDayAfter = useCallback(
+    async (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
+      const { n, base } = nDaysAfter;
+      await createNdaysAfter(n, Number(params.id), base, false);
+      mutate();
+    },
+    [createNdaysAfter, mutate, params]
+  );
+
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet();
+    useAddOneNotificationSheet(handleAddNDayAfter);
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
   return (
