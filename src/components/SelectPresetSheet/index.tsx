@@ -6,7 +6,7 @@ import { getAllPresets } from "@/db";
 
 type Props = {
   onClose: () => void;
-  onAddNDaysAftersBasedOnPreset?: () => Promise<void> | void;
+  onAddNDaysAftersBasedOnPreset: (id: number) => Promise<void> | void;
 };
 
 export const SelectPresetSheet: React.FC<Props> = ({
@@ -16,6 +16,12 @@ export const SelectPresetSheet: React.FC<Props> = ({
   const [selected, setSelected] = useState<number | null>(null);
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));
   const { data: presets } = useSWR("/presets", getAllPresets);
+
+  const handleAddNDaysAfterBasedOnPreset = useCallback(async () => {
+    if (!selected) return;
+    await onAddNDaysAftersBasedOnPreset(selected);
+    onClose();
+  }, [onAddNDaysAftersBasedOnPreset]);
   return (
     <Sheet color="reverse" onClose={onClose}>
       <div className="px-5 pb-5">
@@ -53,7 +59,7 @@ export const SelectPresetSheet: React.FC<Props> = ({
           <button
             type="button"
             className="w-1/3 px-2 py-2 rounded-lg bg-bg-primary text-primary"
-            onClick={onAddNDaysAftersBasedOnPreset}
+            onClick={handleAddNDaysAfterBasedOnPreset}
           >
             確定
           </button>
