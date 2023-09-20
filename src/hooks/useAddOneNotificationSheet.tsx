@@ -4,7 +4,9 @@ import { AnimatePresence } from "framer-motion";
 import { NDaysAfterForClient } from "@/db";
 
 export const useAddOneNotificationSheet = (
-  onAddNotification?: (nDaysAfter: Omit<NDaysAfterForClient, "id">) => void
+  onAddNotification?: (
+    nDaysAfter: Omit<NDaysAfterForClient, "id">
+  ) => void | Promise<void>
 ): [() => React.ReactNode, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 
