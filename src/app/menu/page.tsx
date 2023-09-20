@@ -8,17 +8,28 @@ const Page = () => {
       <Header />
       <h1 className="mb-4 text-xl">メニュー</h1>
       <ul className="mb-10">
+        <Link href="/">
+          <MenuItem
+            text="今日復習するIDを見る"
+            rounded="top"
+            color="light-gray"
+          />
+        </Link>
         <Link href="/publishid">
-          <MenuItem text="IDを発行する" rounded="top" color="light-gray" />
+          <MenuItem text="IDを発行する" color="gray" />
         </Link>
         <Link href="/idlist">
-          <MenuItem text="発行済みのIDを見る" rounded="none" color="gray" />
+          <MenuItem
+            text="発行済みのIDを見る"
+            rounded="none"
+            color="light-gray"
+          />
         </Link>
         <Link href="notifications/presets">
           <MenuItem
             text="通知スケジュールのプリセットを作成する"
             rounded="bottom"
-            color="light-gray"
+            color="gray"
           />
         </Link>
       </ul>
