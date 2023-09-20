@@ -3,7 +3,7 @@ import { SelectPresetSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
 
 export const useSelectPresetSheet = (
-  onAddNDaysAftersBasedOnPreset?: () => Promise<void>
+  onAddNDaysAftersBasedOnPreset: (id: number) => Promise<void> | void
 ): [() => JSX.Element, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 

@@ -19,5 +19,10 @@ export default meta;
 type Story = StoryObj<typeof SelectPresetSheet>;
 
 export const Primary: Story = {
-  render: () => <SelectPresetSheet onClose={() => {}} />,
+  render: () => (
+    <SelectPresetSheet
+      onAddNDaysAftersBasedOnPreset={() => {}}
+      onClose={() => {}}
+    />
+  ),
 };

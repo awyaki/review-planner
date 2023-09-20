@@ -49,7 +49,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet(handleAddNDayAfter);
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet();
+    useSelectPresetSheet(() => {});
   return (
     <>
       {renderAddOneNotificationSheet()}
