@@ -26,16 +26,11 @@ export const ScheduleForIdInfo: React.FC<Props> = ({
             <li className="mb-5" key={base.toString()}>
               <div className="mb-2">{`基準：${dateToString(base)}`}</div>
               <List
-                data={days.map(({ id, n }) => {
-                  const date = new Date(base);
-                  date.setDate(base.getDate() + n);
-                  const now = new Date();
-                  return {
-                    id,
-                    text: `${n.toString()}日後`,
-                    isCompleted: now > date,
-                  };
-                })}
+                data={days.map(({ id, n, done }) => ({
+                  id,
+                  text: `${n.toString()}日後`,
+                  isCompleted: done,
+                }))}
                 onDelete={onDelete}
               />
             </li>
