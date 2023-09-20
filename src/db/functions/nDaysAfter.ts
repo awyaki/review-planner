@@ -9,6 +9,19 @@ export const createNdaysAfter = async (
   await db.nDaysAfter.add({ n, belongTo, base, done });
 };
 
+export const createNDaysAfters = async (
+  nDaysAfters: Omit<NDaysAfter, "id">[]
+): Promise<void> => {
+  await db.nDaysAfter.bulkAdd(
+    nDaysAfters.map(({ base, n, belongTo, done }) => ({
+      n,
+      base,
+      belongTo,
+      done,
+    }))
+  );
+};
+
 export const getAllNDaysAfters = async (): Promise<NDaysAfter[]> => {
   const res = await db.nDaysAfter.toArray();
   return res;
