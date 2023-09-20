@@ -46,7 +46,7 @@ const Page = () => {
             <SmallButton text="メニュー" />
           </Link>
         </header>
-        <h2 className="mb-8 text-xl">今日復習すべきID</h2>
+        <h2 className="mb-8 text-xl">今日復習するID</h2>
         <ul className="flex flex-wrap gap-2">
           {ids.map(({ id, belongTo, done }) => (
             <IdItem
