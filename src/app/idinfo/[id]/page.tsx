@@ -14,6 +14,8 @@ import {
   NDaysAfterForClient,
   createNdaysAfter,
   deleteNDaysAfter,
+  createNDaysAfters,
+  getAllNDaysAftersForPresetOfPresetId,
 } from "@/db";
 import { isNotOptionalOnId } from "@/lib";
 
@@ -46,10 +48,26 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     [deleteNDaysAfter]
   );
 
+  const handleAddNDaysAfterBasedOnPreset = useCallback(
+    async (id: number, base: Date) => {
+      const nDaysAfter = await getAllNDaysAftersForPresetOfPresetId(id);
+      await createNDaysAfters(
+        nDaysAfter.map(({ n }) => ({
+          n,
+          base,
+          belongTo: Number(params.id),
+          done: false,
+        }))
+      );
+      mutate();
+    },
+    [params, getAllNDaysAftersForPresetOfPresetId, createNDaysAfters, mutate]
+  );
+
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
     useAddOneNotificationSheet(handleAddNDayAfter);
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet(() => {});
+    useSelectPresetSheet(handleAddNDaysAfterBasedOnPreset);
   return (
     <>
       {renderAddOneNotificationSheet()}
