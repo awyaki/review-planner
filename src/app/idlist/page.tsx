@@ -6,11 +6,21 @@ import Link from "next/link";
 import { SmallButton } from "@/components";
 import { IdItem } from "./components";
 import { useSearchPublishIdSheet } from "./hooks";
+import { getAllIds } from "@/db";
+import useSWR from "swr";
+import { isNotNullOrUndefined } from "@/lib";
 
 const Page: NextPage = () => {
   const router = useRouter();
-  const [render, handleOpen] = useSearchPublishIdSheet([]);
-  const reacentlyIds: number[] = [];
+  const { data: ids } = useSWR("/ids", getAllIds);
+  const reacentlyIds =
+    ids
+      ?.map(({ id }) => id)
+      .filter(isNotNullOrUndefined)
+      .slice(-5) ?? [];
+  const [render, handleOpen] = useSearchPublishIdSheet(
+    ids?.map(({ id }) => id).filter(isNotNullOrUndefined) ?? []
+  );
   return (
     <>
       {render()}
