@@ -6,12 +6,12 @@ import { getAllPresets } from "@/db";
 
 type Props = {
   onClose: () => void;
-  onAddPreset?: () => Promise<void>;
+  onAddNDaysAftersBasedOnPreset?: () => Promise<void> | void;
 };
 
 export const SelectPresetSheet: React.FC<Props> = ({
   onClose,
-  onAddPreset,
+  onAddNDaysAftersBasedOnPreset,
 }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const [baseDate, setBaseDate] = useState(getYearMonthDay(new Date()));

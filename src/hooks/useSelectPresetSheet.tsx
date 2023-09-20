@@ -3,7 +3,7 @@ import { SelectPresetSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
 
 export const useSelectPresetSheet = (
-  onAddPreset?: () => Promise<void>
+  onAddNDaysAftersBasedOnPreset?: () => Promise<void>
 ): [() => JSX.Element, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,7 +18,10 @@ export const useSelectPresetSheet = (
   const render = () => (
     <AnimatePresence>
       {isOpen && (
-        <SelectPresetSheet onClose={handleClose} onAddPreset={onAddPreset} />
+        <SelectPresetSheet
+          onClose={handleClose}
+          onAddNDaysAftersBasedOnPreset={onAddNDaysAftersBasedOnPreset}
+        />
       )}
     </AnimatePresence>
   );
