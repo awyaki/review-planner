@@ -6,7 +6,10 @@ import { getAllPresets } from "@/db";
 
 type Props = {
   onClose: () => void;
-  onAddNDaysAftersBasedOnPreset: (id: number) => Promise<void> | void;
+  onAddNDaysAftersBasedOnPreset: (
+    id: number,
+    base: Date
+  ) => Promise<void> | void;
 };
 
 export const SelectPresetSheet: React.FC<Props> = ({
@@ -19,7 +22,7 @@ export const SelectPresetSheet: React.FC<Props> = ({
 
   const handleAddNDaysAfterBasedOnPreset = useCallback(async () => {
     if (!selected) return;
-    await onAddNDaysAftersBasedOnPreset(selected);
+    await onAddNDaysAftersBasedOnPreset(selected, new Date(baseDate));
     onClose();
   }, [onAddNDaysAftersBasedOnPreset]);
   return (
