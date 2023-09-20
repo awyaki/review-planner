@@ -1,5 +1,4 @@
 "use client";
-import { useContext } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
@@ -7,7 +6,6 @@ import Link from "next/link";
 import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
-import { BaseContext } from "@/app/providers";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const router = useRouter();
@@ -16,7 +14,6 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     useAddOneNotificationSheet();
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet();
-  const { base } = useContext(BaseContext);
   return (
     <>
       {renderAddOneNotificationSheet()}
@@ -35,11 +32,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             <SmallButton text="メニュー" />
           </Link>
         </header>
-        <h1 className="mb-3 text-4xl">
-          {base === "decimal"
-            ? params.id
-            : Number(params).toString(16).toUpperCase()}
-        </h1>
+        <h1 className="mb-3 text-4xl">{params.id}</h1>
         <section>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl">通知スケジュール</h2>
