@@ -1,7 +1,7 @@
 "use client";
-import {useState, useCallback, MouseEventHandler, useRef} from "react";
-import {Sheet} from "@/components";
-import {NDaysAfterForClient} from "@/db";
+import { useState, useCallback, MouseEventHandler, useRef } from "react";
+import { Sheet } from "@/components";
+import { NDaysAfterForClient } from "@/db";
 
 type Props = {
   onClose: () => void;
@@ -28,9 +28,9 @@ const AddOneNotificationSheet: React.FC<Props> = ({
           ) {
             onAddNotification
               ? onAddNotification({
-                base: new Date(baseDate),
-                n: Number(inputValue),
-              })
+                  base: new Date(baseDate),
+                  n: Number(inputValue),
+                })
               : undefined;
             onClose();
           }
@@ -44,8 +44,9 @@ const AddOneNotificationSheet: React.FC<Props> = ({
       <div className="flex flex-col justify-between">
         <form className="px-5 pb-28">
           <div className="flex mb-5">
-            <span>基準：</span>
+            <label htmlFor="base">基準：</label>
             <input
+              id="base"
               ref={dateInput}
               className="px-1 mb-3 rounded-sm text-dark-gray"
               type="date"
@@ -88,7 +89,7 @@ const AddOneNotificationSheet: React.FC<Props> = ({
   );
 };
 
-const DayButton: React.FC<{day: number; onClick: () => void}> = ({
+const DayButton: React.FC<{ day: number; onClick: () => void }> = ({
   day,
   onClick,
 }) => {
@@ -103,7 +104,7 @@ const DayButton: React.FC<{day: number; onClick: () => void}> = ({
   );
 };
 
-export {AddOneNotificationSheet};
+export { AddOneNotificationSheet };
 
 const getYearMonthDay = (date: Date): string => {
   const y = `${date.getFullYear()}`;

@@ -30,8 +30,9 @@ export const SelectPresetSheet: React.FC<Props> = ({
       <div className="px-5 pb-5">
         <h2 className="mb-5 text-lg">通知プリセットを選択</h2>
         <div className="flex">
-          <span>基準：</span>
+          <label htmlFor="base">基準：</label>
           <input
+            id="base"
             className="px-1 mb-3 rounded-sm text-dark-gray"
             type="date"
             onChange={(e) => setBaseDate(e.target.value)}
