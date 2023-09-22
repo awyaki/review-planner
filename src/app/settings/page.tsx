@@ -4,19 +4,16 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
-import { ThemeColorContext, AuthContext } from "@/app/providers";
-import { useAccountSheet, useThemeColorSheet } from "./hooks";
+import { ThemeColorContext } from "@/app/providers";
+import { useThemeColorSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const { theme } = useContext(ThemeColorContext);
-  const user = useContext(AuthContext);
-  const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet(user);
   const [renderThemeColorSheet, handleOpenThemeColorSheet] =
     useThemeColorSheet();
   return (
     <>
-      {renderAccountSheet()}
       {renderThemeColorSheet()}
       <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
         <header className="pt-2 pb-6">
