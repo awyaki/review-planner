@@ -54,7 +54,7 @@ export const filterTodaysNDaysAfters = async (): Promise<NDaysAfter[]> => {
     const nDaysAfter = await db.nDaysAfter.toArray();
     return nDaysAfter.filter(({ base, n }) => {
       const time = new Date();
-      time.setMilliseconds(base.getMilliseconds() + n * 24 * 60 * 60 * 1000);
+      time.setTime(base.getTime() + n * 24 * 60 * 60 * 1000);
       return isSameDate(now, time);
     });
   } catch (e) {
