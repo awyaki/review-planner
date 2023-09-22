@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import IdList from "./page";
-import {
-  ThemeColorContextProvider,
-  BaseContextProvider,
-} from "@/app/providers";
+import { ThemeColorContextProvider } from "@/app/providers";
 
 const meta: Meta<typeof IdList> = {
   title: "IdList",
@@ -12,9 +9,7 @@ const meta: Meta<typeof IdList> = {
     (Story) => {
       return (
         <ThemeColorContextProvider>
-          <BaseContextProvider>
-            <Story />
-          </BaseContextProvider>
+          <Story />
         </ThemeColorContextProvider>
       );
     },

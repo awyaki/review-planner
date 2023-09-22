@@ -4,23 +4,20 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 import { AiOutlineLeft } from "react-icons/ai";
 import { ThemeColorCircle } from "./components";
-import { ThemeColorContext, BaseContext, AuthContext } from "@/app/providers";
-import { useAccountSheet, useThemeColorSheet, useBaseSheet } from "./hooks";
+import { ThemeColorContext, AuthContext } from "@/app/providers";
+import { useAccountSheet, useThemeColorSheet } from "./hooks";
 
 const Page: NextPage = () => {
   const router = useRouter();
   const { theme } = useContext(ThemeColorContext);
-  const { base } = useContext(BaseContext);
   const user = useContext(AuthContext);
   const [renderAccountSheet, handleOpenAccountSheet] = useAccountSheet(user);
   const [renderThemeColorSheet, handleOpenThemeColorSheet] =
     useThemeColorSheet();
-  const [renderBaseSheet, handleOpenBaseSheet] = useBaseSheet();
   return (
     <>
       {renderAccountSheet()}
       {renderThemeColorSheet()}
-      {renderBaseSheet()}
       <article className="h-screen p-5 bg-bg-secondary text-text-on-bg-secondary">
         <header className="pt-2 pb-6">
           <button
@@ -34,7 +31,7 @@ const Page: NextPage = () => {
         </header>
         <h1 className="mb-4 text-xl">設定</h1>
         <ul className="mb-10 text-dark-gray">
-          <li className="list-none rounded-t-lg bg-light-gray">
+          <li className="list-none rounded-lg bg-light-gray">
             <button
               type="button"
               className="flex items-center justify-between w-full p-4"
@@ -47,16 +44,6 @@ const Page: NextPage = () => {
                   background={theme["bg-primary"].code}
                 />
               </span>
-            </button>
-          </li>
-          <li className="flex justify-between p-4 list-none rounded-b-lg bg-gray">
-            <button
-              type="button"
-              className="flex items-center justify-between w-full py-1"
-              onClick={handleOpenBaseSheet}
-            >
-              <span>IDの表示方法</span>
-              <span>{base === "decimal" ? "十進法" : "十六進法"}</span>
             </button>
           </li>
         </ul>

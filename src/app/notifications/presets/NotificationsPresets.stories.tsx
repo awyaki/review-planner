@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import NotificationsPresets from "./page";
-import {
-  ThemeColorContextProvider,
-  BaseContextProvider,
-} from "@/app/providers";
+import { ThemeColorContextProvider } from "@/app/providers";
 
 const meta: Meta<typeof NotificationsPresets> = {
   title: "NotificationsPresets",
@@ -12,9 +9,7 @@ const meta: Meta<typeof NotificationsPresets> = {
     (Story) => {
       return (
         <ThemeColorContextProvider>
-          <BaseContextProvider>
-            <Story />
-          </BaseContextProvider>
+          <Story />
         </ThemeColorContextProvider>
       );
     },

@@ -1,9 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import PublishId from "./page";
-import {
-  ThemeColorContextProvider,
-  BaseContextProvider,
-} from "@/app/providers";
+import { ThemeColorContextProvider } from "@/app/providers";
 
 const meta: Meta<typeof PublishId> = {
   title: "PublishId",
@@ -12,9 +9,7 @@ const meta: Meta<typeof PublishId> = {
     (Story) => {
       return (
         <ThemeColorContextProvider>
-          <BaseContextProvider>
-            <Story />
-          </BaseContextProvider>
+          <Story />
         </ThemeColorContextProvider>
       );
     },
