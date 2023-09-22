@@ -8,7 +8,6 @@ import { Schedule, SmallButton } from "@/components";
 import { EmptyScheduleItem } from "./components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
-import { NextId } from "./components";
 import {
   getCurrentId,
   createId,
@@ -88,7 +87,7 @@ const Page: NextPage = () => {
             <>
               <div className="mb-8">
                 <span className="block mb-1 text-sm">次のID</span>
-                <NextId nextId={currentId ? currentId + 1 : 1} />
+                <div className="text-4xl">{currentId ? currentId + 1 : 1}</div>
               </div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl">通知スケジュール</h2>
