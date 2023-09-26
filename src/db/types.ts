@@ -2,6 +2,11 @@ export type Id = {
   id?: number;
 };
 
+export type Place = {
+  id?: number;
+  name: string;
+};
+
 export type NDaysAfter = {
   id?: number;
   belongTo: number;
@@ -21,10 +26,11 @@ export type NDaysAfterForPreset = {
   belongTo: number;
 };
 
-
 // data type for client side
 
-export type NDaysAfterForClient = Required<Omit<NDaysAfter, "belongTo" | "done">>;
+export type NDaysAfterForClient = Required<
+  Omit<NDaysAfter, "belongTo" | "done">
+>;
 
 export type NDaysAfterForPresetForClient = Required<
   Omit<NDaysAfterForPreset, "belongTo">
