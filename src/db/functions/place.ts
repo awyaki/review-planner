@@ -1,6 +1,14 @@
 import { db, Place } from "@/db";
 import { isNotOptionalOnId } from "@/lib";
 
+export const createPlace = async (name: string) => {
+  try {
+    await db.place.add({ name });
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const getAllPlaces = async (): Promise<Required<Place>[]> => {
   try {
     const allPlaces = (await db.place.toArray()).filter(isNotOptionalOnId);
