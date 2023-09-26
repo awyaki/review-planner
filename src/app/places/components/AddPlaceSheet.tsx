@@ -1,18 +1,23 @@
 "use cient";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Sheet } from "@/components";
+import { createPlace } from "@/db";
 
 type Props = {
   onClose: () => void;
-  onSubmit: () => void | Promise<void>;
 };
 
-export const AddPlaceSheet: React.FC<Props> = ({ onClose, onSubmit }) => {
+export const AddPlaceSheet: React.FC<Props> = ({ onClose }) => {
   const [newPlaceName, setNewPlaceName] = useState("");
+
+  const handleCreatePlace = useCallback(async () => {
+    await createPlace(newPlaceName);
+  }, [newPlaceName]);
+
   return (
     <Sheet onClose={onClose} color="reverse">
       <div className="px-5 pb-5">
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleCreatePlace}>
           <label htmlFor="new_place" className="block text-xl mb-3">
             新しい記録場所
           </label>

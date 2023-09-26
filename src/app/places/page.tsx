@@ -6,7 +6,7 @@ import { useAddPlaceSheet } from "./hooks";
 import { PlacesList } from "./components";
 
 const Page: NextPage = () => {
-  const [render, handleOpen] = useAddPlaceSheet(() => {});
+  const [render, handleOpen] = useAddPlaceSheet();
   return (
     <>
       {render()}
