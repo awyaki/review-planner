@@ -1,6 +1,6 @@
-import Dexie, {Table} from "dexie";
+import Dexie, { Table } from "dexie";
 
-import {Id, Preset, NDaysAfter, NDaysAfterForPreset} from "./types";
+import { Id, Preset, NDaysAfter, NDaysAfterForPreset } from "./types";
 
 export * from "./functions";
 export * from "./types";
