@@ -9,3 +9,11 @@ export const getAllPlaces = async (): Promise<Required<Place>[]> => {
     throw e;
   }
 };
+
+export const deletePlace = async (id: number): Promise<void> => {
+  try {
+    await db.place.delete(id);
+  } catch (e) {
+    throw e;
+  }
+};
