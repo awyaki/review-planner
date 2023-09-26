@@ -1,6 +1,6 @@
 import Dexie, { Table } from "dexie";
 
-import { Id, Preset, NDaysAfter, NDaysAfterForPreset } from "./types";
+import { Id, Preset, NDaysAfter, NDaysAfterForPreset, Place } from "./types";
 
 export * from "./functions";
 export * from "./types";
@@ -10,6 +10,7 @@ export class ReviewPlannerDatabase extends Dexie {
   preset!: Table<Preset>;
   nDaysAfter!: Table<NDaysAfter>;
   nDaysAfterForPreset!: Table<NDaysAfterForPreset>;
+  place!: Table<Place>;
   constructor() {
     super("review_planner");
     this.version(1).stores({
@@ -17,6 +18,7 @@ export class ReviewPlannerDatabase extends Dexie {
       nDaysAfter: "++id, belongTo",
       preset: "++id",
       nDaysAfterForPreset: "++id, belongTo",
+      place: "++id, name",
     });
   }
 }
