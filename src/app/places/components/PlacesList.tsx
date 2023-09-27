@@ -5,12 +5,13 @@ import useSWR from "swr";
 import { List } from "@/components";
 
 export const PlacesList: React.FC = () => {
-  const { data } = useSWR("/places", getAllPlaces);
+  const { data, mutate } = useSWR("/places", getAllPlaces);
   const places = data ? data.map((d) => ({ id: d.id, text: d.name })) : [];
 
   const handleDeletePlace = useCallback(
     async (id: number) => {
       await deletePlace(id);
+      mutate();
     },
     [deletePlace]
   );
