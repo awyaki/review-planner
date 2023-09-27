@@ -1,5 +1,5 @@
 "use cient";
-import { useState, useCallback } from "react";
+import { useState, useCallback, FormEventHandler } from "react";
 import { Sheet } from "@/components";
 import { createPlace } from "@/db";
 
@@ -10,9 +10,13 @@ type Props = {
 export const AddPlaceSheet: React.FC<Props> = ({ onClose }) => {
   const [newPlaceName, setNewPlaceName] = useState("");
 
-  const handleCreatePlace = useCallback(async () => {
-    await createPlace(newPlaceName);
-  }, [newPlaceName]);
+  const handleCreatePlace: FormEventHandler<HTMLFormElement> = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await createPlace(newPlaceName);
+    },
+    [newPlaceName]
+  );
 
   return (
     <Sheet onClose={onClose} color="reverse">
