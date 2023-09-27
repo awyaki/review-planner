@@ -28,8 +28,14 @@ const Page = () => {
         <Link href="notifications/presets">
           <MenuItem
             text="通知スケジュールのプリセットを作成する"
-            rounded="bottom"
             color="gray"
+          />
+        </Link>
+        <Link href="/places">
+          <MenuItem
+            text="記録場所を管理する"
+            rounded="bottom"
+            color="light-gray"
           />
         </Link>
       </ul>
