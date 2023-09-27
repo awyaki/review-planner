@@ -2,6 +2,7 @@
 import { useState, useCallback, FormEventHandler } from "react";
 import { Sheet } from "@/components";
 import { createPlace } from "@/db";
+import { mutate } from "swr";
 
 type Props = {
   onClose: () => void;
@@ -14,6 +15,7 @@ export const AddPlaceSheet: React.FC<Props> = ({ onClose }) => {
     async (e) => {
       e.preventDefault();
       await createPlace(newPlaceName);
+      mutate("/places");
       onClose();
     },
     [newPlaceName, onClose]
