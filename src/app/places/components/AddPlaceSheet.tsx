@@ -14,8 +14,9 @@ export const AddPlaceSheet: React.FC<Props> = ({ onClose }) => {
     async (e) => {
       e.preventDefault();
       await createPlace(newPlaceName);
+      onClose();
     },
-    [newPlaceName]
+    [newPlaceName, onClose]
   );
 
   return (
