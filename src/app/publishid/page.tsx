@@ -1,13 +1,12 @@
 "use client";
 import { useCallback, useState } from "react";
 import { NextPage } from "next";
-import { useRouter } from "next/navigation";
-import { AiOutlineLeft } from "react-icons/ai";
-import Link from "next/link";
 import { Schedule, SmallButton } from "@/components";
 import { EmptyScheduleItem } from "./components";
+import { HeaderWithMenu } from "@/app/components";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
+
 import {
   getCurrentId,
   createId,
@@ -17,7 +16,6 @@ import {
 import useSWR from "swr";
 
 const Page: NextPage = () => {
-  const router = useRouter();
   const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
   const { data: currentId, isLoading, mutate } = useSWR("/id", getCurrentId);
   const handleAddNDaysAfter = useCallback(
@@ -68,19 +66,7 @@ const Page: NextPage = () => {
       <article className="h-screen bg-bg-primary text-text-on-bg-primary">
         <h1 className="invisible">新規IDの作成</h1>
         <section className="px-5 pt-5">
-          <header className="flex items-center justify-between mb-5">
-            <button
-              type="button"
-              className="flex items-center text-primary"
-              onClick={() => router.back()}
-            >
-              <AiOutlineLeft className="mr-1" />
-              <span>戻る</span>
-            </button>
-            <Link href="/menu">
-              <SmallButton text="メニュー" />
-            </Link>
-          </header>
+          <HeaderWithMenu />
           {isLoading ? (
             <>Loading...</>
           ) : (
