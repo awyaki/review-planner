@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { SelectPresetSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
