@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 import { useCallback, useState } from "react";
 import { NextPage } from "next";
 import { Schedule, SmallButton } from "@/components";
@@ -8,16 +9,19 @@ import { useAddOneNotificationSheet } from "@/hooks";
 import { useSelectPresetSheet } from "@/hooks";
 
 import {
-  getCurrentId,
   createId,
   NDaysAfterForClient,
   getAllNDaysAftersForPresetOfPresetId,
 } from "@/db";
-import useSWR from "swr";
+import { mutate } from "swr";
+
+const NextId = dynamic(() => import("./components/NextId"), {
+  ssr: false,
+  loading: () => <>Loading...</>,
+});
 
 const Page: NextPage = () => {
   const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
-  const { data: currentId, isLoading, mutate } = useSWR("/id", getCurrentId);
   const handleAddNDaysAfter = useCallback(
     (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
       const { base, n } = nDaysAfter;
@@ -55,7 +59,7 @@ const Page: NextPage = () => {
 
   const handlePublishId = useCallback(async () => {
     await createId(nDaysAfters);
-    mutate();
+    mutate("/id");
     setNDaysAfters([]);
   }, [mutate, createId, nDaysAfters]);
 
@@ -67,53 +71,46 @@ const Page: NextPage = () => {
         <h1 className="invisible">新規IDの作成</h1>
         <section className="px-5 pt-5">
           <HeaderWithMenu />
-          {isLoading ? (
-            <>Loading...</>
-          ) : (
-            <>
-              <div className="mb-8">
-                <span className="block mb-1 text-sm">次のID</span>
-                <div className="text-4xl">{currentId ? currentId + 1 : 1}</div>
-              </div>
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl">通知スケジュール</h2>
-                <button
-                  type="button"
-                  className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
-                  onClick={handleOpenSelectPresetSheet}
-                >
-                  プリセットから選択
-                </button>
-              </div>
-              <div className="mb-8">
-                {nDaysAfters.length === 0 ? (
-                  <ul>
-                    <li>
-                      <EmptyScheduleItem />
-                    </li>
-                  </ul>
-                ) : (
-                  <Schedule
-                    nDaysAfters={nDaysAfters}
-                    onDelete={handleDeleteNDaysAfter}
-                  ></Schedule>
-                )}
-              </div>
-              <div className="mb-10">
-                <SmallButton
-                  text="通知を追加"
-                  onClick={handleOpenAddOneNotificationSheet}
-                />
-              </div>
-              <button
-                type="button"
-                className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
-                onClick={handlePublishId}
-              >
-                IDを発行
-              </button>
-            </>
-          )}
+          <div className="mb-8">
+            <NextId />
+          </div>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl">通知スケジュール</h2>
+            <button
+              type="button"
+              className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
+              onClick={handleOpenSelectPresetSheet}
+            >
+              プリセットから選択
+            </button>
+          </div>
+          <div className="mb-8">
+            {nDaysAfters.length === 0 ? (
+              <ul>
+                <li>
+                  <EmptyScheduleItem />
+                </li>
+              </ul>
+            ) : (
+              <Schedule
+                nDaysAfters={nDaysAfters}
+                onDelete={handleDeleteNDaysAfter}
+              ></Schedule>
+            )}
+          </div>
+          <div className="mb-10">
+            <SmallButton
+              text="通知を追加"
+              onClick={handleOpenAddOneNotificationSheet}
+            />
+          </div>
+          <button
+            type="button"
+            className="w-1/4 px-2 py-1 rounded-lg bg-primary text-text-on-primary"
+            onClick={handlePublishId}
+          >
+            IDを発行
+          </button>
         </section>
       </article>
     </>
