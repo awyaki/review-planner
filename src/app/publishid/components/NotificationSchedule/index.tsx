@@ -1,49 +1,28 @@
-import { useCallback, useState } from "react";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import { Schedule, SmallButton } from "@/components";
-import {
-  NDaysAfterForClient,
-  getAllNDaysAftersForPresetOfPresetId,
-} from "@/db";
+import { NDaysAfterForClient } from "@/db";
 
 import { EmptyScheduleItem } from "../../components";
 
-export const NotificationSchedule: React.FC = () => {
-  const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
+type Props = {
+  nDaysAfters: NDaysAfterForClient[];
+  onAddNDaysAfter: (nDaysAfter: Omit<NDaysAfterForClient, "id">) => void;
+  onDeleteNDaysAfter: (id: number) => void;
+  onAddNDaysAfterBasedOnPreset: (id: number, base: Date) => void;
+};
 
-  const handleAddNDaysAfter = useCallback(
-    (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
-      const { base, n } = nDaysAfter;
-      setNDaysAfters((cur) => {
-        const maxId = cur.reduce((a, b) => Math.max(a, b.id), 0);
-        const newNDaysAfter: NDaysAfterForClient = { id: maxId + 1, base, n };
-        return cur.concat(newNDaysAfter);
-      });
-    },
-    []
-  );
-
-  const handleAddNDaysAfterBasedOnPreset = useCallback(
-    async (id: number, base: Date) => {
-      const nDaysAfters = await getAllNDaysAftersForPresetOfPresetId(id);
-      setNDaysAfters((p) => {
-        const maxId = p.reduce((a, b) => Math.max(a, b.id), 0);
-        return p.concat(
-          nDaysAfters.map(({ n }, i) => ({ id: maxId + 1 + i, n, base }))
-        );
-      });
-    },
-    [getAllNDaysAftersForPresetOfPresetId]
-  );
+export const NotificationSchedule: React.FC<Props> = ({
+  nDaysAfters,
+  onAddNDaysAfter,
+  onDeleteNDaysAfter,
+  onAddNDaysAfterBasedOnPreset,
+}) => {
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet(handleAddNDaysAfter);
+    useAddOneNotificationSheet(onAddNDaysAfter);
 
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
-    useSelectPresetSheet(handleAddNDaysAfterBasedOnPreset);
+    useSelectPresetSheet(onAddNDaysAfterBasedOnPreset);
 
-  const handleDeleteNDaysAfter = useCallback((id: number) => {
-    setNDaysAfters((cur) => cur.filter((v) => v.id !== id));
-  }, []);
   return (
     <>
       {renderSelectPresetSheet()}
@@ -68,7 +47,7 @@ export const NotificationSchedule: React.FC = () => {
         ) : (
           <Schedule
             nDaysAfters={nDaysAfters}
-            onDelete={handleDeleteNDaysAfter}
+            onDelete={onDeleteNDaysAfter}
           ></Schedule>
         )}
       </div>
