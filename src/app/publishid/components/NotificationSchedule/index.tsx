@@ -2,7 +2,7 @@ import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import { Schedule, SmallButton } from "@/components";
 import { NDaysAfterForClient } from "@/db";
 
-import { EmptyScheduleItem } from "../../components";
+import { EmptyScheduleItem } from "../EmptyScheduleItem";
 
 type Props = {
   nDaysAfters: NDaysAfterForClient[];
