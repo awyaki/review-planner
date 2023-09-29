@@ -12,7 +12,7 @@ export const SelectPlace = forwardRef<HTMLSelectElement, Props>(
         <form>
           <div className="flex justify-between mb-3">
             <h2>
-              <label className="text-xl">記録場所の登録</label>
+              <label className="text-xl">記録場所</label>
             </h2>
           </div>
           <div className="mb-3">
