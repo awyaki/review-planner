@@ -2,6 +2,7 @@
 import { useCallback, useState } from "react";
 import { NotificationSchedule } from "../NotificationSchedule";
 import { PublishId } from "../PublishId";
+import { SelectPlace } from "../SelectPlace";
 
 import {
   createId,
@@ -13,6 +14,11 @@ import { mutate } from "swr";
 
 export const PublishIdCore: React.FC = () => {
   const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
+  const [place, setPlace] = useState("");
+
+  const handleChangePlace = useCallback((place: string) => {
+    setPlace(place);
+  }, []);
 
   const handlePublishId = useCallback(async () => {
     await createId(nDaysAfters);
@@ -52,6 +58,9 @@ export const PublishIdCore: React.FC = () => {
   return (
     <>
       <div className="mb-10">
+        <div className="mb-5">
+          <SelectPlace onChangePlace={handleChangePlace} />
+        </div>
         <NotificationSchedule
           nDaysAfters={nDaysAfters}
           onAddNDaysAfter={handleAddNDaysAfter}
