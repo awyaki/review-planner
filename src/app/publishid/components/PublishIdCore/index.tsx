@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useRef } from "react";
 import { NotificationSchedule } from "../NotificationSchedule";
 import { PublishId } from "../PublishId";
 import { SelectPlace } from "../SelectPlace";
@@ -15,16 +15,21 @@ import { mutate } from "swr";
 export const PublishIdCore: React.FC = () => {
   const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
   const [place, setPlace] = useState("");
+  const selectPlaceRef = useRef<HTMLSelectElement>(null);
 
   const handleChangePlace = useCallback((place: string) => {
     setPlace(place);
   }, []);
 
   const handlePublishId = useCallback(async () => {
-    await createId(nDaysAfters, place);
-    mutate("/id");
-    setNDaysAfters([]);
-  }, [mutate, createId, nDaysAfters, place]);
+    if (selectPlaceRef.current) {
+      if (selectPlaceRef.current.reportValidity()) {
+        await createId(nDaysAfters, place);
+        mutate("/id");
+        setNDaysAfters([]);
+      }
+    }
+  }, [mutate, createId, nDaysAfters, place, selectPlaceRef]);
 
   const handleAddNDaysAfter = useCallback(
     (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
@@ -59,7 +64,7 @@ export const PublishIdCore: React.FC = () => {
     <>
       <div className="mb-10">
         <div className="mb-5">
-          <SelectPlace onChangePlace={handleChangePlace} />
+          <SelectPlace ref={selectPlaceRef} onChangePlace={handleChangePlace} />
         </div>
         <NotificationSchedule
           nDaysAfters={nDaysAfters}
