@@ -1,10 +1,13 @@
 import { parseIntoNumber } from "@/lib";
 import { db, NDaysAfterForClient } from "../index";
 
-export const createId = async (nDaysAfters: NDaysAfterForClient[]) => {
+export const createId = async (
+  nDaysAfters: NDaysAfterForClient[],
+  place: string
+) => {
   try {
     await db.transaction("rw", db.id, db.nDaysAfter, async () => {
-      const _id = await db.id.add({});
+      const _id = await db.id.add({ place });
       const id = parseIntoNumber(_id);
       if (id instanceof Error) throw id;
       await db.nDaysAfter.bulkAdd(

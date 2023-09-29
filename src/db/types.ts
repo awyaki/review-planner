@@ -1,5 +1,6 @@
 export type Id = {
   id?: number;
+  place: string;
 };
 
 export type Place = {

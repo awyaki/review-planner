@@ -21,10 +21,10 @@ export const PublishIdCore: React.FC = () => {
   }, []);
 
   const handlePublishId = useCallback(async () => {
-    await createId(nDaysAfters);
+    await createId(nDaysAfters, place);
     mutate("/id");
     setNDaysAfters([]);
-  }, [mutate, createId, nDaysAfters]);
+  }, [mutate, createId, nDaysAfters, place]);
 
   const handleAddNDaysAfter = useCallback(
     (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
