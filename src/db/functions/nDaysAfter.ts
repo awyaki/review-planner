@@ -1,4 +1,5 @@
 import { db, NDaysAfter } from "../index";
+import { isNotOptionalOnId, isNotOptionalOnPlace } from "@/lib";
 
 export const createNdaysAfter = async (
   n: number,
@@ -48,15 +49,41 @@ export const deleteNDaysAfter = async (id: number) => {
   db.nDaysAfter.delete(id);
 };
 
-export const filterTodaysNDaysAfters = async (): Promise<NDaysAfter[]> => {
+export const filterTodaysNDaysAfters = async (): Promise<
+  Required<NDaysAfter & { place: string }>[]
+> => {
   try {
-    const now = new Date();
-    const nDaysAfters = await db.nDaysAfter.toArray();
-    return nDaysAfters.filter(({ base, n }) => {
-      const time = new Date();
-      time.setTime(base.getTime() + n * 24 * 60 * 60 * 1000);
-      return isSameDate(now, time);
-    });
+    const nDaysAftersWithPlace = await db.transaction(
+      "rw",
+      db.nDaysAfter,
+      db.id,
+      async () => {
+        const now = new Date();
+        const nDaysAfters_ = await db.nDaysAfter.toArray();
+        const nDaysAfters = nDaysAfters_.filter(({ base, n }) => {
+          const time = new Date();
+          time.setTime(base.getTime() + n * 24 * 60 * 60 * 1000);
+          return isSameDate(now, time);
+        });
+
+        // get ids to obtian places of ids
+        const ids = await db.id.toArray();
+
+        // make a map of id to place
+        const idToPlaceMap = new Map(ids.map((id) => [id.id, id.place]));
+
+        const withPlace = nDaysAfters
+          .map((nDaysAfter) => ({
+            ...nDaysAfter,
+            place: idToPlaceMap.get(nDaysAfter.belongTo),
+          }))
+          .filter(isNotOptionalOnId)
+          .filter(isNotOptionalOnPlace);
+        return withPlace;
+      }
+    );
+
+    return nDaysAftersWithPlace;
   } catch (e) {
     throw e;
   }
