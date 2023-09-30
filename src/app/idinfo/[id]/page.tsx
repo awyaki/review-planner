@@ -1,11 +1,9 @@
 "use client";
 import { useMemo, useCallback } from "react";
 import { NextPage } from "next";
-import { useRouter } from "next/navigation";
-import { AiOutlineLeft } from "react-icons/ai";
-import Link from "next/link";
 import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
+import { HeaderWithMenu } from "@/app/components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import useSWR from "swr";
 import {
@@ -20,7 +18,6 @@ import {
 import { isNotOptionalOnId } from "@/lib";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
-  const router = useRouter();
   const { data: _nDaysAfters, mutate } = useSWR(
     `/nDaysAfters/${params.id}`,
     async () => getAllNDaysAftersOfId(Number(params.id))
@@ -73,19 +70,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
       {renderAddOneNotificationSheet()}
       {renderSelectPresetSheet()}
       <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
-        <header className="flex items-center justify-between mb-5">
-          <button
-            type="button"
-            className="flex items-center text-primary"
-            onClick={() => router.back()}
-          >
-            <AiOutlineLeft className="mr-1" />
-            <span>戻る</span>
-          </button>
-          <Link href="/menu">
-            <SmallButton text="メニュー" />
-          </Link>
-        </header>
+        <HeaderWithMenu />
         <h1 className="mb-3 text-4xl">{params.id}</h1>
         <section>
           <div className="flex items-center justify-between mb-4">
