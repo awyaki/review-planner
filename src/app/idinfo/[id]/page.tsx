@@ -2,40 +2,27 @@
 import { useCallback } from "react";
 import { NextPage } from "next";
 import { SmallButton } from "@/components";
-import { ScheduleForIdInfo } from "./components";
 import { HeaderWithMenu } from "@/app/components";
 import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
-import useSWR from "swr";
+import { mutate } from "swr";
 import {
-  getAllNDaysAftersOfId,
   NDaysAfterForClient,
   createNdaysAfter,
-  deleteNDaysAfter,
   createNDaysAfters,
   getAllNDaysAftersForPresetOfPresetId,
 } from "@/db";
+import { useScheduleForIdInfo } from "./hooks";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
-  const { data: nDaysAfters, mutate } = useSWR(
-    `/nDaysAfters/${params.id}`,
-    async () => getAllNDaysAftersOfId(Number(params.id))
-  );
+  const renderScheduleForIdInfo = useScheduleForIdInfo(params.id);
 
   const handleAddNDayAfter = useCallback(
     async (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
       const { n, base } = nDaysAfter;
       await createNdaysAfter(n, Number(params.id), base, false);
-      mutate();
+      mutate(`/nDaysAfters/${params.id}`);
     },
     [createNdaysAfter, mutate, params]
-  );
-
-  const handleDeleteNDaysAfter = useCallback(
-    async (id: number) => {
-      await deleteNDaysAfter(id);
-      mutate();
-    },
-    [deleteNDaysAfter]
   );
 
   const handleAddNDaysAfterBasedOnPreset = useCallback(
@@ -49,7 +36,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           done: false,
         }))
       );
-      mutate();
+      mutate(`/nDaysAfters/${params.id}`);
     },
     [params, getAllNDaysAftersForPresetOfPresetId, createNDaysAfters, mutate]
   );
@@ -76,10 +63,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
               プリセットを選択
             </button>
           </div>
-          <ScheduleForIdInfo
-            nDaysAfters={nDaysAfters ?? []}
-            onDelete={handleDeleteNDaysAfter}
-          />
+          {renderScheduleForIdInfo()}
           <SmallButton
             text="通知を追加"
             onClick={handleOpenAddOneNotificationSheet}

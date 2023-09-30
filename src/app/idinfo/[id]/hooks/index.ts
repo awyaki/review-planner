@@ -1,0 +1,1 @@
+export { useScheduleForIdInfo } from "./useScheduleForInfo";
