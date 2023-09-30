@@ -1,4 +1,4 @@
-import { parseIntoNumber } from "@/lib";
+import { parseIntoNumber, isNotOptionalOnId } from "@/lib";
 import { db, NDaysAfterForClient } from "../index";
 
 export const createId = async (
@@ -24,7 +24,7 @@ export const createId = async (
 };
 
 export const getAllIds = async () => {
-  const res = await db.id.toArray();
+  const res = (await db.id.toArray()).filter(isNotOptionalOnId);
   return res;
 };
 

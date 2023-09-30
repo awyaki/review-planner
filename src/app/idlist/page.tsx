@@ -12,11 +12,7 @@ import { isNotNullOrUndefined } from "@/lib";
 const Page: NextPage = () => {
   const router = useRouter();
   const { data: ids } = useSWR("/ids", getAllIds);
-  const reacentlyIds =
-    ids
-      ?.map(({ id }) => id)
-      .filter(isNotNullOrUndefined)
-      .slice(-5) ?? [];
+  const reacentlyIds = ids?.map(({ id }) => id).slice(-5) ?? [];
   const [render, handleOpen] = useSearchPublishIdSheet(
     ids?.map(({ id }) => id).filter(isNotNullOrUndefined) ?? []
   );
