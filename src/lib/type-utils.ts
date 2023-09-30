@@ -9,3 +9,9 @@ export const isNotOptionalOnId = <T extends { id?: unknown }>(
 ): v is T & { id: Exclude<T["id"], undefined> } => {
   return Object.hasOwn(v, "id") && v.id !== undefined;
 };
+
+export const isNotOptionalOnPlace = <T extends { place?: unknown }>(
+  v: T
+): v is T & { place: Exclude<T["place"], undefined> } => {
+  return Object.hasOwn(v, "place") && v.place !== undefined;
+};
