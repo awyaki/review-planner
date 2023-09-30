@@ -12,7 +12,8 @@ import { isNotNullOrUndefined } from "@/lib";
 const Page: NextPage = () => {
   const router = useRouter();
   const { data: ids } = useSWR("/ids", getAllIds);
-  const reacentlyIds = ids?.map(({ id }) => id).slice(-5) ?? [];
+  const reacentlyIds =
+    ids?.map(({ id, place }) => ({ id, place })).slice(-5) ?? [];
   const [render, handleOpen] = useSearchPublishIdSheet(
     ids?.map(({ id }) => id).filter(isNotNullOrUndefined) ?? []
   );
@@ -23,7 +24,7 @@ const Page: NextPage = () => {
         <HeaderWithMenu />
         <h1 className="mb-5 text-xl">最近発行したID</h1>
         <ul className="mb-8">
-          {reacentlyIds.map((id, i) => {
+          {reacentlyIds.map(({ id, place }, i) => {
             const color: Parameters<typeof IdItem>["0"]["color"] =
               i % 2 === 0 ? "light-gray" : "gray";
             const rounded: Parameters<typeof IdItem>["0"]["rounded"] = (() => {
@@ -36,6 +37,7 @@ const Page: NextPage = () => {
               <li key={id}>
                 <IdItem
                   id={id.toString()}
+                  place={place}
                   color={color}
                   rounded={rounded}
                   onClick={() => router.push(`/idinfo/${id}`)}

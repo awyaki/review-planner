@@ -32,12 +32,19 @@ const variants = {
 
 type Props = {
   id: string;
+  place?: string;
   color: ColorVariants;
   rounded?: RoundedVariants;
   onClick: (id: string) => void;
 };
 
-export const IdItem: FC<Props> = ({ id, color, onClick, rounded = "none" }) => {
+export const IdItem: FC<Props> = ({
+  id,
+  place,
+  color,
+  onClick,
+  rounded = "none",
+}) => {
   return (
     <button
       type="button"
@@ -45,6 +52,7 @@ export const IdItem: FC<Props> = ({ id, color, onClick, rounded = "none" }) => {
       onClick={() => onClick(id)}
     >
       <span>{id}</span>
+      <span>{place}</span>
     </button>
   );
 };
