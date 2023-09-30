@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useCallback } from "react";
+import { useCallback } from "react";
 import { NextPage } from "next";
 import { SmallButton } from "@/components";
 import { ScheduleForIdInfo } from "./components";
@@ -8,24 +8,17 @@ import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
 import useSWR from "swr";
 import {
   getAllNDaysAftersOfId,
-  NDaysAfter,
   NDaysAfterForClient,
   createNdaysAfter,
   deleteNDaysAfter,
   createNDaysAfters,
   getAllNDaysAftersForPresetOfPresetId,
 } from "@/db";
-import { isNotOptionalOnId } from "@/lib";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
-  const { data: _nDaysAfters, mutate } = useSWR(
+  const { data: nDaysAfters, mutate } = useSWR(
     `/nDaysAfters/${params.id}`,
     async () => getAllNDaysAftersOfId(Number(params.id))
-  );
-
-  const nDaysAfters: Required<NDaysAfter>[] = useMemo(
-    () => _nDaysAfters?.filter(isNotOptionalOnId) ?? [],
-    [_nDaysAfters]
   );
 
   const handleAddNDayAfter = useCallback(

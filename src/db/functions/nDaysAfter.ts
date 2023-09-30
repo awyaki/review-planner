@@ -40,8 +40,10 @@ export const getOneNDaysAfter = async (
 // This function returns all nDaysAfters which belong to the `id`.
 export const getAllNDaysAftersOfId = async (
   id: number
-): Promise<NDaysAfter[]> => {
-  const res = await db.nDaysAfter.where("belongTo").equals(id).toArray();
+): Promise<Required<NDaysAfter>[]> => {
+  const res = (
+    await db.nDaysAfter.where("belongTo").equals(id).toArray()
+  ).filter(isNotOptionalOnId);
   return res;
 };
 
