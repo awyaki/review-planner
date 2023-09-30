@@ -1,8 +1,7 @@
 "use client";
 import { NextPage } from "next";
 import { useRouter } from "next/navigation";
-import { AiOutlineLeft } from "react-icons/ai";
-import Link from "next/link";
+import { HeaderWithMenu } from "@/app/components";
 import { SmallButton } from "@/components";
 import { IdItem } from "./components";
 import { useSearchPublishIdSheet } from "./hooks";
@@ -25,19 +24,7 @@ const Page: NextPage = () => {
     <>
       {render()}
       <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
-        <header className="flex items-center justify-between mb-5">
-          <button
-            type="button"
-            className="flex items-center text-primary"
-            onClick={() => router.back()}
-          >
-            <AiOutlineLeft className="mr-1" />
-            <span>戻る</span>
-          </button>
-          <Link href="/menu">
-            <SmallButton text="メニュー" />
-          </Link>
-        </header>
+        <HeaderWithMenu />
         <h1 className="mb-5 text-xl">最近発行したID</h1>
         <ul className="mb-8">
           {reacentlyIds.map((id, i) => {
