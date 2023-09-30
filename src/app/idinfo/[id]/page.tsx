@@ -1,29 +1,17 @@
 "use client";
 import { useCallback } from "react";
 import { NextPage } from "next";
-import { SmallButton } from "@/components";
 import { HeaderWithMenu } from "@/app/components";
-import { useAddOneNotificationSheet, useSelectPresetSheet } from "@/hooks";
+import { useSelectPresetSheet } from "@/hooks";
 import { mutate } from "swr";
-import {
-  NDaysAfterForClient,
-  createNdaysAfter,
-  createNDaysAfters,
-  getAllNDaysAftersForPresetOfPresetId,
-} from "@/db";
-import { useScheduleForIdInfo } from "./hooks";
+import { createNDaysAfters, getAllNDaysAftersForPresetOfPresetId } from "@/db";
+import { useScheduleForIdInfo, useAddNDaysAfter } from "./hooks";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const renderScheduleForIdInfo = useScheduleForIdInfo(params.id);
 
-  const handleAddNDayAfter = useCallback(
-    async (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
-      const { n, base } = nDaysAfter;
-      await createNdaysAfter(n, Number(params.id), base, false);
-      mutate(`/nDaysAfters/${params.id}`);
-    },
-    [createNdaysAfter, mutate, params]
-  );
+  const [renderAddOneNotificationSheet, renderAddNDaysAfterButton] =
+    useAddNDaysAfter(params.id);
 
   const handleAddNDaysAfterBasedOnPreset = useCallback(
     async (id: number, base: Date) => {
@@ -41,8 +29,6 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     [params, getAllNDaysAftersForPresetOfPresetId, createNDaysAfters, mutate]
   );
 
-  const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
-    useAddOneNotificationSheet(handleAddNDayAfter);
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet(handleAddNDaysAfterBasedOnPreset);
   return (
@@ -64,10 +50,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
             </button>
           </div>
           {renderScheduleForIdInfo()}
-          <SmallButton
-            text="通知を追加"
-            onClick={handleOpenAddOneNotificationSheet}
-          />
+          {renderAddNDaysAfterButton()}
         </section>
       </article>
     </>
