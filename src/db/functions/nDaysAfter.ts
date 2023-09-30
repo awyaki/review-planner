@@ -51,8 +51,8 @@ export const deleteNDaysAfter = async (id: number) => {
 export const filterTodaysNDaysAfters = async (): Promise<NDaysAfter[]> => {
   try {
     const now = new Date();
-    const nDaysAfter = await db.nDaysAfter.toArray();
-    return nDaysAfter.filter(({ base, n }) => {
+    const nDaysAfters = await db.nDaysAfter.toArray();
+    return nDaysAfters.filter(({ base, n }) => {
       const time = new Date();
       time.setTime(base.getTime() + n * 24 * 60 * 60 * 1000);
       return isSameDate(now, time);
