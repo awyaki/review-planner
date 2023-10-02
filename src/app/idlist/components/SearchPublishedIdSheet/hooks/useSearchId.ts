@@ -5,6 +5,7 @@ type Id = Required<_Id>;
 
 type State = {
   query: string;
+  place: string;
   minIdQuery: string;
   maxIdQuery: string;
   result: Id[];
@@ -23,6 +24,10 @@ type Action =
   | {
       type: "changed_maxIdQuery";
       maxIdQuery: string;
+    }
+  | {
+      type: "changed_place";
+      place: string;
     };
 
 const filterByQuery = (ids: Id[], query: string): Id[] => {
@@ -37,12 +42,23 @@ const filterByMaxId = (ids: Id[], max: string): Id[] => {
   return max === "" ? [...ids] : ids.filter((id) => id.id <= Number(max));
 };
 
-const filterByAll = (ids: Id[], query: string, min: string, max: string) => {
+const filterByPlace = (ids: Id[], place: string): Id[] => {
+  return place === "" ? [...ids] : ids.filter((id) => id.place === place);
+};
+
+const filterByAll = (
+  ids: Id[],
+  query: string,
+  min: string,
+  max: string,
+  place: string
+) => {
   if (query === "" && min === "" && max === "") return [];
   const filtered1 = filterByQuery(ids, query);
   const filtered2 = filterByMinId(filtered1, min);
   const filtered3 = filterByMaxId(filtered2, max);
-  return filtered3;
+  const filtered4 = filterByPlace(filtered3, place);
+  return filtered4;
 };
 
 const reducer: Reducer<State, Action> = (state, action) => {
@@ -54,7 +70,8 @@ const reducer: Reducer<State, Action> = (state, action) => {
         state.ids,
         nextQuery,
         state.minIdQuery,
-        state.maxIdQuery
+        state.maxIdQuery,
+        state.place
       );
       nextState.result = nextResult;
       nextState.query = nextQuery;
@@ -68,9 +85,9 @@ const reducer: Reducer<State, Action> = (state, action) => {
         state.ids,
         state.query,
         nextMinIdQuery,
-        state.maxIdQuery
+        state.maxIdQuery,
+        state.place
       );
-
       nextState.minIdQuery = nextMinIdQuery;
       nextState.result = nextResult;
       return nextState;
@@ -83,10 +100,27 @@ const reducer: Reducer<State, Action> = (state, action) => {
         state.ids,
         state.query,
         state.minIdQuery,
-        nextMaxIdQuery
+        nextMaxIdQuery,
+        state.place
       );
 
       nextState.maxIdQuery = nextMaxIdQuery;
+      nextState.result = nextResult;
+      return nextState;
+    }
+    case "changed_place": {
+      const nextState = { ...state };
+      const nextPlace = action.place;
+
+      const nextResult = filterByAll(
+        state.ids,
+        state.query,
+        state.minIdQuery,
+        state.maxIdQuery,
+        nextPlace
+      );
+
+      nextState.place = nextPlace;
       nextState.result = nextResult;
       return nextState;
     }
@@ -99,6 +133,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 export const useSearchId = (ids: Id[]) =>
   useReducer(reducer, {
     query: "",
+    place: "",
     minIdQuery: "",
     maxIdQuery: "",
     result: [],
