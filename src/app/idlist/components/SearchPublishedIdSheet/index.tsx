@@ -3,9 +3,10 @@ import { Sheet } from "@/components";
 import { IdItem } from "../IdItem";
 import { useSearchId } from "./hooks";
 import { useRouter } from "next/navigation";
+import { Id } from "@/db";
 
 type Props = {
-  ids: number[];
+  ids: Required<Id>[];
   onClose: () => void;
 };
 
@@ -18,6 +19,19 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
       <div className="px-5">
         <section className="mb-8">
           <h2 className="mb-3 text-lg">検索条件</h2>
+          <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
+            <label htmlFor="searchBySavePlace">記録場所で検索</label>
+            <select
+              id="searchBySavePlace"
+              className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
+              value={""}
+              onChange={(e) =>
+                dispatch({ type: "changed_query", query: e.target.value })
+              }
+            >
+              <option value="">選択してください</option>
+            </select>
+          </div>
           <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
             <label htmlFor="searchById">IDで検索</label>
             <input
@@ -72,7 +86,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
         <section className="pb-5">
           <h2 className="mb-3 text-lg">検索結果</h2>
           <ul>
-            {result.map((id, i) => {
+            {result.map(({ id }, i) => {
               const color: Parameters<typeof IdItem>["0"]["color"] =
                 i % 2 === 0 ? "light-gray" : "gray";
               const rounded: Parameters<typeof IdItem>["0"]["rounded"] =

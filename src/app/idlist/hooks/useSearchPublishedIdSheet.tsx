@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { SearchPublishedIdSheet } from "../components";
 import { AnimatePresence } from "framer-motion";
+import { Id } from "@/db";
 
 export const useSearchPublishIdSheet = (
-  ids: number[]
+  ids: Required<Id>[]
 ): [() => React.ReactNode, () => void] => {
   const [isOpen, setIsOpen] = useState(false);
 

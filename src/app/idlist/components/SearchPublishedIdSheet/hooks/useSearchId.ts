@@ -1,10 +1,14 @@
 import { Reducer, useReducer } from "react";
+import { Id as _Id } from "@/db";
+
+type Id = Required<_Id>;
+
 type State = {
   query: string;
   minIdQuery: string;
   maxIdQuery: string;
-  result: number[];
-  ids: number[];
+  result: Id[];
+  ids: Id[];
 };
 
 type Action =
@@ -21,24 +25,19 @@ type Action =
       maxIdQuery: string;
     };
 
-const filterByQuery = (ids: number[], query: string): number[] => {
-  return query === "" ? [...ids] : ids.filter((id) => id === Number(query));
+const filterByQuery = (ids: Id[], query: string): Id[] => {
+  return query === "" ? [...ids] : ids.filter((id) => id.id === Number(query));
 };
 
-const filterByMinId = (ids: number[], min: string): number[] => {
-  return min === "" ? [...ids] : ids.filter((id) => id >= Number(min));
+const filterByMinId = (ids: Id[], min: string): Id[] => {
+  return min === "" ? [...ids] : ids.filter((id) => id.id >= Number(min));
 };
 
-const filterByMaxId = (ids: number[], max: string): number[] => {
-  return max === "" ? [...ids] : ids.filter((id) => id <= Number(max));
+const filterByMaxId = (ids: Id[], max: string): Id[] => {
+  return max === "" ? [...ids] : ids.filter((id) => id.id <= Number(max));
 };
 
-const filterByAll = (
-  ids: number[],
-  query: string,
-  min: string,
-  max: string
-) => {
+const filterByAll = (ids: Id[], query: string, min: string, max: string) => {
   if (query === "" && min === "" && max === "") return [];
   const filtered1 = filterByQuery(ids, query);
   const filtered2 = filterByMinId(filtered1, min);
@@ -97,7 +96,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
   }
 };
 
-export const useSearchId = (ids: number[]) =>
+export const useSearchId = (ids: Id[]) =>
   useReducer(reducer, {
     query: "",
     minIdQuery: "",
