@@ -43,7 +43,7 @@ const Page: NextPage = () => {
             );
           })}
         </ul>
-        <SmallButton text="検索する" onClick={handleOpen} />
+        <SmallButton text="IDを検索" onClick={handleOpen} />
       </article>
     </>
   );
