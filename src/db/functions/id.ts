@@ -1,5 +1,18 @@
 import { parseIntoNumber, isNotOptionalOnId } from "@/lib";
 import { db, NDaysAfterForClient } from "../index";
+import { Id } from "../types";
+
+export const getId = async (id: number): Promise<Required<Id>> => {
+  try {
+    const res = await db.id.get(id);
+    if (res == null) throw new Error("Error: No such Id exists.");
+    if (!isNotOptionalOnId(res))
+      throw new Error("Error: Expected id field exists but it doesn't exsit.");
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
 
 export const createId = async (
   nDaysAfters: NDaysAfterForClient[],
