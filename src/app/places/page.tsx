@@ -16,7 +16,7 @@ const Page: NextPage = () => {
         <div className="mb-5">
           <PlacesList />
         </div>
-        <SmallButton text="作成する" onClick={handleOpen} />
+        <SmallButton text="記録場所を追加" onClick={handleOpen} />
       </article>
     </>
   );
