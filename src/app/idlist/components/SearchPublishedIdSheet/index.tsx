@@ -24,7 +24,6 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
             <select
               id="searchBySavePlace"
               className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
-              value={""}
               onChange={(e) =>
                 dispatch({ type: "changed_query", query: e.target.value })
               }
