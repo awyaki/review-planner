@@ -53,7 +53,7 @@ const filterByAll = (
   max: string,
   place: string
 ) => {
-  if (query === "" && min === "" && max === "") return [];
+  if (query === "" && min === "" && max === "" && place === "") return [];
   const filtered1 = filterByQuery(ids, query);
   const filtered2 = filterByMinId(filtered1, min);
   const filtered3 = filterByMaxId(filtered2, max);
@@ -111,7 +111,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
     case "changed_place": {
       const nextState = { ...state };
       const nextPlace = action.place;
-
       const nextResult = filterByAll(
         state.ids,
         state.query,
