@@ -1,0 +1,1 @@
+export { useGetSavePlace } from "./useGetSavePlace";
