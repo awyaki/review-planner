@@ -25,10 +25,11 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
               id="searchBySavePlace"
               className="w-20 px-2 text-right rounded-sm outline-dark-gray border-text-on-bg-primary bg-light-gray text-dark-gray"
               onChange={(e) =>
-                dispatch({ type: "changed_query", query: e.target.value })
+                dispatch({ type: "changed_place", place: e.target.value })
               }
             >
               <option value="">選択してください</option>
+              {}
             </select>
           </div>
           <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
