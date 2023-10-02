@@ -87,7 +87,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
         <section className="pb-5">
           <h2 className="mb-3 text-lg">検索結果</h2>
           <ul>
-            {result.map(({ id }, i) => {
+            {result.map(({ id, place }, i) => {
               const color: Parameters<typeof IdItem>["0"]["color"] =
                 i % 2 === 0 ? "light-gray" : "gray";
               const rounded: Parameters<typeof IdItem>["0"]["rounded"] =
@@ -101,6 +101,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
                 <li key={id}>
                   <IdItem
                     id={id.toString()}
+                    place={place}
                     color={color}
                     rounded={rounded}
                     onClick={() => router.push(`/idinfo/${id}`)}
