@@ -61,6 +61,7 @@ const Page: NextPage = () => {
             <SmallButton text="メニュー" />
           </Link>
         </header>
+        <h1 className="text-xl mb-3">プリセットを作成する</h1>
         <form id="title_form">
           <input
             ref={tilteInput}
