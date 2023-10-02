@@ -46,3 +46,7 @@ export const getCurrentId = async (): Promise<number> => {
   const curMax = ids.reduce((a, b) => Math.max(a, b.id ?? 0), 0);
   return curMax;
 };
+
+export const putId = async (id: number, place: string): Promise<void> => {
+  await db.id.put({ id, place });
+};
