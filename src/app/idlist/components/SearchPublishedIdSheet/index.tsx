@@ -3,6 +3,7 @@ import { Sheet } from "@/components";
 import { IdItem } from "../IdItem";
 import { useSearchId } from "./hooks";
 import { useRouter } from "next/navigation";
+import { SavePlaceOptions } from "./components";
 import { Id } from "@/db";
 
 type Props = {
@@ -29,7 +30,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
               }
             >
               <option value="">選択してください</option>
-              {}
+              <SavePlaceOptions places={ids.map(({ place }) => place)} />
             </select>
           </div>
           <div className="flex items-center justify-between w-full px-5 py-2 mb-2 border rounded-md text-text-on-primary border-text-on-primary">
