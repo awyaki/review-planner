@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { NextPage, type Metadata } from "next";
 import { HeaderWithMenu } from "@/app/components";
 import {
   SavePlace,
@@ -6,6 +6,10 @@ import {
   OpenPresetSheetButton,
   Schedule,
 } from "./components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | 発行したIDを見る",
+};
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   return (
