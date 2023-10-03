@@ -7,6 +7,7 @@ import { EmptyScheduleItem } from "../EmptyScheduleItem";
 type Props = {
   nDaysAfters: NDaysAfterForClient[];
   onAddNDaysAfter: (nDaysAfter: Omit<NDaysAfterForClient, "id">) => void;
+  onDeleteAllNDaysAfters: () => void;
   onDeleteNDaysAfter: (id: number) => void;
   onAddNDaysAfterBasedOnPreset: (id: number, base: Date) => void;
 };
@@ -15,6 +16,7 @@ export const NotificationSchedule: React.FC<Props> = ({
   nDaysAfters,
   onAddNDaysAfter,
   onDeleteNDaysAfter,
+  onDeleteAllNDaysAfters,
   onAddNDaysAfterBasedOnPreset,
 }) => {
   const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
@@ -51,10 +53,16 @@ export const NotificationSchedule: React.FC<Props> = ({
           ></Schedule>
         )}
       </div>
-      <div>
+      <div className="flex justify-between">
+        <div>
+          <SmallButton
+            text="通知を追加"
+            onClick={handleOpenAddOneNotificationSheet}
+          />
+        </div>
         <SmallButton
-          text="通知を追加"
-          onClick={handleOpenAddOneNotificationSheet}
+          text="すべての通知を削除"
+          onClick={onDeleteAllNDaysAfters}
         />
       </div>
     </>
