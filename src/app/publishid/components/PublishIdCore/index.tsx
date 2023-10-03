@@ -29,7 +29,6 @@ export const PublishIdCore: React.FC = () => {
         await createId(nDaysAfters, place);
         handleOpenModal();
         mutate("/currentid");
-        setNDaysAfters([]);
       }
     }
   }, [mutate, createId, nDaysAfters, place, selectPlaceRef, handleOpenModal]);
