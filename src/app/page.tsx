@@ -1,4 +1,9 @@
+import type { Metadata } from "next";
 import { HeaderWithMenu, IdList } from "./components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | 復習するID",
+};
 
 const Page = () => {
   return (
