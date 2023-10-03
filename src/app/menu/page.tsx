@@ -27,7 +27,7 @@ const Page = () => {
         </Link>
         <Link href="notifications/presets">
           <MenuItem
-            text="通知スケジュールのプリセットを作成する"
+            text="通知スケジュールのプリセットを管理する"
             color="gray"
           />
         </Link>
