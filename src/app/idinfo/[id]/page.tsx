@@ -1,12 +1,14 @@
 "use client";
 import { NextPage } from "next";
 import { HeaderWithMenu } from "@/app/components";
-import { useScheduleForIdInfo, usePreset } from "./hooks";
-import { SavePlace, OpenAddNDaysAfterSheetButton } from "./components";
+import { usePreset } from "./hooks";
+import {
+  SavePlace,
+  OpenAddNDaysAfterSheetButton,
+  Schedule,
+} from "./components";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
-  const renderScheduleForIdInfo = useScheduleForIdInfo(params.id);
-
   const [renderSelectPresetSheet, renderOpenPresetSheetButton] = usePreset(
     params.id
   );
@@ -25,7 +27,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           <h2 className="text-xl">通知スケジュール</h2>
           {renderOpenPresetSheetButton()}
         </section>
-        {renderScheduleForIdInfo()}
+        <Schedule id={params.id} />
         <OpenAddNDaysAfterSheetButton id={params.id} />
       </article>
     </>

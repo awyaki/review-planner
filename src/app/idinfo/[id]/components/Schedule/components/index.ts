@@ -1,0 +1,1 @@
+export { ScheduleForIdInfo } from "./ScheduleForIdInfo";

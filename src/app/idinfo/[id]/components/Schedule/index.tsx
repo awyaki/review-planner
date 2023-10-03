@@ -1,9 +1,10 @@
+"use client";
 import { useCallback } from "react";
-import { ScheduleForIdInfo } from "../components";
+import { ScheduleForIdInfo } from "./components";
 import { deleteNDaysAfter, getAllNDaysAftersOfId } from "@/db";
 import useSWR from "swr";
 
-export const useScheduleForIdInfo = (id: string): (() => React.ReactNode) => {
+export const Schedule: React.FC<{ id: string }> = ({ id }) => {
   const { data: nDaysAfters, mutate } = useSWR(`/nDaysAfters/${id}`, async () =>
     getAllNDaysAftersOfId(Number(id))
   );
@@ -15,14 +16,10 @@ export const useScheduleForIdInfo = (id: string): (() => React.ReactNode) => {
     },
     [deleteNDaysAfter, id]
   );
-
-  const render = useCallback(() => {
-    return (
-      <ScheduleForIdInfo
-        nDaysAfters={nDaysAfters ?? []}
-        onDelete={handleDeleteNDaysAfter}
-      />
-    );
-  }, [nDaysAfters]);
-  return render;
+  return (
+    <ScheduleForIdInfo
+      nDaysAfters={nDaysAfters ?? []}
+      onDelete={handleDeleteNDaysAfter}
+    />
+  );
 };
