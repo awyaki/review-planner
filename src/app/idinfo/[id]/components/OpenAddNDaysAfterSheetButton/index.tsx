@@ -1,12 +1,13 @@
+"use client";
 import { useCallback } from "react";
 import { useAddOneNotificationSheet } from "@/hooks";
 import { mutate } from "swr";
 import { NDaysAfterForClient, createNdaysAfter } from "@/db";
 import { SmallButton } from "@/components";
 
-export const useAddNDaysAfter = (
-  id: string
-): [() => React.ReactNode, () => React.ReactNode] => {
+export const OpenAddNDaysAfterSheetButton: React.FC<{ id: string }> = ({
+  id,
+}) => {
   const handleAddNDayAfter = useCallback(
     async (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
       const { n, base } = nDaysAfter;
@@ -15,18 +16,13 @@ export const useAddNDaysAfter = (
     },
     [createNdaysAfter, mutate, id]
   );
-
-  const [renderAddOneNotificationSheet, handleOpenAddOneNotificationSheet] =
+  const [renderSheet, handleOpen] =
     useAddOneNotificationSheet(handleAddNDayAfter);
 
-  const renderAddNDaysAfterButton = useCallback(() => {
-    return (
-      <SmallButton
-        text="通知を追加"
-        onClick={handleOpenAddOneNotificationSheet}
-      />
-    );
-  }, [handleOpenAddOneNotificationSheet]);
-
-  return [renderAddOneNotificationSheet, renderAddNDaysAfterButton];
+  return (
+    <>
+      {renderSheet()}
+      <SmallButton text="通知を追加" onClick={handleOpen} />
+    </>
+  );
 };
