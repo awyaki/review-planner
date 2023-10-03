@@ -1,6 +1,10 @@
-import { NextPage } from "next";
+import { NextPage, type Metadata } from "next";
 import { HeaderWithMenu } from "@/app/components";
 import { IdList, SearchIdButton } from "./components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | 発行したIDを見る",
+};
 
 const Page: NextPage = () => {
   return (
