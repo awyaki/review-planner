@@ -1,11 +1,10 @@
+"use client";
 import { useCallback } from "react";
 import { useSelectPresetSheet } from "@/hooks";
 import { createNDaysAfters, getAllNDaysAftersForPresetOfPresetId } from "@/db";
-
 import { mutate } from "swr";
-export const usePreset = (
-  id: string
-): [() => React.ReactNode, () => React.ReactNode] => {
+
+export const OpenPresetSheetButton: React.FC<{ id: string }> = ({ id }) => {
   const handleAddNDaysAfterBasedOnPreset = useCallback(
     async (id: number, base: Date) => {
       const nDaysAfter = await getAllNDaysAftersForPresetOfPresetId(id);
@@ -25,8 +24,9 @@ export const usePreset = (
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =
     useSelectPresetSheet(handleAddNDaysAfterBasedOnPreset);
 
-  const renderOpenPresetSheetButton = useCallback(() => {
-    return (
+  return (
+    <>
+      {renderSelectPresetSheet()}
       <button
         type="button"
         className="px-2 py-1 rounded-lg bg-primary text-text-on-primary"
@@ -34,8 +34,6 @@ export const usePreset = (
       >
         プリセットを選択
       </button>
-    );
-  }, [handleOpenSelectPresetSheet]);
-
-  return [renderSelectPresetSheet, renderOpenPresetSheetButton];
+    </>
+  );
 };
