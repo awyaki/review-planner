@@ -3,6 +3,7 @@ import { useCallback, useState, useRef } from "react";
 import { NotificationSchedule } from "../NotificationSchedule";
 import { PublishId } from "../PublishId";
 import { SelectPlace } from "../SelectPlace";
+import { usePublishModal } from "./hooks";
 
 import {
   createId,
@@ -16,6 +17,7 @@ export const PublishIdCore: React.FC = () => {
   const [nDaysAfters, setNDaysAfters] = useState<NDaysAfterForClient[]>([]);
   const [place, setPlace] = useState("");
   const selectPlaceRef = useRef<HTMLSelectElement>(null);
+  const [renderModal, handleOpenModal] = usePublishModal(place);
 
   const handleChangePlace = useCallback((place: string) => {
     setPlace(place);
@@ -25,11 +27,12 @@ export const PublishIdCore: React.FC = () => {
     if (selectPlaceRef.current) {
       if (selectPlaceRef.current.reportValidity()) {
         await createId(nDaysAfters, place);
+        handleOpenModal();
         mutate("/currentid");
         setNDaysAfters([]);
       }
     }
-  }, [mutate, createId, nDaysAfters, place, selectPlaceRef]);
+  }, [mutate, createId, nDaysAfters, place, selectPlaceRef, handleOpenModal]);
 
   const handleAddNDaysAfter = useCallback(
     (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
@@ -62,6 +65,7 @@ export const PublishIdCore: React.FC = () => {
 
   return (
     <>
+      {renderModal()}
       <div className="mb-10">
         <div className="mb-5">
           <SelectPlace ref={selectPlaceRef} onChangePlace={handleChangePlace} />
