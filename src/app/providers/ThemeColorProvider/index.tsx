@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useState, useMemo } from "react";
 import { type Theme, type ThemeName, themes } from "@/lib/colors";
 
 const initialThemeName: ThemeName = "sky-light";
@@ -19,7 +19,7 @@ export const ThemeColorContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [themeName, setThemeName] = useState<ThemeName>(initialThemeName);
-  const [theme, setTheme] = useState<Theme>({ ...initialTheme });
+  const theme = useMemo(() => themes[themeName], [themeName]);
 
   const changeTheme = (themeName: ThemeName) => {
     const root = document.querySelector(":root");
@@ -40,7 +40,6 @@ export const ThemeColorContextProvider: React.FC<{
     );
 
     setThemeName(themeName);
-    setTheme({ ...themes[themeName] });
   };
 
   return (
