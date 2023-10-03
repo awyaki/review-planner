@@ -24,9 +24,10 @@ export const SavePlace: React.FC<Props> = ({ id }) => {
     <select
       className="w-1/4 border-primary border-2 rounded-sm"
       onChange={(e) => handleUpdatePlace(e.target.value)}
+      defaultValue={place}
     >
       {places?.map(({ id: placeId, name }) => (
-        <option key={placeId} value={name} selected={place === name}>
+        <option key={placeId} value={name}>
           {name}
         </option>
       ))}
