@@ -1,21 +1,18 @@
 "use client";
 import { NextPage } from "next";
 import { HeaderWithMenu } from "@/app/components";
-import { useScheduleForIdInfo, useAddNDaysAfter, usePreset } from "./hooks";
-import { SavePlace } from "./components";
+import { useScheduleForIdInfo, usePreset } from "./hooks";
+import { SavePlace, OpenAddNDaysAfterSheetButton } from "./components";
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   const renderScheduleForIdInfo = useScheduleForIdInfo(params.id);
 
-  const [renderAddOneNotificationSheet, renderAddNDaysAfterButton] =
-    useAddNDaysAfter(params.id);
   const [renderSelectPresetSheet, renderOpenPresetSheetButton] = usePreset(
     params.id
   );
 
   return (
     <>
-      {renderAddOneNotificationSheet()}
       {renderSelectPresetSheet()}
       <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
         <HeaderWithMenu />
@@ -29,7 +26,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
           {renderOpenPresetSheetButton()}
         </section>
         {renderScheduleForIdInfo()}
-        {renderAddNDaysAfterButton()}
+        <OpenAddNDaysAfterSheetButton id={params.id} />
       </article>
     </>
   );
