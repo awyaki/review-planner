@@ -45,3 +45,14 @@ export const themes = {
     "text-on-bg-secondary": { ...colors.white },
   },
 } satisfies { [k in ThemeName]: Theme };
+
+const isThemeName = (u: string): u is ThemeName => {
+  return themeNames.some((name) => u === name);
+};
+
+export const parseIntoThemeName = (u: string): ThemeName => {
+  if (isThemeName(u)) {
+    return u;
+  }
+  throw new Error("Failed to parse into ThemeName");
+};
