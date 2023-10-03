@@ -62,6 +62,10 @@ export const PublishIdCore: React.FC = () => {
     setNDaysAfters((cur) => cur.filter((v) => v.id !== id));
   }, []);
 
+  const handleDeleteAllNDaysAfters = useCallback(() => {
+    setNDaysAfters([]);
+  }, []);
+
   return (
     <>
       {renderModal()}
@@ -72,6 +76,7 @@ export const PublishIdCore: React.FC = () => {
         <NotificationSchedule
           nDaysAfters={nDaysAfters}
           onAddNDaysAfter={handleAddNDaysAfter}
+          onDeleteAllNDaysAfters={handleDeleteAllNDaysAfters}
           onDeleteNDaysAfter={handleDeleteNDaysAfter}
           onAddNDaysAfterBasedOnPreset={handleAddNDaysAfterBasedOnPreset}
         />
