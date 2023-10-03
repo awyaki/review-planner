@@ -2,7 +2,7 @@
 import useSWR from "swr";
 import { getCurrentId } from "@//db";
 export const NextId: React.FC = () => {
-  const { data: currentId } = useSWR("/id", getCurrentId, {
+  const { data: currentId } = useSWR("/currentid", getCurrentId, {
     suspense: true,
   });
   return (

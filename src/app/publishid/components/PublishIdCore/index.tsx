@@ -25,7 +25,7 @@ export const PublishIdCore: React.FC = () => {
     if (selectPlaceRef.current) {
       if (selectPlaceRef.current.reportValidity()) {
         await createId(nDaysAfters, place);
-        mutate("/id");
+        mutate("/currentid");
         setNDaysAfters([]);
       }
     }
