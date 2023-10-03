@@ -34,14 +34,16 @@ export const IdList: React.FC = () => {
         <li key={place}>
           <h3 className="text-xl mb-2">{place}</h3>
           <ul className="flex flex-wrap gap-2 mb-5">
-            {ids.map(({ id, belongTo, done }) => (
-              <IdItem
-                key={id}
-                belongTo={belongTo}
-                done={done}
-                onClick={() => handleToggleDone(id)}
-              />
-            ))}
+            {ids
+              .sort((a, b) => (a.id > b.id ? 1 : -1))
+              .map(({ id, belongTo, done }) => (
+                <IdItem
+                  key={id}
+                  belongTo={belongTo}
+                  done={done}
+                  onClick={() => handleToggleDone(id)}
+                />
+              ))}
           </ul>
         </li>
       ))}
