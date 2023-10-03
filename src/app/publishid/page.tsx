@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { NextPage } from "next";
 import { HeaderWithMenu } from "@/app/components";
 import { PublishIdCore } from "./components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | IDを発行する",
+};
 
 const NextId = dynamic(() => import("./components/NextId"), {
   ssr: false,
