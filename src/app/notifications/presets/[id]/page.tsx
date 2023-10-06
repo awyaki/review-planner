@@ -1,6 +1,10 @@
+import type { NextPage, Metadata } from "next";
 import { PresetCore } from "./components";
-import { type NextPage } from "next";
 import { HeaderWithMenu } from "@/app/components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | 通知プリセットを更新する",
+};
 
 const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
   return (
