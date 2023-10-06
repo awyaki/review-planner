@@ -3,10 +3,9 @@ import { useState, useCallback, useRef, MouseEventHandler } from "react";
 import { useAddOneNotificationSheetForPreset } from "../hooks";
 import { type NextPage } from "next";
 import { List, SmallButton } from "@/components";
-import Link from "next/link";
-import { AiOutlineLeft } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { NDaysAfterForPresetForClient, createPreset } from "@/db";
+import { HeaderWithMenu } from "@/app/components";
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -48,19 +47,7 @@ const Page: NextPage = () => {
     <>
       {render()}
       <article className="px-5 pt-5 bg-bg-primary text-text-on-bg-primary">
-        <header className="flex items-center justify-between mb-5">
-          <button
-            type="button"
-            className="flex items-center text-primary"
-            onClick={() => router.back()}
-          >
-            <AiOutlineLeft className="mr-1" />
-            <span>戻る</span>
-          </button>
-          <Link href="/menu">
-            <SmallButton text="メニュー" />
-          </Link>
-        </header>
+        <HeaderWithMenu />
         <h1 className="text-xl mb-3">プリセットを作成する</h1>
         <form id="title_form">
           <input
