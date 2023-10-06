@@ -3,7 +3,7 @@ import { HeaderWithMenu } from "@/app/components";
 import { PresetList, CreatePresetButton } from "./components";
 
 export const metadata: Metadata = {
-  title: "Review Plnner | 通知プリセット",
+  title: "Review Planner | 通知プリセット",
 };
 
 const Page: NextPage = () => {
