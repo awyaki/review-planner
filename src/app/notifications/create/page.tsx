@@ -5,7 +5,7 @@ import { List } from "@/components";
 import { useRouter } from "next/navigation";
 import { NDaysAfterForPresetForClient, createPreset } from "@/db";
 import { HeaderWithMenu } from "@/app/components";
-import { AddNDaysAfterButton } from "./components";
+import { AddNDaysAfterButton, CancelCreateButton } from "./components";
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -69,13 +69,7 @@ const Page: NextPage = () => {
         <AddNDaysAfterButton onAddNDaysAfter={handleAddNotification} />
       </div>
       <div className="flex gap-3">
-        <button
-          className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
-          onClick={() => router.push("/notifications/presets")}
-          type="button"
-        >
-          キャンセル
-        </button>
+        <CancelCreateButton />
         <button
           form="title_form"
           className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
