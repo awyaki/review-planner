@@ -4,13 +4,25 @@ import { AiOutlineLeft } from "react-icons/ai";
 import Link from "next/link";
 import { SmallButton } from "@/components";
 
-export const HeaderWithMenu: React.FC = () => {
+const colorVariants = {
+  normal: "flex items-center text-primary",
+  reverse: "flex items-center text-text-on-primary",
+} satisfies {
+  normal: "flex items-center text-primary";
+  reverse: "flex items-center text-text-on-primary";
+};
+
+type Props = {
+  color?: keyof typeof colorVariants;
+};
+
+export const HeaderWithMenu: React.FC<Props> = ({ color = "normal" }) => {
   const router = useRouter();
   return (
     <header className="flex items-center justify-between mb-5">
       <button
         type="button"
-        className="flex items-center text-primary"
+        className={colorVariants[color]}
         onClick={() => router.back()}
       >
         <AiOutlineLeft className="mr-1" />
