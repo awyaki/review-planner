@@ -1,6 +1,10 @@
-import type { NextPage } from "next";
+import type { NextPage, Metadata } from "next";
 import { HeaderWithMenu } from "@/app/components";
 import { OpenThemeColorSheetButton } from "./components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | 設定",
+};
 
 const Page: NextPage = () => {
   return (
