@@ -1,4 +1,4 @@
-"use cient";
+"use client";
 import { useState, useCallback, FormEventHandler } from "react";
 import { Sheet } from "@/components";
 import { createPlace } from "@/db";
