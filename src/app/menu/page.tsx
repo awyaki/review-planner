@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { MenuItem } from "./components";
 import Link from "next/link";
 import { Header } from "@/app/components";
+
+export const metadata: Metadata = {
+  title: "Review Planner | メニュー",
+};
 
 const Page = () => {
   return (
