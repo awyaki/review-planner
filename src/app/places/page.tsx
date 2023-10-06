@@ -1,24 +1,17 @@
-"use client";
 import { NextPage } from "next";
-import { SmallButton } from "@/components";
 import { HeaderWithMenu } from "@/app/components";
-import { useAddPlaceSheet } from "./hooks";
-import { PlacesList } from "./components";
+import { PlacesList, AddPlaceButton } from "./components";
 
 const Page: NextPage = () => {
-  const [render, handleOpen] = useAddPlaceSheet();
   return (
-    <>
-      {render()}
-      <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
-        <HeaderWithMenu />
-        <h1 className="mb-5 text-xl">記録場所リスト</h1>
-        <div className="mb-5">
-          <PlacesList />
-        </div>
-        <SmallButton text="記録場所を追加" onClick={handleOpen} />
-      </article>
-    </>
+    <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
+      <HeaderWithMenu />
+      <h1 className="mb-5 text-xl">記録場所リスト</h1>
+      <div className="mb-5">
+        <PlacesList />
+      </div>
+      <AddPlaceButton />
+    </article>
   );
 };
 

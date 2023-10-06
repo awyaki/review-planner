@@ -1,2 +1,2 @@
-export * from "./AddPlaceSheet";
 export * from "./PlacesList";
+export { AddPlaceButton } from "./AddPlaceButton";
