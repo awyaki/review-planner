@@ -29,7 +29,7 @@ export const HeaderWithMenu: React.FC<Props> = ({ color = "normal" }) => {
         <span>戻る</span>
       </button>
       <Link href="/menu">
-        <SmallButton text="メニュー" />
+        <SmallButton color={color} text="メニュー" />
       </Link>
     </header>
   );
