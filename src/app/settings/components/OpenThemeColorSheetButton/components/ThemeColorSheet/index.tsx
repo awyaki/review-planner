@@ -1,3 +1,4 @@
+"use client";
 import { useContext } from "react";
 import { CheckableThemeColorCircle } from "../CheckableThemeColorCircle";
 import { Sheet } from "@/components";

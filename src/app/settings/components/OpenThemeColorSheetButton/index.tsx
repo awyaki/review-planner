@@ -1,7 +1,8 @@
+"use client";
 import { useContext } from "react";
-import { ThemeColorCircle } from "../../components";
+import { ThemeColorCircle } from "./components";
 import { ThemeColorContext } from "@/app/providers";
-import { useThemeColorSheet } from "../../hooks";
+import { useThemeColorSheet } from "./hooks";
 export const OpenThemeColorSheetButton: React.FC = () => {
   const { theme } = useContext(ThemeColorContext);
   const [renderThemeColorSheet, handleOpenThemeColorSheet] =
