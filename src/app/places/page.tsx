@@ -2,7 +2,7 @@ import type { NextPage, Metadata } from "next";
 import { HeaderWithMenu } from "@/app/components";
 import { PlacesList, AddPlaceButton } from "./components";
 
-export const metadate: Metadata = {
+export const metadata: Metadata = {
   title: "Review Planner | 記録場所を管理する",
 };
 
