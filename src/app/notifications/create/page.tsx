@@ -1,11 +1,11 @@
 "use client";
 import { useState, useCallback, useRef, MouseEventHandler } from "react";
-import { useAddOneNotificationSheetForPreset } from "../hooks";
 import { type NextPage } from "next";
-import { List, SmallButton } from "@/components";
+import { List } from "@/components";
 import { useRouter } from "next/navigation";
 import { NDaysAfterForPresetForClient, createPreset } from "@/db";
 import { HeaderWithMenu } from "@/app/components";
+import { AddNDaysAfterButton } from "./components";
 
 const Page: NextPage = () => {
   const router = useRouter();
@@ -39,58 +39,52 @@ const Page: NextPage = () => {
     },
     [createPreset, tilteInput, inputValue, nDaysAfters]
   );
-  const [render, handleOpen] = useAddOneNotificationSheetForPreset(
-    handleAddNotification
-  );
 
   return (
-    <>
-      {render()}
-      <article className="px-5 pt-5 bg-bg-primary text-text-on-bg-primary">
-        <HeaderWithMenu />
-        <h1 className="text-xl mb-3">プリセットを作成する</h1>
-        <form id="title_form">
-          <input
-            ref={tilteInput}
-            type="text"
-            required
-            maxLength={30}
-            className="w-full px-3 py-2 mb-5 focus:outline-primary"
-            value={inputValue}
-            placeholder="タイトルを入力"
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-        </form>
-        <div className="mb-10">
-          <List
-            data={nDaysAfters.map(({ id, n }) => ({
-              id,
-              text: `${n.toString()}日後`,
-            }))}
-            onDelete={handleDeleteNotification}
-          />
-        </div>
-        <div className="mb-5">
-          <SmallButton onClick={handleOpen} text="通知を追加" />
-        </div>
-        <div className="flex gap-3">
-          <button
-            className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
-            onClick={() => router.push("/notifications/presets")}
-            type="button"
-          >
-            キャンセル
-          </button>
-          <button
-            form="title_form"
-            className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
-            onClick={handleCreatePreset}
-          >
-            作成
-          </button>
-        </div>
-      </article>
-    </>
+    <article className="px-5 pt-5 bg-bg-primary text-text-on-bg-primary">
+      <HeaderWithMenu />
+      <h1 className="text-xl mb-3">プリセットを作成する</h1>
+      <form id="title_form">
+        <input
+          ref={tilteInput}
+          type="text"
+          required
+          maxLength={30}
+          className="w-full px-3 py-2 mb-5 focus:outline-primary"
+          value={inputValue}
+          placeholder="タイトルを入力"
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+      </form>
+      <div className="mb-10">
+        <List
+          data={nDaysAfters.map(({ id, n }) => ({
+            id,
+            text: `${n.toString()}日後`,
+          }))}
+          onDelete={handleDeleteNotification}
+        />
+      </div>
+      <div className="mb-5">
+        <AddNDaysAfterButton onAddNDaysAfter={handleAddNotification} />
+      </div>
+      <div className="flex gap-3">
+        <button
+          className="w-1/3 px-2 py-2 rounded-lg bg-gray text-dark-gray"
+          onClick={() => router.push("/notifications/presets")}
+          type="button"
+        >
+          キャンセル
+        </button>
+        <button
+          form="title_form"
+          className="w-1/3 px-2 py-2 rounded-lg bg-bg-secondary text-text-on-bg-secondary"
+          onClick={handleCreatePreset}
+        >
+          作成
+        </button>
+      </div>
+    </article>
   );
 };
 
