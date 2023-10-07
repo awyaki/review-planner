@@ -16,10 +16,9 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
     <article className="h-screen p-5 bg-bg-primary text-text-on-bg-primary">
       <HeaderWithMenu />
       <h1 className="mb-3 text-4xl">{params.id}</h1>
-      <section className="mb-5">
-        <h2 className="text-xl mb-4">記録場所</h2>
+      <div className="mb-5">
         <SavePlace id={Number(params.id)} />
-      </section>
+      </div>
       <section className="flex items-center justify-between mb-4">
         <h2 className="text-xl">通知スケジュール</h2>
         <OpenPresetSheetButton id={params.id} />
