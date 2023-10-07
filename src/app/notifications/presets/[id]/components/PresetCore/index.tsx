@@ -71,6 +71,7 @@ export const PresetCore: React.FC<Props> = ({ id }) => {
   return (
     <>
       {render()}
+      <h1 className="text-xl mb-3">通知プリセットを更新する</h1>
       <form id="title_form">
         <input
           ref={titleInput}
