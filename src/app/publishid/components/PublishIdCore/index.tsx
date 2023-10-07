@@ -71,7 +71,11 @@ export const PublishIdCore: React.FC = () => {
       {renderModal()}
       <div className="mb-10">
         <div className="mb-5">
-          <SelectPlace ref={selectPlaceRef} onChangePlace={handleChangePlace} />
+          <SelectPlace
+            ref={selectPlaceRef}
+            place={place}
+            onChangePlace={handleChangePlace}
+          />
         </div>
         <NotificationSchedule
           nDaysAfters={nDaysAfters}
