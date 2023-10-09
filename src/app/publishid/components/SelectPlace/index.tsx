@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const SelectPlace = forwardRef<HTMLSelectElement, Props>(
-  ({ place, onChangePlace }, ref) => {
+  function SelectPlace({ place, onChangePlace }, ref) {
     return (
       <section>
         <form>

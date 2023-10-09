@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const PlaceOptionList = forwardRef<HTMLSelectElement, Props>(
-  ({ onChange }, ref) => {
+  function PlaceOptionList({ onChange }, ref) {
     const { data: places, isLoading } = useSWR("/places", getAllPlaces);
     return isLoading ? (
       <>Loading...</>
