@@ -13,7 +13,7 @@ export const PlacesList: React.FC = () => {
       await deletePlace(id);
       mutate();
     },
-    [deletePlace]
+    [mutate]
   );
 
   return <List data={places} onDelete={handleDeletePlace} />;

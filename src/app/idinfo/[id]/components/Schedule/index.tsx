@@ -14,7 +14,7 @@ export const Schedule: React.FC<{ id: string }> = ({ id }) => {
       await deleteNDaysAfter(id);
       mutate();
     },
-    [deleteNDaysAfter, id]
+    [mutate]
   );
   return (
     <ScheduleForIdInfo

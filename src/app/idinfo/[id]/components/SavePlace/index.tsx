@@ -16,7 +16,7 @@ export const SavePlace: React.FC<Props> = ({ id }) => {
       await putId(id, place);
       mutate(`/${id}/place`);
     },
-    [id, mutate]
+    [id]
   );
 
   if (isLoadingPlace) return <>Loading...</>;

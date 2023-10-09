@@ -4,7 +4,7 @@ import { useSelectPresetSheet } from "@/hooks";
 import { createNDaysAfters, getAllNDaysAftersForPresetOfPresetId } from "@/db";
 import { mutate } from "swr";
 
-export const OpenPresetSheetButton: React.FC<{ id: string }> = ({ id }) => {
+export const OpenPresetSheetButton: React.FC = () => {
   const handleAddNDaysAfterBasedOnPreset = useCallback(
     async (id: number, base: Date) => {
       const nDaysAfter = await getAllNDaysAftersForPresetOfPresetId(id);
@@ -18,7 +18,7 @@ export const OpenPresetSheetButton: React.FC<{ id: string }> = ({ id }) => {
       );
       mutate(`/nDaysAfters/${id}`);
     },
-    [id, getAllNDaysAftersForPresetOfPresetId, createNDaysAfters, mutate]
+    []
   );
 
   const [renderSelectPresetSheet, handleOpenSelectPresetSheet] =

@@ -39,7 +39,7 @@ export const CreatePresetCore: React.FC = () => {
         }
       }
     },
-    [createPreset, tilteInput, inputValue, nDaysAfters]
+    [tilteInput, inputValue, nDaysAfters, router]
   );
   return (
     <>

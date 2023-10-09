@@ -14,7 +14,7 @@ export const OpenAddNDaysAfterSheetButton: React.FC<{ id: string }> = ({
       await createNdaysAfter(n, Number(id), base, false);
       mutate(`/nDaysAfters/${id}`);
     },
-    [createNdaysAfter, mutate, id]
+    [id]
   );
   const [renderSheet, handleOpen] =
     useAddOneNotificationSheet(handleAddNDayAfter);

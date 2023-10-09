@@ -24,7 +24,7 @@ export const SelectPresetSheet: React.FC<Props> = ({
     if (!selected) return;
     await onAddNDaysAftersBasedOnPreset(selected, new Date(baseDate));
     onClose();
-  }, [onAddNDaysAftersBasedOnPreset, selected]);
+  }, [onAddNDaysAftersBasedOnPreset, selected, baseDate, onClose]);
   return (
     <Sheet color="reverse" onClose={onClose}>
       <div className="px-5 pb-5">

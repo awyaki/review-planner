@@ -21,7 +21,7 @@ const Page: NextPage<{ params: { id: string } }> = ({ params }) => {
       </div>
       <section className="flex items-center justify-between mb-4">
         <h2 className="text-xl">通知スケジュール</h2>
-        <OpenPresetSheetButton id={params.id} />
+        <OpenPresetSheetButton />
       </section>
       <Schedule id={params.id} />
       <OpenAddNDaysAfterSheetButton id={params.id} />

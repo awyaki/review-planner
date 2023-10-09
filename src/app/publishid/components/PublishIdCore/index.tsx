@@ -31,7 +31,7 @@ export const PublishIdCore: React.FC = () => {
         mutate("/currentid");
       }
     }
-  }, [mutate, createId, nDaysAfters, place, selectPlaceRef, handleOpenModal]);
+  }, [nDaysAfters, place, selectPlaceRef, handleOpenModal]);
 
   const handleAddNDaysAfter = useCallback(
     (nDaysAfter: Omit<NDaysAfterForClient, "id">) => {
@@ -55,7 +55,7 @@ export const PublishIdCore: React.FC = () => {
         );
       });
     },
-    [getAllNDaysAftersForPresetOfPresetId]
+    []
   );
 
   const handleDeleteNDaysAfter = useCallback((id: number) => {

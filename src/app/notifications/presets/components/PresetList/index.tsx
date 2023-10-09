@@ -18,7 +18,7 @@ export const PresetList: React.FC = () => {
       await deleteOnePreset(id);
       mutate();
     },
-    [deleteOnePreset, mutate]
+    [mutate]
   );
   return (
     <>

@@ -16,7 +16,7 @@ export const IdList: React.FC = () => {
       await toggleDoneOfNDaysAfter(id);
       mutate();
     },
-    [toggleDoneOfNDaysAfter, mutate]
+    [mutate]
   );
 
   const ids =
