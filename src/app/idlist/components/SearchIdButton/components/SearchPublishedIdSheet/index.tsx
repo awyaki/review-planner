@@ -86,7 +86,7 @@ export const SearchPublishedIdSheet: React.FC<Props> = ({ onClose, ids }) => {
         </section>
         <section className="pb-5">
           <h2 className="mb-3 text-lg">検索結果</h2>
-          <ul>
+          <ul className="h-28 overflow-y-auto">
             {result.map(({ id, place }, i) => {
               const color: Parameters<typeof IdItem>["0"]["color"] =
                 i % 2 === 0 ? "light-gray" : "gray";
